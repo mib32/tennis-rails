@@ -3,8 +3,10 @@ set :repo_url, 'https://github.com/mib32/okcity_app.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-# set :deploy_to, '/var/www/my_app'
-# set :scm, :git
+set :deploy_to, '/home/rails/'
+set :scm, :git
+
+set :rvm_ruby_version, '2.2.0'
 
 # set :format, :pretty
 # set :log_level, :debug
