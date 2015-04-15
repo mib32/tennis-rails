@@ -13,8 +13,12 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <%= breadcrumbs style: :bootstrap %>
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </main>
+    <footer class="footer">
+      <%= render "layouts/footer" %>
+    </footer>
   </body>
 </html>

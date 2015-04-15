@@ -1,0 +1,15 @@
+<% breadcrumb :coaches %>
+
+<div class="body-bg">
+	<div class="row">
+		<div class="entry">
+			<h1><span class="title-tire">–</span> Тренеры <span class="title-tire">–</span></h1>
+			<hr>
+			<% @coaches.each do |coach| %>
+	  		<%= image_tag coach.gravatar_url, class: 'avatar photo pull-left' %>
+				<%= link_to coach.name, coach %>
+				<p>Информация: </p>
+			<% end %>
+		</div>
+	</div>
+ </div>

@@ -1,0 +1,57 @@
+<%= javascript_include_tag '/data.json', extname: false %>
+<%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry' %>
+<%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>
+<div id="map-container"><div id="map"></div></div>
+
+<script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {scrollwheel: false}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": 55.75,
+        "lng": 37.61,
+        "picture": {
+          "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+          "width":  36,
+          "height": 36
+        },
+        "infowindow": "hello!"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
+
+
+
+   <!-- Begin searcher -->
+<div class="searchonmap">
+   <form>
+   	   <input type="text" placeholder="Ключевое слово...">
+   	   <input type="text" placeholder="Расположение"> <div class="location-detector"><input type="button" class="location-detector-btn" value=" "></div>
+   	   <select class="chosen-select" data-placeholder="Выбор категории...">
+  <option>Футбол</option>
+  <option>Теннис</option>
+  <option>Фитнес</option>
+  <option>Йога</option>
+  <option>Баскетбол</option>
+  <option>Групповые занятия</option>
+</select>
+   	   <input type="submit" value="Подобрать" class="submit-btn">
+   </form>
+   	   </div>
+	<!-- End searcher -->
+
+  <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>
