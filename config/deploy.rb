@@ -1,5 +1,5 @@
 set :application, 'tennis-rails'
-set :repo_url, 'https://github.com/mib32/okcity_app.git'
+set :repo_url, 'https://github.com/mib32/tennis-rails.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
