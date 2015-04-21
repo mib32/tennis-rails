@@ -1,0 +1,60 @@
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li role="presentation" class="active"><a href="#courts" aria-controls="home" role="tab" data-toggle="tab">Корты</a></li>
+    <li role="presentation"><a href="#coaches" aria-controls="profile" role="tab" data-toggle="tab">Тренеры</a></li>
+    <li role="presentation"><a href="#stadium" aria-controls="messages" role="tab" data-toggle="tab">Стадион</a></li>
+    <li role="presentation"><a href="#clients" aria-controls="settings" role="tab" data-toggle="tab">Клиенты</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="courts"></div>
+    <div role="tabpanel" class="tab-pane" id="coaches">...</div>
+    <div role="tabpanel" class="tab-pane" id="stadium">
+      <div class="row">
+        <div class="col-md-6">
+          <%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false' %>
+          <%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>
+          <div id="map" style="height: 400px;"></div>
+          <script type="text/javascript">
+    //         var markers = new Tennis.Collections.MarkerCollection([
+    //   {
+    //     "lat": 55.75,
+    //     "lng": 37.61,
+    //     "picture": {
+    //       "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+    //       "width":  36,
+    //       "height": 36
+    //     },
+    //     "infowindow": "hello!"
+    //   }
+    // ]);
+            var map = new Tennis.Views.DraggableMapView({latLng: {lat: <%= @user.stadium.latitude || 55.75 %>, lng: <%= @user.stadium.longitude || 37.61 %>}});
+            map.render();
+          </script>
+        </div>
+        <div class="col-md-6">
+          <%= simple_form_for @user.stadium, remote: true do |f|%>
+            <%= f.association :category %>
+            <%= f.input :name %>
+            <%= f.input :address %>
+            <%= f.input :latitude %>
+            <%= f.input :longitude %>
+            <%= f.input :phone %>
+            <%= f.input :description %>
+            <%= f.simple_fields_for :courts, @user.stadium.courts.any? && @user.stadium.courts || @user.stadium.courts.new do |court| %>
+              <%= render "court_fields", f: court %>
+              <div class="links">
+                <%= link_to_add_association 'Добавить корт', f, :courts %>
+              </div>
+            <% end %>
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="clients">...</div>
+  </div>
+
+</div>

@@ -15,6 +15,16 @@
 //= require turbolinks
 //= require underscore
 //= require gmaps/google
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/tennis_app
 //= require bootstrap-sprockets
 //= require chosen.jquery
-//= require_tree .
+//= require gritter
+//= require moment
+//= require moment/ru
+//= require fullcalendar
+//= require fullcalendar/lang/ru
+//= require cocoon
+//= require_directory .

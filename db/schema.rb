@@ -11,10 +11,81 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412093819) do
+ActiveRecord::Schema.define(version: 20150421162930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
+
+  create_table "courts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "stadium_id"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "description"
+    t.integer  "court_id"
+    t.integer  "order_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree
+  add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "total",      precision: 8, scale: 2
+    t.integer  "status"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "stadia", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "stadia", ["category_id"], name: "index_stadia_on_category_id", using: :btree
+  add_index "stadia", ["user_id"], name: "index_stadia_on_user_id", using: :btree
+
+  create_table "stadiums", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  add_index "stadiums", ["category_id"], name: "index_stadiums_on_category_id", using: :btree
+  add_index "stadiums", ["user_id"], name: "index_stadiums_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -46,5 +117,13 @@ ActiveRecord::Schema.define(version: 20150412093819) do
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  add_foreign_key "courts", "stadiums"
+  add_foreign_key "events", "orders"
+  add_foreign_key "events", "stadiums", column: "court_id"
+  add_foreign_key "orders", "users"
+  add_foreign_key "stadia", "categories"
+  add_foreign_key "stadia", "users"
+  add_foreign_key "stadiums", "categories"
+  add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
 end

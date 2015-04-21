@@ -19,7 +19,10 @@ gem 'figaro', '>= 1.0.0.rc1'
 gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
+gem 'cocoon'
+gem 'rails-i18n', '~> 4.0.0'
 group :development do
+  gem 'rails-admin-scaffold'
   gem 'better_errors'
   gem 'capistrano', '~> 3.4'
   gem 'capistrano-bundler'
@@ -60,5 +63,16 @@ gem 'gretel'
 # gravatar
 gem 'gravtastic'
 
+# assets
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
+# gem 'kendoui-rails', github: 'kendo-labs/kendo-rails', branch: 'master'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
+
+# js notifications
+gem "gritter", "1.1.0"
+
+# tree models
+gem 'ancestry'

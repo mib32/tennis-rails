@@ -13,6 +13,7 @@ def create_user(model, email, password)
   end
 
   puts "CREATED #{model.to_s} USER: " << user.email
+  user
 end
   
 # Environment variables (ENV['...']) can be set in the file config/application.yml.
@@ -20,6 +21,11 @@ end
 SECRETS = Rails.application.secrets
 
 create_user(Admin, SECRETS.admin_email, SECRETS.admin_password)
-create_user(Stadium, SECRETS.stadium_email, SECRETS.stadium_password)
+stadium_user = create_user(StadiumUser, SECRETS.stadium_email, SECRETS.stadium_password)
 create_user(Coach, SECRETS.coach_email, SECRETS.coach_password)
 create_user(Customer, SECRETS.customer_email, SECRETS.customer_password)
+
+c = Category.create!(name: "Футбол", parent: Category.create(name: "Стадион"))
+stadium_user.stadium = Stadium.create(name: 'Арена "Открытие"', category: c)
+stadium_user.stadium.courts.create name: 'Первый'
+stadium_user.stadium.courts.create name: 'Второй'

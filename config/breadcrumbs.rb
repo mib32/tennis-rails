@@ -10,6 +10,24 @@ crumb :stadiums do
   link "Стадионы", stadiums_path
 end
 
+crumb :category do |category|
+  link category.name, category
+  if category.parent
+    parent category.parent
+  else
+    parent :root
+  end
+end
+
+crumb :stadium do |stadium|
+  link stadium.name, stadium
+  if stadium.category
+    parent :category, stadium.category
+  else
+    parent :stadiums
+  end
+end
+
 crumb :account do
   link "Личный кабинет", stadiums_path
 end
