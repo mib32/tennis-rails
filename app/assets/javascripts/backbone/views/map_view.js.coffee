@@ -20,7 +20,7 @@ class Tennis.Views.MapView extends Backbone.View
       else
         @handler.getMap().setCenter(@coords())
 
-      @handler.getMap().setZoom(14);
+      # @handler.getMap().setZoom(14);
       @afterMap() if @afterMap
 
     this
