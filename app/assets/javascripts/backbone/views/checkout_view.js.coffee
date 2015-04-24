@@ -1,10 +1,19 @@
 class Tennis.Views.CheckoutView extends Backbone.View
   initialize: ->
-    window.grid.model.on('change', @render, this)
+    @listenTo(window.grid.model, 'change', @render)
 
   render: ->
+    $('[data-time]').html(@getTime)
     $('[data-total]').html(@getPrice)
-    $('[data-book]').removeClass('hidden')
+    $('#start').val(window.grid.model.get('start'))
+    $('#end').val(window.grid.model.get('end'))
+    $('[data-book]').removeAttr('disabled')
+
+  getTime: ->
+    start = window.grid.model.get('start')
+    end = window.grid.model.get('end')
+
+    start.format('lll') + ' - ' + end.format('lll')
 
   getPrice: ->
     start = window.grid.model.get('start')

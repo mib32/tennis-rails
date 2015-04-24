@@ -3,7 +3,7 @@
 <div class="body-bg">
   <div class="row">
     <div class="entry">
-      <h1><span class="title-tire">–</span> Личный кабинет <span class="title-tire">–</span></h1>
+      <h1><span class="title-tire">–</span> <%= @stadium.name %> <span class="title-tire">–</span></h1>
       <hr>
       <div class="row">
 	      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -49,10 +49,15 @@
 						    						<h3 class="panel-title">Бронирование</h3>
 						    				  </div>
 						    				  <div class="panel-body woocommerce">
-						    				  	<%= label_tag "Выберите корт" %>
-								    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: court_events_path(c), price: c.price } } ] }), class: 'form-control' %>
-								    				<h3 data-total></h3>
-								    				<%= link_to 'Забронировать', '#', class: 'button add_to_cart_button product_type_simple hidden', data: { book: true} %>
+						    				  	<%= simple_form_for :order, url: new_order_path, method: :get do |f|%>
+							    				  	<%= label_tag "Выберите корт" %>
+									    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: court_events_path(c), price: c.price } } ] }), class: 'form-control' %>
+						    				  		<%= hidden_field_tag :start %>
+						    				  		<%= hidden_field_tag :end %>
+									    				<p data-time></p>
+									    				<h3 data-total></h3>
+									    				<%= f.button :submit, 'Забронировать', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
+									    				<% end %>
 						    				  </div>
 						    			</div>
 						    		</div>

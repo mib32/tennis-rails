@@ -32,6 +32,11 @@ crumb :account do
   link "Личный кабинет", stadiums_path
 end
 
+crumb :cart do
+  'Корзина'
+  parent :root
+end
+
 # crumb :project do |project|
 #   link project.name, project_path(project)
 #   parent :projects

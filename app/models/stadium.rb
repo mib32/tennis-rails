@@ -14,7 +14,6 @@ class Stadium < ActiveRecord::Base
         lat: latitude.to_f,
         lng: longitude.to_f
       },
-      name: name
     }
   end
 end

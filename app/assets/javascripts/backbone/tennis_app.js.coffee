@@ -6,6 +6,7 @@
 
 class window.CustomMarkerBuilder extends Gmaps.Google.Builders.Marker
   create_marker: ->
+    @args.infowindow = @args.attributes.infowindow
     options = _.extend @marker_options(), @custom_options()
     @serviceObject = new(@primitives().marker)(options)
 

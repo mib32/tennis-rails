@@ -1,4 +1,9 @@
 ru:
+  hours:
+    few: "%{count} часа"
+    many: "%{count} часов"
+    one: "%{count} час"
+    other: "%{count} часов"
   activerecord:
     attributes:
       user:

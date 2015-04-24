@@ -4,4 +4,8 @@ class Wallet < ActiveRecord::Base
   def deposit! amount
     update total: total + amount
   end
+
+  def withdraw! amount
+    update total: total - amount
+  end
 end

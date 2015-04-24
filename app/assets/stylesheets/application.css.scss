@@ -184,6 +184,9 @@ select,
     padding: 7px 30px 7px 30px !important;
     border-bottom: solid #1b6db5 3px !important;
     text-decoration: none !important;
+    &:disabled{
+      background-color: gray !important;
+    }
 }
 .woocommerce #respond input#submit:hover,
 .woocommerce a.button:hover,
