@@ -45,7 +45,7 @@ group :development, :test do
   gem 'faker'
   # gem 'pry-rails'
   # gem 'pry-rescue'
-  gem 'irbtools', require: 'irbtools/binding'
+  # gem 'irbtools', require: 'irbtools/binding'
   gem 'rspec-rails'
 end
 group :production do
