@@ -14,6 +14,6 @@ class ChangesController < ApplicationController
       end
 
     end
-  respond_with @e, location: court_event_url(@e.court, @e)
+  respond_with @e, location: event_url(court_id: @e.court, @e)
   end
 end
