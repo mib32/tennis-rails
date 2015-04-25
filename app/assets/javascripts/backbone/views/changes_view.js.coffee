@@ -3,9 +3,12 @@ class Tennis.Views.ChangesView extends Backbone.View
     'click [data-move]': 'submit'
 
   initialize: ->
-    @listenTo(@collection, 'add change reset', @render)
+    @listenTo(@collection, 'add', @render)
+    @listenTo(@collection, 'change', @render)
+    @listenTo(@collection, 'reset', @render)
 
   render: ->
+    @setElement('[data-event-move]')
     list = ""
     @collection.each (change) =>
       start = change.attributes.event.start.format()

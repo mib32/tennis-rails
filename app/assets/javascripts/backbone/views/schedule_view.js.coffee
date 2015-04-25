@@ -16,6 +16,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
         if change = window.changes.findWhere(event: event)
           delta.add(change.get('delta'))
           change.set('delta', delta)
+          window.changes.trigger('change')
         else
           window.changes.add(new Tennis.Models.Change(event: event, delta: delta))
       header:
