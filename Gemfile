@@ -71,6 +71,7 @@ gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
 # gem 'kendoui-rails', github: 'kendo-labs/kendo-rails', branch: 'master'
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
+gem 'handlebars_assets'
 
 # js notifications
 gem "gritter", "1.1.0"

@@ -9,10 +9,27 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="courts"></div>
+    <div role="tabpanel" class="tab-pane active" id="courts">
+      <div class="row top15">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <%= label_tag "Выберите корт" %>
+          <%= select_tag :court, options_for_select(@user.stadium.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control' %>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div data-grid data-source="<%= events_path(court_id: @user.stadium.courts.first) %>" class="top15"></div>
+          <script type="text/javascript">
+            var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+            // var changes = new Tennis.Collections.Changes();
+            // var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+            // var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+            grid.render();
+          </script>
+        </div>
+      </div>
+    </div>
     <div role="tabpanel" class="tab-pane" id="coaches">...</div>
     <div role="tabpanel" class="tab-pane" id="stadium">
-      <div class="row">
+      <div class="row top15">
         <div class="col-md-6">
           <%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false' %>
           <%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>

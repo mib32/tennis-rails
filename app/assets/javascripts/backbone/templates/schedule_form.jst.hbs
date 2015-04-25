@@ -1,0 +1,22 @@
+<form>
+	<div class="form-group">
+		<label>Начало</label>
+		<input type="datetime" value="{{ date }}" class="form-control" name="start" readonly="true">
+	</div>
+	<div class="form-group">
+		<label>Длительность</label>
+		<select name="duration" class="form-control">
+			<option value="1">1 час</option>
+			<option value="2">2 часа</option>
+			<option value="3">3 часа</option>
+			<option value="4">4 часа</option>
+			<option value="5">5 часов</option>
+			<option value="6">6 часов</option>
+			<option value="7">7 часов</option>
+			<option value="8">8 часов</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Сохранить" class="form-control">
+	</div>
+</form>

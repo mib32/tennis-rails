@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
 
     if transaction
       @order.save
+      redirect_to dashboard_path, notice: 'Заказ успешно создан.'
     end
   end
 end

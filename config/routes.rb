@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
+  resources :changes, only: :create
+
   resources :orders, only: [:new, :create]
 
   get 'dashboard', to: 'dashboard#edit', as: 'dashboard'
   resources :categories
   resources :coaches
-  resources :courts do
-    resources :events
-  end
+  resources :courts
+  resources :events
   resources :stadiums do
     
   end

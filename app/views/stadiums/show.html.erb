@@ -19,7 +19,7 @@
 					  <!-- Tab panes -->
 					  <div class="tab-content">
 					    <div role="tabpanel" class="tab-pane active" id="home">
-					    	<div class="row">
+					    	<div class="row top30">
 					    	  <div class="col-md-8">
 					    	    <%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false' %>
 					    	    <%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>
@@ -42,35 +42,52 @@
 					    	</div>
 					    </div>
 					    <div role="tabpanel" class="tab-pane" id="grid">
-					    	<div class="row">
-					    		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						    		<div class="panel panel-default">
-						    				  <div class="panel-heading">
-						    						<h3 class="panel-title">Бронирование</h3>
-						    				  </div>
-						    				  <div class="panel-body woocommerce">
-						    				  	<%= simple_form_for :order, url: new_order_path, method: :get do |f|%>
-							    				  	<%= label_tag "Выберите корт" %>
-									    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: court_events_path(c), price: c.price } } ] }), class: 'form-control' %>
-						    				  		<%= hidden_field_tag :start %>
-						    				  		<%= hidden_field_tag :end %>
-									    				<p data-time></p>
-									    				<h3 data-total></h3>
-									    				<%= f.button :submit, 'Забронировать', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
-									    				<% end %>
-						    				  </div>
-						    			</div>
-						    		</div>
+					    	<div class="row top30">
+					    		<div class="col-xs-12 col-sm-12">
+							    	<div data-grid data-source="<%= events_path(court_id: @stadium.courts.first.id) %>"></div>
+							    	
+					    		</div>
+				    		</div>
+				    		<div class="row top30">
 					    		<div class="col-xs-12 col-sm-6">
-							    	<div data-grid data-source="<%= court_events_path(@stadium.courts.first) %>"></div>
-							    	<script type="text/javascript">
+						    		<div class="panel panel-default">
+				    				  <div class="panel-heading">
+				    						<h3 class="panel-title">Бронирование</h3>
+				    				  </div>
+				    				  <div class="panel-body woocommerce" data-checkout>
+				    				  	<%= simple_form_for :order, url: new_order_path, method: :get do |f|%>
+					    				  	<%= label_tag "Выберите корт" %>
+							    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control' %>
+				    				  		<%= hidden_field_tag :start %>
+				    				  		<%= hidden_field_tag :end %>
+							    				<p data-time></p>
+							    				<h3 data-total></h3>
+							    				<%= f.button :submit, 'Забронировать', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
+							    				<% end %>
+				    				  </div>
+				    				  <script type="text/javascript">
 								    	var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
-								    	var checkout = new Tennis.Views.CheckoutView();
+								    	var changes = new Tennis.Collections.Changes();
+								    	var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+								    	var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
 								    	grid.render();
 							    	</script>
+					    			</div>
+				    			</div>
+				    			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					    			<div class="panel panel-default" data-event-move>
+				    				  <div class="panel-heading">
+				    						<h3 class="panel-title">Перенос</h3>
+				    				  </div>
+				    				  <div class="panel-body woocommerce">
+			    				  		<ul data-changes-list></ul>
+				    				  	<h3 data-total></h3>
+						    				<%= link_to 'Сохранить', '#', class: 'button add_to_cart_button hidden', data: { move: true } %>
+				    				  </div>
+					    			</div>
+					    			</div>
 					    		</div>
 					    	</div>
-					    </div>
 					    <div role="tabpanel" class="tab-pane" id="photos">
 					    </div>
 					    <div role="tabpanel" class="tab-pane" id="reviews">...</div>

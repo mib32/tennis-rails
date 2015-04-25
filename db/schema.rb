@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421162930) do
+ActiveRecord::Schema.define(version: 20150425114652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,23 @@ ActiveRecord::Schema.define(version: 20150421162930) do
   create_table "courts", force: :cascade do |t|
     t.string   "name"
     t.integer  "stadium_id"
-    t.decimal  "price",      precision: 8, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "price",        precision: 8, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.decimal  "change_price", precision: 8, scale: 2
   end
 
   add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
+
+  create_table "event_changes", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "start_delta"
+    t.string   "duration_delta"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "event_changes", ["event_id"], name: "index_event_changes_on_event_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.datetime "start"
@@ -118,8 +129,9 @@ ActiveRecord::Schema.define(version: 20150421162930) do
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
   add_foreign_key "courts", "stadiums"
+  add_foreign_key "event_changes", "events"
+  add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
-  add_foreign_key "events", "stadiums", column: "court_id"
   add_foreign_key "orders", "users"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"

@@ -22,6 +22,6 @@ class StadiumsController < ApplicationController
 
   def stadium_params
     params.require(:stadium).permit(:name, :address, :telephone, :description, :category_id, :phone, :latitude, :longitude,
-      courts_attributes: [:id, :name, :price, :_destroy])
+      courts_attributes: [:id, :name, :price, :change_price, :_destroy])
   end
 end

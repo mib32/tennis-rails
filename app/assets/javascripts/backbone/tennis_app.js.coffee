@@ -1,4 +1,5 @@
 #= require_self
+#= require handlebars.runtime
 #= require_tree ./templates
 #= require_tree ./models
 #= require_tree ./views
