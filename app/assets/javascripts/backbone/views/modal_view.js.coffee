@@ -25,11 +25,13 @@ class Tennis.Views.ModalView extends Backbone.View
 
     $modal.find('.modal-dialog').css(@dialogStyle) if @dialogStyle
     $modal.modal('show')
+    @afterRender() if @afterRender
 
   renderContent: ->
     html = $(@template(@variables))
 
     @$el.html(html.html())
+
 
   hide: ->
     @$el.modal('hide')

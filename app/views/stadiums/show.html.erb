@@ -10,15 +10,15 @@
 					<div role="tabpanel">
 					  <!-- Nav tabs -->
 					  <ul class="nav nav-tabs nav-justified" role="tablist">
-					    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Описание</a></li>
-					    <li role="presentation"><a href="#grid" aria-controls="grid" role="tab" data-toggle="tab">Расписание</a></li>
+					    <!-- <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Описание</a></li>-->
+					    <li role="presentation" class="active"><a href="#grid" aria-controls="grid" role="tab" data-toggle="tab">Расписание</a></li>
 					    <li role="presentation"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Галерея</a></li>
 					    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Отзывы</a></li>
 					  </ul>
 
 					  <!-- Tab panes -->
 					  <div class="tab-content">
-					    <div role="tabpanel" class="tab-pane active" id="home">
+					    <!--<div role="tabpanel" class="tab-pane active" id="home">
 					    	<div class="row top30">
 					    	  <div class="col-md-8">
 					    	    <%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false' %>
@@ -40,9 +40,13 @@
 					    			</p>
 					    		</div>
 					    	</div>
-					    </div>
-					    <div role="tabpanel" class="tab-pane" id="grid">
+					    </div> -->
+					    <div role="tabpanel" class="tab-pane active" id="grid">
 					    	<div class="row top30">
+					    		<div class="col-xs-12">
+						    		<%= label_tag "Выберите корт" %>
+				    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control' %>
+			    				</div>
 					    		<div class="col-xs-12 col-sm-12">
 							    	<div data-grid data-source="<%= events_path(court_id: @stadium.courts.first.id) %>"></div>
 							    	
@@ -56,8 +60,7 @@
 				    				  </div>
 				    				  <div class="panel-body woocommerce" data-checkout>
 				    				  	<%= simple_form_for :order, url: new_order_path, method: :get do |f|%>
-					    				  	<%= label_tag "Выберите корт" %>
-							    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control' %>
+					    				  	
 				    				  		<%= hidden_field_tag :start %>
 				    				  		<%= hidden_field_tag :end %>
 							    				<p data-time></p>

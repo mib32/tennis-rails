@@ -72,6 +72,8 @@ gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 gem 'handlebars_assets'
+gem 'jquery-datetimepicker-rails'
+
 
 # js notifications
 gem "gritter", "1.1.0"

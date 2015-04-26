@@ -13,4 +13,8 @@ class Event < ActiveRecord::Base
   def duration
     self.end - self.start
   end
+
+  def owned_by user
+    self.order.user.id == user.id if self.order && user
+  end
 end

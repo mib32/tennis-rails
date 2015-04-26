@@ -1,8 +1,10 @@
 class Tennis.Views.ScheduleView extends Backbone.View
   initialize: ->
-    @model = new Backbone.Model();
+    @model = new Tennis.Models.Event();
+    @collection = new Tennis.Collections.Events();
     $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
       @$el.fullCalendar('render')  
+    @court = $('#court').find(":selected").val()
     $('#court').on 'change', @switchSource
 
   render: ->
@@ -23,23 +25,28 @@ class Tennis.Views.ScheduleView extends Backbone.View
         left: 'prev,next today'
         center: 'title'
         right: 'month, agendaWeek, agendaDay'
-      dayClick: (date, ev, view) =>
-        modal = new Tennis.Views.ScheduleModalView(date)
-        modal.render()
+      # dayClick: (date, ev, view) =>
+        # modal = new Tennis.Views.ScheduleModalView(date, date.add(1, 'hour'))
+        # modal.render()
       defaultView: 'agendaWeek'
       selectable: true
       timezone: false
       selectHelper: true
       selectOverlap: false
+      unselectAuto: false
       select: ( start, end, jsEvent, view ) =>
-        @model.set
-          start: start.utcOffset(0)
-          end: end.utcOffset(0)
+        if jsEvent
+          @modal = new Tennis.Views.ScheduleModalView(start, end)
+          @modal.render()
+        # @model.set
+          # start: start.utcOffset(0)
+          # end: end.utcOffset(0)
 
   reRender: ->
     @$el.fullCalendar('render')
 
   switchSource: =>
+    @court = $('#court').find(":selected").val()
     @$el.fullCalendar('removeEventSource', @$el.fullCalendar("eventSources"))
     @$el.fullCalendar('removeEvents')
     @$el.fullCalendar('addEventSource', $('#court').find(":selected").data('source'))

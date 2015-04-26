@@ -27,4 +27,5 @@
 //= require fullcalendar
 //= require fullcalendar/lang/ru
 //= require cocoon
+//= require jquery.datetimepicker
 //= require_directory .
