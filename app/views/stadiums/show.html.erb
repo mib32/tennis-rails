@@ -59,26 +59,15 @@
 				    						<h3 class="panel-title">Бронирование</h3>
 				    				  </div>
 				    				  <div class="panel-body woocommerce" data-checkout>
-				    				  	<%= simple_form_for :order, url: new_order_path, method: :get do |f|%>
-					    				  	
-				    				  		<%= hidden_field_tag :start %>
-				    				  		<%= hidden_field_tag :end %>
+					    				  	<ul data-orders-list></ul>
 							    				<p data-time></p>
 							    				<h3 data-total></h3>
-							    				<%= f.button :submit, 'Забронировать', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
-							    				<% end %>
+							    				<%= link_to 'Оплатить', '#', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
 				    				  </div>
-				    				  <script type="text/javascript">
-								    	var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
-								    	var changes = new Tennis.Collections.Changes();
-								    	var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
-								    	var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
-								    	grid.render();
-							    	</script>
 					    			</div>
 				    			</div>
 				    			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					    			<div class="panel panel-default" data-event-move>
+					    			<div class="panel panel-default hidden" data-event-move>
 				    				  <div class="panel-heading">
 				    						<h3 class="panel-title">Перенос</h3>
 				    				  </div>
@@ -90,6 +79,13 @@
 					    			</div>
 					    			</div>
 					    		</div>
+				    				  <script type="text/javascript">
+								    	var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+								    	var changes = new Tennis.Collections.Changes();
+								    	var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+								    	var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+								    	grid.render();
+							    	</script>
 					    	</div>
 					    <div role="tabpanel" class="tab-pane" id="photos">
 					    </div>

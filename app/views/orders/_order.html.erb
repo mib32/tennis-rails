@@ -1,0 +1,29 @@
+<h3><%= order.guid %></h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Стадион</th>
+			<th>Начало</th>
+			<th>Конец</th>
+			<th>Длительность</th>
+			<th>Цена</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% order.events.each do |item| %>
+			<tr>
+				<td><%= link_to item.court.stadium.name, item.court.stadium %></td>
+				<td><%= item.start %></td>
+				<td><%= item.end %></td>
+				<td><%= t('hours', count: item.duration_in_hours) %></td>
+				<td><%= item.total %></td>	
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<% if order.unpaid? %>
+	<%= simple_form_for order, url: pay_order_path(order) do |f| %>
+		<%= f.hidden_field :id %>
+		<%= f.button :submit, "Оплатить #{order.total}", class: 'btn-info' %>
+	<% end %>
+<% end %>

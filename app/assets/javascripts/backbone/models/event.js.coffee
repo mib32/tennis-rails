@@ -4,6 +4,8 @@ class Tennis.Models.Event extends Backbone.Model
     start: @attributes.start
     end: @attributes.end
     color: 'red' if @isOverlapping() 
+    editable: true
+    cid: @cid
 
 
   isOverlapping: ->
@@ -15,3 +17,4 @@ class Tennis.Models.Event extends Backbone.Model
     return false
 
 class Tennis.Collections.Events extends Backbone.Collection
+  paramRoot: 'order'

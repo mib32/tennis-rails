@@ -1,0 +1,18 @@
+<% breadcrumb :orders %>
+
+<div class="body-bg">
+  <div class="row">
+    <div class="entry">
+      <h1><span class="title-tire">–</span> Заказы <span class="title-tire">–</span></h1>
+      <hr>
+      <div class="row">
+	      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	      	<h2>Неоплаченные</h2>
+    			<%= render @orders.unpaid %>
+      		<h2>Оплаченные</h2>
+      		<%= render @orders.paid %>
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -38,6 +38,7 @@ class Tennis.Views.ScheduleModalView extends Tennis.Views.ModalView
     # if @model.isOverlapping()
     window.grid.$el.fullCalendar('renderEvent', @model.eventObject(), true)
     window.grid.$el.fullCalendar('unselect')
+    window.grid.collection.add(@model)
 
     @hide()
 

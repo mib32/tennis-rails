@@ -8,7 +8,8 @@ class Tennis.Views.ChangesView extends Backbone.View
     @listenTo(@collection, 'reset', @render)
 
   render: ->
-    @setElement('[data-event-move]')
+    # @setElement('[data-event-move]')
+    @$el.removeClass('hidden')
     list = ""
     @collection.each (change) =>
       start = change.attributes.event.start.format()

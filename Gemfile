@@ -80,3 +80,6 @@ gem "gritter", "1.1.0"
 
 # tree models
 gem 'ancestry'
+
+# slugs
+gem 'friendly_id', "~> 5"

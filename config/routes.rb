@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :changes, only: :create
 
-  resources :orders, only: [:new, :create]
+  resources :orders do
+    member do
+      patch 'pay'
+    end
+  end
 
   get 'dashboard', to: 'dashboard#edit', as: 'dashboard'
   resources :categories

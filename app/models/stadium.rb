@@ -1,4 +1,7 @@
 class Stadium < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :name, use: [:slugged]
+  
   belongs_to :category
   belongs_to :user
   has_many :events, through: :courts

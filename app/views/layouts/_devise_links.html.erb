@@ -6,9 +6,8 @@
     </div>
     <% end %>
   </li>
-  <li><%= link_to 'Корзина', '#'  %></li>
+  <li><%= link_to 'Корзина', orders_path %></li>
   <li><%= link_to 'Выход', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to 'Вход / Регистрация', new_user_session_path %></li>
-  <li><%= link_to 'Корзина', '#'  %></li>
 <% end %>

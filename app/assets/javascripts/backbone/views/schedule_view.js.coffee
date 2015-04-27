@@ -13,14 +13,19 @@ class Tennis.Views.ScheduleView extends Backbone.View
       events: @$el.data('source')
       eventOverlap: false
       eventResize: ( event, delta, revertFunc, jsEvent, ui, view ) =>
-        revertFunc()
+        if obj = _.findWhere(@collection.models, {cid: event.cid})
+          obj.set(start: event.start, end: event.end)
       eventDrop: ( event, delta, revertFunc, jsEvent, ui, view ) =>
-        if change = window.changes.findWhere(event: event)
-          delta.add(change.get('delta'))
-          change.set('delta', delta)
-          window.changes.trigger('change')
+        # if event is fresh just change it
+        if obj = _.findWhere(@collection.models, {cid: event.cid})
+          obj.set(start: event.start, end: event.end)
         else
-          window.changes.add(new Tennis.Models.Change(event: event, delta: delta))
+          if change = window.changes.findWhere(event: event)
+            delta.add(change.get('delta'))
+            change.set('delta', delta)
+            window.changes.trigger('change')
+          else
+            window.changes.add(new Tennis.Models.Change(event: event, delta: delta))
       header:
         left: 'prev,next today'
         center: 'title'

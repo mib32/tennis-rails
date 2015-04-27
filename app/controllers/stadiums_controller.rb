@@ -17,7 +17,7 @@ class StadiumsController < ApplicationController
 
   private
   def set_stadium
-    @stadium  = Stadium.find(params[:id])
+    @stadium  = Stadium.friendly.find(params[:id])
   end
 
   def stadium_params

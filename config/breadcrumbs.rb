@@ -37,6 +37,10 @@ crumb :cart do
   parent :root
 end
 
+crumb :orders do 
+  'Заказы'
+end
+
 # crumb :project do |project|
 #   link project.name, project_path(project)
 #   parent :projects
