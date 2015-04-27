@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :order
   belongs_to :court
+  has_many :event_repeats
 
   def total
     court.price * duration_in_hours

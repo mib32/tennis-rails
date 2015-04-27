@@ -24,6 +24,6 @@
 <% if order.unpaid? %>
 	<%= simple_form_for order, url: pay_order_path(order) do |f| %>
 		<%= f.hidden_field :id %>
-		<%= f.button :submit, "Оплатить #{order.total}", class: 'btn-info' %>
+		<%= f.button :submit, "Оплатить #{order.total}", class: 'btn-primary' %>
 	<% end %>
 <% end %>

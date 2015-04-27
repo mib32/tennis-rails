@@ -6,6 +6,7 @@ class Tennis.Views.ScheduleModalView extends Tennis.Views.ModalView
       'submit form': 'submit',
       'change input': 'bindModel'
       'change select': 'bindModel'
+      'change #repeatType': 'showRepeatForm'
       }, super)
 
   bindModel: (evt) ->
@@ -15,17 +16,23 @@ class Tennis.Views.ScheduleModalView extends Tennis.Views.ModalView
     obj[changed.name] = value;
     if changed.name == 'start' || changed.name == 'end'
       obj[changed.name] = moment.utc(value)
-    this.model.set(obj);
+
+    @model.set('repeatType', @$('#repeatType').val())
+    switch @$('#repeatType').val()
+      when "weekly"
+        _.each @$('[name=repeatWday]').serializeArray(), =>
+
+
+    @model.set('')
+    this.model.set(obj)
 
   initialize: (start, end) ->
-    @model = new Tennis.Models.Event(start: start, end: end)
+    @model = new Tennis.Models.Event(start: start, end: end, repeats: new Tennis.Collections.Repeats())
     @listenTo(@model, 'change', @calculatePrice)
 
   variables: ->
-    # _.extend({
     header: 'Бронирование'
     body: @form(start: @start().format('YYYY/MM/DD H:mm'), end: @end().format('YYYY/MM/DD H:mm'))
-    # }, super)
 
   start: ->
     @model.get('start')
@@ -46,6 +53,8 @@ class Tennis.Views.ScheduleModalView extends Tennis.Views.ModalView
     $('[data-datetimepicker]').datetimepicker
       lang: 'ru'
       step: 30
+    $('[data-datepicker]').datetimepicker
+      lang: 'ru'
     @calculatePrice()
 
   calculatePrice: ->
@@ -54,3 +63,8 @@ class Tennis.Views.ScheduleModalView extends Tennis.Views.ModalView
       total = data.price * dur
       time = moment.duration(dur, "hours").humanize()
       @$('[data-total]').html(time + ' = ' + total + ' руб.')
+
+  showRepeatForm: (e) ->
+    @$('[data-only]').addClass('hidden')
+    if @$('#repeatType').find(':selected').val() == 'weekly'
+      @$('[data-only=weekly]').removeClass('hidden')
