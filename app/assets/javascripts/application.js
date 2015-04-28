@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require underscore
 //= require gmaps/google
+//= require kendo.all.min
+//= require cultures/kendo.culture.ru-RU.min
+//= require messages/kendo.messages.ru-RU.min
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink

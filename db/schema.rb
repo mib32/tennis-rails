@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427142445) do
+ActiveRecord::Schema.define(version: 20150428140227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,8 +62,12 @@ ActiveRecord::Schema.define(version: 20150427142445) do
     t.string   "description"
     t.integer  "court_id"
     t.integer  "order_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "recurrence_rule"
+    t.string   "recurrence_exception"
+    t.integer  "recurrence_id"
+    t.boolean  "is_all_day"
   end
 
   add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree

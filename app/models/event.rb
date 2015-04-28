@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
   belongs_to :court
   has_many :event_repeats
 
+  def description
+    attributes["description"] || ""
+  end
   def total
     court.price * duration_in_hours
   end
@@ -16,6 +19,6 @@ class Event < ActiveRecord::Base
   end
 
   def owned_by user
-    self.order.user.id == user.id if self.order && user
+    self.order.user.id == user.id if self.order && self.order.user && user
   end
 end
