@@ -83,3 +83,5 @@ gem 'ancestry'
 
 # slugs
 gem 'friendly_id', "~> 5"
+
+gem 'yui-compressor'
