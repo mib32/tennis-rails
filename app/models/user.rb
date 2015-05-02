@@ -13,4 +13,12 @@ class User < ActiveRecord::Base
   def set_customer
     self.type = 'Customer' unless self.type
   end
+
+  def total
+    orders.map(&:total).inject(:+)
+  end
+
+  def total_hours
+    orders.map(&:total_hours).inject(:+)
+  end
 end

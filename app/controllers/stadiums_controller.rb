@@ -3,7 +3,11 @@ class StadiumsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @stadiums = Stadium.all
+    if params[:category_id]
+      @stadiums = Category.friendly.find(params[:category_id]).stadiums
+    else
+      @stadiums = Stadium.all
+    end
   end
 
   def show

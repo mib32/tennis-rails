@@ -21,4 +21,8 @@ class Event < ActiveRecord::Base
   def owned_by user
     self.order.user.id == user.id if self.order && self.order.user && user
   end
+
+  def owned= a
+    # for syncronization with kendoScheduler
+  end
 end

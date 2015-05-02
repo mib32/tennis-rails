@@ -20,7 +20,17 @@ class Tennis.Views.ScheduleView extends Backbone.View
         "month",
         "agenda",
       ],
+      edit: (e) ->
+        # console.log e.event
+        e.preventDefault() unless e.event.owned
       timezone: "Etc/UTC",
+      resources:[
+        field: 'owned'
+        dataSource:[
+          { text: 'Своё', value: true, color: 'cadetblue', editable: false },
+          { text: 'Чужое', value: false, color: 'rgba(255,136,0,0.5)' }
+        ]
+      ]
       dataSource: {
         batch: false,
         transport: {
@@ -62,7 +72,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     $('#court').find(":selected").val()
 
   fields:
-    title: { from: "description", defaultValue: "No title", type: 'string'}, 
+    title: { from: "description", defaultValue: "Введите название", type: 'string'}, 
     start: { type: "date", from: "start" },
     end: { type: "date", from: "end" },
     recurrenceId: { from: "recurrence_id" },
@@ -70,7 +80,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     recurrenceException: { from: "recurrence_exception" },
     startTimezone: { from: "start_timezone" },
     endTimezone: { from: "end_timezone" },
-    ownerId: { from: "user_id" },
+    owned: { from: "owned", type: 'boolean', defaultValue: "true" },
     isAllDay: { type: "boolean", from: "is_all_day" }
 
   # initialize: ->

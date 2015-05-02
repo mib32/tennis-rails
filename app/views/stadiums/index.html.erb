@@ -5,12 +5,15 @@
 		<div class="entry">
 			<h1><span class="title-tire">–</span> Стадионы <span class="title-tire">–</span></h1>
 			<hr>
-			<ul>
+			<ul class="list-unstyled">
 			<% @stadiums.each do |stadium| %>
 				<li>
-		  		<%= image_tag nil, class: 'avatar photo pull-left', size: '100x100' %>
+		  		<%= image_tag 'placeholder.png', class: 'avatar photo pull-left', size: '60x60' %>
 					<%= link_to stadium.name, stadium %>
 				</li>
+			<% end %>
+			<% if @stadiums.empty? %>
+				<p class="text-center">Не найдено</p>
 			<% end %>
 			</ul>
 		</div>

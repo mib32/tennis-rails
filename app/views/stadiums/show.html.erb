@@ -59,10 +59,7 @@
 				    						<h3 class="panel-title">Бронирование</h3>
 				    				  </div>
 				    				  <div class="panel-body woocommerce" data-checkout>
-					    				  	<ul data-orders-list></ul>
-							    				<p data-time></p>
-							    				<h3 data-total></h3>
-							    				<%= link_to 'Оплатить', '#', class: 'button add_to_cart_button product_type_simple', disabled: 'disabled', data: { book: true} %>
+				    				  	<%= render "orders/total" %>
 				    				  </div>
 					    			</div>
 				    			</div>

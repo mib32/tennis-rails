@@ -1,0 +1,7 @@
+<% if current_user.nil? %>
+  <h4>Сперва авторизуйтесь, пожалуйста:</h4>
+  <%= link_to 'Вход / Регистрация', new_user_session_path, class: 'button add_to_cart_button product_type_simple' %>
+<% elsif current_user.orders.unpaid %>
+  <h3 data-total><%= t('hours', count: current_user.total_hours) %> на сумму <%= current_user.total %> руб.</h3>
+  <%= link_to 'Перейти к оплате', orders_path(), class: 'button add_to_cart_button product_type_simple', data: { book: true} %>
+<% end %>

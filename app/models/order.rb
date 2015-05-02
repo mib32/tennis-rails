@@ -15,6 +15,10 @@ class Order < ActiveRecord::Base
     events.map(&:total).inject(:+)
   end
 
+  def total_hours
+    events.map(&:duration_in_hours).inject(:+)
+  end
+
   def guid
     "#%06d" % id
   end

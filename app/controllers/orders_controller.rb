@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   def index
     @orders = current_user.orders.order('created_at desc')
@@ -53,6 +53,10 @@ class OrdersController < ApplicationController
       @order.save
       respond_with @order, notice: 'Заказ успешно оплачен'
     end
+  end
+
+  def total
+    
   end
 
 end
