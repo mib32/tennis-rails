@@ -13,16 +13,19 @@ class Tennis.Views.ScheduleView extends Backbone.View
       culture: 'ru-RU'
       date: new Date()
       startTime: new Date("2013/6/13 07:00 AM")
-      height: 600
+      height: 700
       views: [
         "day",
         {type: "week", selected: true},
         "month",
         "agenda",
       ],
-      edit: (e) ->
+      edit: (e) =>
         # console.log e.event
-        e.preventDefault() unless e.event.owned
+        if !e.event.owned || @getCookie('signed_in') != '1'
+          e.preventDefault()
+
+
       timezone: "Etc/UTC",
       resources:[
         field: 'owned'
@@ -82,6 +85,19 @@ class Tennis.Views.ScheduleView extends Backbone.View
     endTimezone: { from: "end_timezone" },
     owned: { from: "owned", type: 'boolean', defaultValue: "true" },
     isAllDay: { type: "boolean", from: "is_all_day" }
+
+  getCookie: (cname) ->
+    name = cname + '='
+    ca = document.cookie.split(';')
+    i = 0
+    while i < ca.length
+      c = ca[i]
+      while c.charAt(0) == ' '
+        c = c.substring(1)
+      if c.indexOf(name) == 0
+        return c.substring(name.length, c.length)
+      i++
+    ''
 
   # initialize: ->
     # @model = new Tennis.Models.Event();

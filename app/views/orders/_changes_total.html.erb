@@ -1,4 +1,4 @@
-<% if current_user || current_user.event_changes.unpaid.present? %>
+<% if current_user && current_user.event_changes.unpaid.present? %>
 <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Переносы</h3>
