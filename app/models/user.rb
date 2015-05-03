@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :orders
+  has_many :events, through: :orders
+  has_many :event_changes, through: :events
   has_one :wallet
   after_create :create_wallet
 
@@ -20,5 +23,9 @@ class User < ActiveRecord::Base
 
   def total_hours
     orders.map(&:total_hours).inject(:+)
+  end
+
+  def changes_total
+    event_changes.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
   end
 end

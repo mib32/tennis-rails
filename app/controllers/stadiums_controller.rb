@@ -1,13 +1,21 @@
 class StadiumsController < ApplicationController
   before_action :set_stadium, only: [:show, :edit, :update]
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   def index
-    if params[:category_id]
+    @stadiums = Stadium.all
+
+    if params[:category_id].present?
       @stadiums = Category.friendly.find(params[:category_id]).stadiums
-    else
-      @stadiums = Stadium.all
     end
+    if params[:name].present?
+      @stadiums = @stadiums.where('name ilike ?', '%' + params[:name] + '%')
+    end
+    if params[:place].present?
+      
+    end
+
+    respond_with @stadiums
   end
 
   def show

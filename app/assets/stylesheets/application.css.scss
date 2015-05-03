@@ -145,7 +145,7 @@ select,
     height: 100px;
 }
 .chosen-container {
-    margin-left: 7px;
+    margin-left: 25px;
 }
 .total-price-title {
     font-family: 'Ubuntu', Arial;
@@ -498,11 +498,11 @@ html .km-pane-wrapper .k-header {
 .product-image,
 .product-map {
     float: left;
-    margin-top: -40px;
-    height: 300px;
+    // margin-top: -40px;
+    height: 300px ;
 }
 .product-map {
-    width: 65%;
+    width: 65% !important;
 }
 .product-image {
     width: 35%;

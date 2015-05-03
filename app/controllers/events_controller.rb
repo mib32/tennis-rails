@@ -23,10 +23,11 @@ class EventsController < ApplicationController
 
   def update
     @event = current_user.events.find(params[:id])
-    @event.update event_params
-
-    # if @event.order.unpaid?
-    # end      
+    if @event.update event_params
+      if @event.order.paid?
+        @event.event_changes.create! summary: @event.to_json, status: 'unpaid'
+      end      
+    end
 
     respond_with @event
   end

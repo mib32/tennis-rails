@@ -4,6 +4,11 @@ ru:
     many: "%{count} часов"
     one: "%{count} час"
     other: "%{count} часов"
+  changes:
+    few: "%{count} переноса"
+    many: "%{count} переносов"
+    one: "%{count} перенос"
+    other: "%{count} переносов"
   activerecord:
     attributes:
       user:

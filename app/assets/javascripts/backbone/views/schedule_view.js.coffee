@@ -51,8 +51,8 @@ class Tennis.Views.ScheduleView extends Backbone.View
         },
         parameterMap: (options, operation) =>
           options.court_id = @court_id
-          # if operation == "read"
-            # return options
+          if operation == "read"
+            return options
           if operation != "read" && options
             return {event: options};
       },

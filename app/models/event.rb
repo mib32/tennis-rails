@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :order
   belongs_to :court
-  has_many :event_repeats
+  has_many :event_changes
 
   def description
     attributes["description"] || ""

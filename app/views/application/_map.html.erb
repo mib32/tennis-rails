@@ -19,19 +19,13 @@
 
    <!-- Begin searcher -->
 <div class="searchonmap">
-   <form>
-   	   <input type="text" placeholder="Ключевое слово...">
-   	   <input type="text" placeholder="Расположение"> <div class="location-detector"><input type="button" class="location-detector-btn" value=" "></div>
-   	   <select class="chosen-select" data-placeholder="Выбор категории...">
-  <option>Футбол</option>
-  <option>Теннис</option>
-  <option>Фитнес</option>
-  <option>Йога</option>
-  <option>Баскетбол</option>
-  <option>Групповые занятия</option>
-</select>
-   	   <input type="submit" value="Подобрать" class="submit-btn">
-   </form>
+    <%= form_tag  stadiums_path(format: 'json'), remote: true, method: :get, id: 'searcher' do %> 
+      <%= text_field_tag :name, nil, placeholder: 'Ключевое слово...' %>
+      <%= text_field_tag :place, nil, placeholder: 'Расположение' %>
+      <div class="location-detector"><input type="button" class="location-detector-btn" value=" "></div>
+      <%= select_tag :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), class: 'chosen-select', prompt: 'Выбор категории...' %>
+      <%= submit_tag  'Подобрать', class: 'submit-btn' %>
+    <% end %>
    	   </div>
 	<!-- End searcher -->
 
