@@ -714,3 +714,11 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
 .top15 { margin-top:15px; }
 .top17 { margin-top:17px; }
 .top30 { margin-top:30px; }
+
+
+
+.k-edit-form-container{
+  label[for=owned], label[for=title], [data-container-for=owned], [data-container-for=title] {
+    display: none;
+  }
+}

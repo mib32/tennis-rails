@@ -23,12 +23,37 @@ class Tennis.Views.ScheduleView extends Backbone.View
         "month",
         "agenda",
       ],
+
       edit: (e) =>
         # console.log e.event
         if !e.event.owned || @getCookie('signed_in') != '1'
           alert('Пожалуйста, сначала авторизуйтесь.')
           e.preventDefault()
-
+      resize: (e) ->
+        if roomIsOccupied(e.start, e.end, e.event, e.resources)
+          @wrapper.find('.k-marquee-color').addClass 'invalid-slot'
+          e.preventDefault()
+        return
+      resizeEnd: (e) ->
+        if !checkAvailability(e.start, e.end, e.events)
+          e.preventDefault()
+        return
+      move: (e) ->
+        if roomIsOccupied(e.start, e.end, e.event, e.resources)
+          @wrapper.find('.k-event-drag-hint').addClass 'invalid-slot'
+        return
+      moveEnd: (e) ->
+        if !checkAvailability(e.start, e.end, e.event, e.resources)
+          e.preventDefault()
+        return
+      add: (e) ->
+        if !checkAvailability(e.event.start, e.event.end, e.event)
+          e.preventDefault()
+        return
+      save: (e) ->
+        if !checkAvailability(e.event.start, e.event.end, e.event)
+          e.preventDefault()
+        return
 
       timezone: "Etc/UTC",
       resources:[
@@ -79,7 +104,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     $('#court').find(":selected").val()
 
   fields:
-    title: { from: "description", defaultValue: "Введите название", type: 'string'}, 
+    title: { from: "description", defaultValue: "", type: 'string'}, 
     start: { type: "date", from: "start" },
     end: { type: "date", from: "end" },
     recurrenceId: { from: "recurrence_id" },
@@ -87,7 +112,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     recurrenceException: { from: "recurrence_exception" },
     startTimezone: { from: "start_timezone" },
     endTimezone: { from: "end_timezone" },
-    owned: { from: "owned", type: 'boolean', defaultValue: "true" },
+    owned: { from: "owned", type: 'boolean', defaultValue: "true"},
     isAllDay: { type: "boolean", from: "is_all_day" }
 
   getCookie: (cname) ->
