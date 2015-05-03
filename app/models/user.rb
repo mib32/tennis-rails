@@ -18,14 +18,14 @@ class User < ActiveRecord::Base
   end
 
   def total
-    orders.map(&:total).inject(:+)
+    orders.unpaid.map(&:total).inject(:+)
   end
 
   def total_hours
-    orders.map(&:total_hours).inject(:+)
+    orders.unpaid.map(&:total_hours).inject(:+)
   end
 
   def changes_total
-    event_changes.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
+    event_changes.unpaid.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
   end
 end
