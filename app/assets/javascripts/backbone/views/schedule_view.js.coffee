@@ -5,8 +5,11 @@ class Tennis.Views.ScheduleView extends Backbone.View
     @bindExternalEvents()
 
   bindExternalEvents: ->
-    $('#court').on 'change', => 
-      @scheduler().dataSource.read()
+    $ =>
+      $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
+        @scheduler().refresh()
+      $('#court').on 'change', => 
+        @scheduler().dataSource.read()
 
   render: ->
     @$el.kendoScheduler({
@@ -23,6 +26,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
       edit: (e) =>
         # console.log e.event
         if !e.event.owned || @getCookie('signed_in') != '1'
+          alert('Пожалуйста, сначала авторизуйтесь.')
           e.preventDefault()
 
 
