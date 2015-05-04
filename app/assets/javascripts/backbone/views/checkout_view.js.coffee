@@ -1,10 +1,10 @@
 class Tennis.Views.CheckoutView extends Backbone.View
   events: {}
 
-  initialize: ->
-    $ =>
-      window.grid.scheduler().bind('save', @render, this)
+  # initialize: ->
+  #   $ =>
+  #     window.grid.scheduler().bind('save', @render, this)
 
-  render: ->
-    $.get('/orders/total.js')
-    
+  # render: ->
+  #   $.get('/orders/total.js')
+  #   

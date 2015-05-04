@@ -57,6 +57,8 @@ class Tennis.Views.ScheduleView extends Backbone.View
         if @timeIsOccupied(e.event.start, e.event.end, e.event)
           alert('Это время занято')
           e.preventDefault()
+        else
+          $.get('/orders/total.js')
         return
 
       timezone: "Etc/UTC",
