@@ -29,29 +29,33 @@ class Tennis.Views.ScheduleView extends Backbone.View
         if !e.event.owned || @getCookie('signed_in') != '1'
           alert('Пожалуйста, сначала авторизуйтесь.')
           e.preventDefault()
-      resize: (e) ->
-        if roomIsOccupied(e.start, e.end, e.event, e.resources)
-          @wrapper.find('.k-marquee-color').addClass 'invalid-slot'
+      resize: (e) =>
+        if @timeIsOccupied(e.start, e.end, e.event)
+          @scheduler().wrapper.find('.k-marquee-color').addClass 'invalid-slot'
           e.preventDefault()
         return
-      resizeEnd: (e) ->
-        if !checkAvailability(e.start, e.end, e.events)
+      resizeEnd: (e) =>
+        if @timeIsOccupied(e.start, e.end, e.events)
+          alert('Это время занято')
           e.preventDefault()
         return
-      move: (e) ->
-        if roomIsOccupied(e.start, e.end, e.event, e.resources)
-          @wrapper.find('.k-event-drag-hint').addClass 'invalid-slot'
+      move: (e) =>
+        if @timeIsOccupied(e.start, e.end, e.event)
+          @scheduler().wrapper.find('.k-event-drag-hint').addClass 'invalid-slot'
         return
-      moveEnd: (e) ->
-        if !checkAvailability(e.start, e.end, e.event, e.resources)
+      moveEnd: (e) =>
+        if @timeIsOccupied(e.start, e.end, e.event)
+          alert('Это время занято')
           e.preventDefault()
         return
-      add: (e) ->
-        if !checkAvailability(e.event.start, e.event.end, e.event)
+      add: (e) =>
+        if @timeIsOccupied(e.event.start, e.event.end, e.event)
+          alert('Это время занято')
           e.preventDefault()
         return
-      save: (e) ->
-        if !checkAvailability(e.event.start, e.event.end, e.event)
+      save: (e) =>
+        if @timeIsOccupied(e.event.start, e.event.end, e.event)
+          alert('Это время занято')
           e.preventDefault()
         return
 
@@ -127,6 +131,17 @@ class Tennis.Views.ScheduleView extends Backbone.View
         return c.substring(name.length, c.length)
       i++
     ''
+
+  timeIsOccupied: (start, end, event) =>
+    occurences = @scheduler().occurrencesInRange(start, end)
+    idx = occurences.indexOf(event)
+    if idx > -1
+      occurences.splice(idx, 1)
+    if occurences.length > 0 
+      true
+    else
+      false
+
 
   # initialize: ->
     # @model = new Tennis.Models.Event();

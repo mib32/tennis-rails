@@ -722,3 +722,9 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
     display: none;
   }
 }
+
+
+.invalid-slot {
+  background: red !important;
+  cursor: no-drop;
+}
