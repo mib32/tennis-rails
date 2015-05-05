@@ -16,7 +16,7 @@
       <%= breadcrumbs style: :bootstrap %>
       <%= render 'layouts/messages' %>
       <%= gflash %>
-      <%= yield %>
+      <%= content_for?(:sub_layout) ? yield(:sub_layout) : yield %>
     </main>
     <footer class="footer">
       <%= render "layouts/footer" %>

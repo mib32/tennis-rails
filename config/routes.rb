@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'dashboard', to: 'dashboard#edit', as: 'dashboard'
+  get 'dashboard', to: 'dashboard/events#index', as: 'dashboard'
+  namespace :dashboard do
+    resources :events
+    resource :stadium
+  end
   # resources :categories
   resources :coaches
   resources :courts

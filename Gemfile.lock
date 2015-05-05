@@ -31,6 +31,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_link_to (1.0.2)
+      actionpack
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -161,6 +163,8 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    haml (4.0.6)
+      tilt
     handlebars_assets (0.19.1)
       execjs (>= 1.2.9)
       multi_json
@@ -345,6 +349,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   ancestry
   better_errors
   bootstrap-sass
@@ -372,6 +377,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  haml
   handlebars_assets
   high_voltage
   hub

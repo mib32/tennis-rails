@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'haml'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -86,3 +87,5 @@ gem 'ancestry'
 gem 'friendly_id', "~> 5"
 
 gem 'yui-compressor'
+
+gem 'active_link_to'

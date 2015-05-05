@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def changes_total
     event_changes.unpaid.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
   end
+
+  def navs
+    []
+  end
 end

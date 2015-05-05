@@ -10,8 +10,18 @@ ru:
     one: "%{count} перенос"
     other: "%{count} переносов"
   activerecord:
+    models:
+      stadium: Стадион
     attributes:
       user:
         password: Пароль
         password_confirmation: Подтверждение пароля
         email: Эл. почта
+      stadium:
+        category: Категория
+        name: Имя
+        address: Адрес
+        latitude: Широта
+        longitude: Долгота
+        phone: Телефон
+        description: Описание

@@ -1,0 +1,11 @@
+.row.top15
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    = label_tag "Выберите корт"
+    = select_tag :court, options_from_collection_for_select(current_user.courts, :id, :name), class: 'form-control'
+    .top15{"data-grid" => "", "data-source" => dashboard_events_path()}
+    :javascript
+      var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+      // var changes = new Tennis.Collections.Changes();
+      // var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+      // var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+      grid.render();

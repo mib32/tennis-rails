@@ -1,0 +1,32 @@
+= simple_form_for @stadium, url: dashboard_stadium_path do |f|
+  .row.top15
+    .col-md-6
+      = javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&sensor=false'
+      = javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js'
+      #map{:style => "height: 400px;"}
+      :javascript
+        var map = new Tennis.Views.DraggableMapView({latLng: {lat: #{@stadium.latitude || 55.75}, lng: #{@stadium.longitude || 37.61}}});
+        map.render();
+    .col-md-6
+      = f.association :category
+      = f.input :name
+      = f.input :address
+      = f.input :latitude, as: :hidden
+      = f.input :longitude, as: :hidden
+      = f.input :phone
+      = f.input :description
+  .row
+    .col-xs-12
+      %h4 Корты
+      = link_to_add_association 'Добавить корт', f, :courts, class: 'btn btn-primary', 'data-association-insertion-node' => 'tbody', 'data-association-insertion-method' => 'append'
+      %table.table
+        %thead
+          %tr
+            %th Название
+            %th Стоимость часа
+            %th Стоимость переноса
+            %th
+        %tbody
+          = f.simple_fields_for :courts, @stadium.courts.any? && @stadium.courts || @stadium.courts.new do |court|
+            = render "court_fields", f: court
+      = f.button :submit
