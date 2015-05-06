@@ -7,7 +7,7 @@
 			<hr>
 			<ul class="list-unstyled">
 			<% @stadiums.each do |stadium| %>
-				<li>
+				<li class="clearfix">
 		  		<%= image_tag 'placeholder.png', class: 'avatar photo pull-left', size: '60x60' %>
 					<%= link_to stadium.name, stadium %>
 				</li>
