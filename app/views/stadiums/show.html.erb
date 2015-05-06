@@ -46,7 +46,7 @@
 				    				<%= select_tag :court, options_for_select(@stadium.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control' %>
 			    				</div>
 					    		<div class="col-xs-12 col-sm-12">
-							    	<div data-grid data-source="<%= events_path(court_id: @stadium.courts.first.id) %>"></div>
+							    	<div data-grid data-source="<%= events_path %>"></div>
 							    	
 					    		</div>
 				    		</div>

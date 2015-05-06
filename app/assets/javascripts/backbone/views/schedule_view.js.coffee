@@ -110,7 +110,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     $('#court').find(":selected").val()
 
   fields:
-    title: { from: "description", defaultValue: "", type: 'string'}, 
+    title: { from: "user_name", type: 'string'}, 
     start: { type: "date", from: "start" },
     end: { type: "date", from: "end" },
     recurrenceId: { from: "recurrence_id" },

@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   belongs_to :court
   has_many :event_changes
 
+  delegate :user, to: :order
+
   def description
     attributes["description"] || ""
   end
