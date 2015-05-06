@@ -3,7 +3,7 @@ class Customer < User
     [
       {name: 'Расписание', link: 'dashboard_path'},
       {name: 'Кошелек', link: '#'},
-      {name: 'Настройки', link: '#'}
+      {name: 'Настройки', link: 'edit_user_registration_path'}
     ]
   end
 

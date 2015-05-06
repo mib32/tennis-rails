@@ -1,4 +1,6 @@
 ru:
+  true: Да
+  false: Нет
   hours:
     few: "%{count} часа"
     many: "%{count} часов"
@@ -12,9 +14,12 @@ ru:
   activerecord:
     models:
       stadium: Стадион
+      special_price: Период
     attributes:
       user:
+        name: Имя
         password: Пароль
+        current_password: Пароль
         password_confirmation: Подтверждение пароля
         email: Эл. почта
       stadium:
@@ -25,3 +30,8 @@ ru:
         longitude: Долгота
         phone: Телефон
         description: Описание
+      special_price:
+        start: Начало
+        end: Конец
+        price: Цена
+        is_sale: Скидка

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502200529) do
+ActiveRecord::Schema.define(version: 20150506112139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,18 @@ ActiveRecord::Schema.define(version: 20150502200529) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "special_prices", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "price"
+    t.boolean  "is_sale"
+    t.integer  "court_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "special_prices", ["court_id"], name: "index_special_prices_on_court_id", using: :btree
 
   create_table "stadia", force: :cascade do |t|
     t.integer  "category_id"
@@ -139,6 +151,7 @@ ActiveRecord::Schema.define(version: 20150502200529) do
   add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
   add_foreign_key "stadiums", "categories"
