@@ -718,7 +718,15 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
 
 
 .k-edit-form-container{
-  label[for=owned], label[for=title], [data-container-for=owned], [data-container-for=title] {
+  label[for=owned],
+  label[for=title],
+  label[for=isAllDay],
+  label[for=description],
+  [data-container-for=owned], 
+  [data-container-for=title],
+  [data-container-for=isAllDay], 
+  [data-container-for=description] 
+  {
     display: none;
   }
 }
