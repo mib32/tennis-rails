@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506112139) do
+ActiveRecord::Schema.define(version: 20150511083834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20150506112139) do
   end
 
   add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
+
+  create_table "deposits", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "deposits", ["wallet_id"], name: "index_deposits_on_wallet_id", using: :btree
 
   create_table "event_changes", force: :cascade do |t|
     t.integer  "event_id"
@@ -139,14 +149,24 @@ ActiveRecord::Schema.define(version: 20150506112139) do
 
   create_table "wallets", force: :cascade do |t|
     t.integer  "user_id"
-    t.decimal  "total",      precision: 8, scale: 2, default: 0.0
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  create_table "withdrawals", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
+
   add_foreign_key "courts", "stadiums"
+  add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
   add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
@@ -157,4 +177,5 @@ ActiveRecord::Schema.define(version: 20150506112139) do
   add_foreign_key "stadiums", "categories"
   add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
+  add_foreign_key "withdrawals", "wallets"
 end
