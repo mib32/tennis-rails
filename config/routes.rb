@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :events
     resource :stadium
+    resources :deposit_requests
     resources :courts do
       resources :special_prices
     end

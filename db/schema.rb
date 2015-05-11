@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511083834) do
+ActiveRecord::Schema.define(version: 20150511084950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,26 @@ ActiveRecord::Schema.define(version: 20150511083834) do
   end
 
   add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
+
+  create_table "deposit_requests", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "deposit_requests", ["wallet_id"], name: "index_deposit_requests_on_wallet_id", using: :btree
+
+  create_table "deposit_responses", force: :cascade do |t|
+    t.integer  "deposit_request_id"
+    t.integer  "status"
+    t.text     "data"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "deposit_responses", ["deposit_request_id"], name: "index_deposit_responses_on_deposit_request_id", using: :btree
 
   create_table "deposits", force: :cascade do |t|
     t.integer  "wallet_id"
@@ -166,6 +186,8 @@ ActiveRecord::Schema.define(version: 20150511083834) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "courts", "stadiums"
+  add_foreign_key "deposit_requests", "wallets"
+  add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
   add_foreign_key "events", "courts"

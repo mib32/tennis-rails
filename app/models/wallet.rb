@@ -1,6 +1,7 @@
 class Wallet < ActiveRecord::Base
   belongs_to :user
   has_many :deposits
+  has_many :deposit_requests
   has_many :withdrawals
 
   def deposit! amount
