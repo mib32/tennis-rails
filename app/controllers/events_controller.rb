@@ -35,9 +35,15 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def show
+    @event = Event.find(params[:id])
+
+    respond_with @event
+  end
+
   private
   def event_params
-    params.require(:event).permit(:id, :court_id, :start, :end, :recurrence_rule, :recurrence_id, :recurrence_exception, :user_id, :is_all_day, :description, :start_timezone, :end_timezone, :owned)
+    params.require(:event).permit(Event.strong_params)
   end
   # def set_court
     

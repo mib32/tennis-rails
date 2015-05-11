@@ -6,7 +6,8 @@ class StadiumsController < ApplicationController
     @stadiums = Stadium.all
 
     if params[:category_id].present?
-      @stadiums = Category.friendly.find(params[:category_id]).stadiums
+      @category = Category.friendly.find(params[:category_id])
+      @stadiums = @category.stadiums
     end
     if params[:name].present?
       @stadiums = @stadiums.where('name ilike ?', '%' + params[:name] + '%')
