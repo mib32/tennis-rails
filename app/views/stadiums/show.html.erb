@@ -25,7 +25,7 @@
 				    	    <div class="product-subheader">
 							    <div id="map" class="product-map"></div>
 							    <div class="product-image">
-							    <div class="address"><%= @stadium.address %><p class="tel_field"><tel>Тел.: <%= @stadium.phone %></tel></p></div><%# image %></div>
+							    <div class="address"><%= @stadium.address %><p class="tel_field"><tel>Тел.: <%= @stadium.phone %></tel></p></div><%= image_tag @stadium.pictures.last.try(:name) %></div>
 							    </div>
 					    	    <script type="text/javascript">
 					    	      var markers = new Tennis.Collections.MarkerCollection([<%== @stadium.to_json %>]);
@@ -75,6 +75,15 @@
 							    	</script>
 					    	</div>
 					    <div role="tabpanel" class="tab-pane" id="photos">
+						    <div class="row">
+							    <% @stadium.pictures.each do |picture| %>
+							    	<div class="col-md-3">
+								    	<%= link_to picture.name.to_s, data: { lightbox: 'stadium' }  do%> 
+									    	<%= image_tag picture.name, height: '200', class: 'img-responsive thumbnail rounded' %>
+								    	<% end %>
+							    	</div>
+							    <% end %>
+						    </div>
 					    </div>
 					    <div role="tabpanel" class="tab-pane" id="reviews">...</div>
 					  </div>

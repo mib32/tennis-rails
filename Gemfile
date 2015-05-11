@@ -9,6 +9,8 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
+gem 'carrierwave'
+gem 'rmagick', require: false
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -75,6 +77,9 @@ gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 gem 'handlebars_assets'
 gem 'jquery-datetimepicker-rails'
+gem 'font-awesome-rails'
+gem 'dropzonejs-rails'
+gem 'lightbox2-rails'
 
 
 # js notifications

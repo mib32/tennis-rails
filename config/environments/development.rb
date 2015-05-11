@@ -1,10 +1,10 @@
-require 'byebug'
+# require 'byebug'
 
-if ENV['RUBY_DEBUG_PORT']
-  Byebug.start_server 'localhost', ENV['RUBY_DEBUG_PORT'].to_i
-else
-  Byebug.start_server 'localhost'
-end
+# if ENV['RUBY_DEBUG_PORT']
+  # Byebug.start_server 'localhost', ENV['RUBY_DEBUG_PORT'].to_i
+# else
+  # Byebug.start_server 'localhost'
+# end
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.

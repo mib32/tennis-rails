@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard/events#index', as: 'dashboard'
   namespace :dashboard do
     resources :events
-    resource :stadium
+    resource :stadium do
+      resources :pictures, defaults: { imageable_type: 'Stadium'}
+    end
     resources :deposit_requests
     resources :courts do
       resources :special_prices

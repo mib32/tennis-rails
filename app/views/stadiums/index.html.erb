@@ -9,8 +9,10 @@
 			<ul class="list-unstyled">
 			<% @stadiums.each do |stadium| %>
 				<li class="clearfix">
-		  		<%= image_tag 'placeholder.png', class: 'avatar photo pull-left', size: '60x60' %>
-					<%= link_to stadium.name, stadium %>
+					<%= link_to  stadium  do %>
+			  		<%= image_tag stadium.pictures.last.try(:name).try(:thumb).try(:url) || 'placeholder.png', class: 'avatar photo pull-left', size: '60x60' %>
+			  		<%= stadium.name %>
+		  		<% end %>
 				</li>
 			<% end %>
 			<% if @stadiums.empty? %>

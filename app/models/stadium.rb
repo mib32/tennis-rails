@@ -8,6 +8,8 @@ class Stadium < ActiveRecord::Base
   has_many :courts
   accepts_nested_attributes_for :courts, :reject_if => :all_blank, :allow_destroy => true
 
+  has_many :pictures, as: :imageable
+
 
   validates_presence_of :phone
 

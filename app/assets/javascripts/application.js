@@ -28,8 +28,11 @@
 //= require gritter
 //= require moment
 //= require moment/ru
-//= require fullcalendar
-//= require fullcalendar/lang/ru
 //= require cocoon
 //= require jquery.datetimepicker
+//= require dropzone
+//= require lightbox
 //= require_directory .
+
+
+
