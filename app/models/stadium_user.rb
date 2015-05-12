@@ -11,8 +11,13 @@ class StadiumUser < User
     [
       {name: 'Корты', link: 'dashboard_path'},
       {name: 'Тренеры', link: '#'},
-      {name: 'Стадион', link: 'edit_dashboard_stadium_path', active: /stadium/},
-      {name: 'Клиенты', link: '#'}
+      {name: 'Заказы', link: 'dashboard_orders_path'},
+      {name: 'Настройки', items: 
+        [
+          {name: 'Стадион', link: 'edit_dashboard_stadium_path', active: /stadium/},
+          {name: 'Попа', link: '#'}
+        ]
+      }
     ]
   end
 end

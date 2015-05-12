@@ -11,6 +11,14 @@
           .col-xs-12.col-sm-12.col-md-12.col-lg-12
             %ul.nav.nav-pills.nav-justified
               - current_user.navs.each do |nav|
-                = active_link_to nav[:name], nav[:link] == '#' && nav[:link] || send(nav[:link]), wrap_tag: :li, active: nav[:active] || :exclusive
+                - if nav[:items].present?
+                  = active_link_to  '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+                    = nav[:name]
+                    %span.caret
+                  %ul.dropdown-meny
+                    - nav[:items].each do |item|
+                      = active_link_to item[:name], item[:link] == '#' && item[:link] || send(item[:link]), wrap_tag: :li, active: item[:active] || :exclusive
+                - else
+                  = active_link_to nav[:name], nav[:link] == '#' && nav[:link] || send(nav[:link]), wrap_tag: :li, active: nav[:active] || :exclusive
             = yield
 = render template: 'layouts/application'
