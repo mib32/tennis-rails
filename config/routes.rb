@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :courts do
       resources :special_prices
     end
-    resources :orders
+    resources :orders, only: :index
   end
   # resources :categories
   resources :coaches

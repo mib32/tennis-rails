@@ -1,0 +1,23 @@
+%h3 Заказы
+- @orders.each do |order|
+  .panel.panel-default
+    .panel-heading
+      = order.guid
+      .pull-right= number_to_currency order.total
+    .panel-body
+      %table.table
+        %thead
+          %tr
+            %th Корт
+            %th Начало
+            %th Конец
+            %th Длительность
+            %th Цена
+        %tbody
+          - order.events.joins(court: :stadium).where('stadiums.id = ?', current_user.stadium.id).each do |event|
+            %tr
+              %td= event.court.name
+              %td= event.start
+              %td= event.end
+              %td= event.duration
+              %td= event.total
