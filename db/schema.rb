@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511093703) do
+ActiveRecord::Schema.define(version: 20150512095327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,20 @@ ActiveRecord::Schema.define(version: 20150511093703) do
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.text     "text"
+    t.integer  "user_id"
+    t.boolean  "verified"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "rating"
+  end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
   create_table "special_prices", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
@@ -203,6 +217,7 @@ ActiveRecord::Schema.define(version: 20150511093703) do
   add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "users"
   add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"

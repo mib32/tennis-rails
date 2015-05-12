@@ -1,4 +1,4 @@
-<h4 data-court-price>Стоимость часа: <%= number_to_currency @stadium.courts.first.price, precision: 0 %></h4>
+<h4 data-court-price>Стоимость часа: <%= number_to_currency object.price, precision: 0 %></h4>
 <% if current_user.nil? %>
   <h4>Сперва авторизуйтесь, пожалуйста:</h4>
   <%= link_to 'Вход / Регистрация', new_user_session_path, class: 'button add_to_cart_button product_type_simple' %>

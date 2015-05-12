@@ -25,8 +25,10 @@ Rails.application.routes.draw do
   resources :coaches
   resources :courts
   resources :events
-  resources :stadiums do
-    
+  resources :stadiums, defaults: { model_name: 'Stadium' } do
+    resources :events, only: :index
+    resources :pictures, only: :index
+    resources :reviews
   end
   resources :stadium_users
   resources :sales

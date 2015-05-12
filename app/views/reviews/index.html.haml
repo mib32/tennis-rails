@@ -1,0 +1,20 @@
+- if current_user.nil? 
+  %h4 Сперва авторизуйтесь, пожалуйста:
+  = link_to 'Вход / Регистрация', new_user_session_path, class: 'button add_to_cart_button product_type_simple'
+- else
+  .panel.panel-info
+    .panel-heading
+      %i Оставьте свой отзыв:
+    .panel-body
+      = simple_form_for [@record.model_name.singular_route_key, @review] do |f|
+        .row
+          .col-md-2
+            = f.input :rating, collection: 0..5, label: "Оценка"
+          .col-md-6
+            = f.input :text, label: "Текст"
+        = f.button :submit, 'Отправить'
+
+- if @reviews.any?
+  = render @reviews
+- else
+  %h5.text-center Пока ни одного отзыва

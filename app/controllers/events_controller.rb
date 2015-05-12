@@ -10,7 +10,10 @@ class EventsController < ApplicationController
     else
       @events = @events.where(orders: { status: Order.statuses[:paid] })
     end
-    respond_with @events
+    respond_to do |format|
+      format.json {  }
+      format.html {  }
+    end
   end
 
   def create
@@ -45,7 +48,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(Event.strong_params)
   end
-  # def set_court
-    
-  # end
 end
