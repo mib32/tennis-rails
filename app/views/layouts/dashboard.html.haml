@@ -12,12 +12,13 @@
             %ul.nav.nav-pills.nav-justified
               - current_user.navs.each do |nav|
                 - if nav[:items].present?
-                  = active_link_to  '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
-                    = nav[:name]
-                    %span.caret
-                  %ul.dropdown-meny
-                    - nav[:items].each do |item|
-                      = active_link_to item[:name], item[:link] == '#' && item[:link] || send(item[:link]), wrap_tag: :li, active: item[:active] || :exclusive
+                  %li
+                    = link_to  '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+                      = nav[:name]
+                      %span.caret
+                    %ul.dropdown-menu( role="menu" )
+                      - nav[:items].each do |item|
+                        = active_link_to item[:name], item[:link] == '#' && item[:link] || send(item[:link]), wrap_tag: :li, active: item[:active] || :exclusive
                 - else
                   = active_link_to nav[:name], nav[:link] == '#' && nav[:link] || send(nav[:link]), wrap_tag: :li, active: nav[:active] || :exclusive
             = yield
