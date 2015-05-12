@@ -15,7 +15,7 @@ class StadiumUser < User
       {name: 'Настройки', items: 
         [
           {name: 'Стадион', link: 'edit_dashboard_stadium_path', active: /stadium/},
-          {name: 'Попа', link: '#'}
+          {name: 'Платежи', link: '#'}
         ]
       }
     ]
