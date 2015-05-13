@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'dashboard/events#index', as: 'dashboard'
+  get 'dashboard/payment_settings', to: 'dashboard#payment_settings', as: 'dashboard_payment_settings'
   namespace :dashboard do
     resources :events
     resource :stadium do

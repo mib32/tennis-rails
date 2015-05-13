@@ -3,4 +3,7 @@ class DashboardController < ApplicationController
   def show
     @user = current_user
   end
+
+  def payment_settings
+  end
 end
