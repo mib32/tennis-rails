@@ -4,6 +4,7 @@
     = select_tag :court, options_from_collection_for_select(current_user.courts, :id, :name), class: 'form-control'
     .top15{"data-grid" => "", "data-source" => dashboard_events_path()}
     :javascript
+      kendo.culture("ru-RU");
       var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
       // var changes = new Tennis.Collections.Changes();
       // var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});

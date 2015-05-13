@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
     attributes["description"] || ""
   end
   def total
-    court.price * duration_in_hours
+    court.try(:price).to_i * duration_in_hours
   end
 
   def duration_in_hours
