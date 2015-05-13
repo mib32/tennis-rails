@@ -10,7 +10,11 @@
         </div>
         
         <div class="footer-right col-md-4">
-        	<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>
+        	<ul class="menu" id="menu-footer">
+                <li class="menu-item"><%= link_to 'О сайте', '#' %></li>
+                <li class="menu-item"><%= link_to 'Обратная связь', '#' %></li>
+                <li class="menu-item"><%= link_to 'Помощь', '#' %></li>
+            </ul>
         	</div>
       </div>
     </footer>
