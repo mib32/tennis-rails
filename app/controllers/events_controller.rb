@@ -21,7 +21,9 @@ class EventsController < ApplicationController
     @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
 
     @order.save
-    respond_with @event
+    respond_to do |format|
+      format.json { render @event }
+    end
   end
 
   def update
