@@ -1,8 +1,8 @@
 %h2 Пополнение кошелька
-= simple_form_for [:dashboard, DepositRequest.new] do |f|
+= simple_form_for [:dashboard, DepositRequest.new], wrapper: 'horizontal_form' do |f|
   .row
     .col-xs-4
-      = f.input :amount, label: 'Сумма', wrapper: 'horizontal_form'
+      = f.input :amount, label: 'Сумма', as: :string, input_html: { value: 5000 }
     .col-xs-8
       = f.button :submit, 'Пополнить'
 
@@ -13,10 +13,12 @@
       %tr
         %th Дата
         %th Количество
+        %th Результат
     %tbody
       - @requests.each do |request|
         %tr
-          %td l request.created_at
-          %td request.amount
+          %td= l request.created_at, format: :short
+          %td= number_to_currency request.amount, precision: 0
+          %td= request.status
 - else
   Пока ни одного.
