@@ -1,0 +1,22 @@
+%h2 Пополнение кошелька
+= simple_form_for [:dashboard, DepositRequest.new] do |f|
+  .row
+    .col-xs-4
+      = f.input :amount, label: 'Сумма', wrapper: 'horizontal_form'
+    .col-xs-8
+      = f.button :submit, 'Пополнить'
+
+%h3 История
+- if @requests.any?
+  %table.table
+    %thead
+      %tr
+        %th Дата
+        %th Количество
+    %tbody
+      - @requests.each do |request|
+        %tr
+          %td l request.created_at
+          %td request.amount
+- else
+  Пока ни одного.

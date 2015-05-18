@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-body
+    = review.text
+    %br
+    %i Оценка: 
+    = review.rating
+    %hr
+    = review.user.name
+    = l review.created_at

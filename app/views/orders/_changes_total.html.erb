@@ -1,0 +1,11 @@
+<% if current_user && current_user.event_changes.unpaid.present? %>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Переносы</h3>
+    </div>
+    <div class="panel-body woocommerce">
+      <h3><%= t('changes', count: current_user.event_changes.unpaid.count) %> на сумму <%= current_user.changes_total %> руб.</h3>
+  <%= link_to 'Перейти к оплате', orders_path(), class: 'button add_to_cart_button product_type_simple', data: { book: true} %>
+  </div>
+</div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427142445) do
+ActiveRecord::Schema.define(version: 20150513082429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,21 @@ ActiveRecord::Schema.define(version: 20150427142445) do
     t.string   "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
+
+  create_table "coaches", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "stadium_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  add_index "coaches", ["stadium_id"], name: "index_coaches_on_stadium_id", using: :btree
+  add_index "coaches", ["user_id"], name: "index_coaches_on_user_id", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "name"
@@ -36,37 +48,62 @@ ActiveRecord::Schema.define(version: 20150427142445) do
 
   add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
 
-  create_table "event_changes", force: :cascade do |t|
-    t.integer  "event_id"
-    t.string   "start_delta"
-    t.string   "duration_delta"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "deposit_requests", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
-  add_index "event_changes", ["event_id"], name: "index_event_changes_on_event_id", using: :btree
+  add_index "deposit_requests", ["wallet_id"], name: "index_deposit_requests_on_wallet_id", using: :btree
 
-  create_table "event_repeats", force: :cascade do |t|
-    t.datetime "start"
-    t.integer  "interval"
+  create_table "deposit_responses", force: :cascade do |t|
+    t.integer  "deposit_request_id"
+    t.integer  "status"
+    t.text     "data"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "deposit_responses", ["deposit_request_id"], name: "index_deposit_responses_on_deposit_request_id", using: :btree
+
+  create_table "deposits", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "deposits", ["wallet_id"], name: "index_deposits_on_wallet_id", using: :btree
+
+  create_table "event_changes", force: :cascade do |t|
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "status"
+    t.string   "summary"
   end
 
-  add_index "event_repeats", ["event_id"], name: "index_event_repeats_on_event_id", using: :btree
+  add_index "event_changes", ["event_id"], name: "index_event_changes_on_event_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
     t.string   "description"
-    t.integer  "court_id"
     t.integer  "order_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "recurrence_rule"
+    t.string   "recurrence_exception"
+    t.integer  "recurrence_id"
+    t.boolean  "is_all_day"
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
   end
 
-  add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree
+  add_index "events", ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id", using: :btree
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
@@ -78,6 +115,42 @@ ActiveRecord::Schema.define(version: 20150427142445) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.text     "text"
+    t.integer  "user_id"
+    t.boolean  "verified"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "rating"
+  end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
+  create_table "special_prices", force: :cascade do |t|
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "price"
+    t.boolean  "is_sale"
+    t.integer  "court_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "special_prices", ["court_id"], name: "index_special_prices_on_court_id", using: :btree
 
   create_table "stadia", force: :cascade do |t|
     t.integer  "category_id"
@@ -132,22 +205,37 @@ ActiveRecord::Schema.define(version: 20150427142445) do
 
   create_table "wallets", force: :cascade do |t|
     t.integer  "user_id"
-    t.decimal  "total",      precision: 8, scale: 2, default: 0.0
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  create_table "withdrawals", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
+
+  add_foreign_key "coaches", "stadiums"
+  add_foreign_key "coaches", "users"
   add_foreign_key "courts", "stadiums"
+  add_foreign_key "deposit_requests", "wallets"
+  add_foreign_key "deposit_responses", "deposit_requests"
+  add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
-  add_foreign_key "event_repeats", "events"
-  add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
   add_foreign_key "stadiums", "categories"
   add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
+  add_foreign_key "withdrawals", "wallets"
 end

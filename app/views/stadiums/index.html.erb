@@ -1,16 +1,22 @@
 <% breadcrumb :stadiums %>
+<% breadcrumb :category, @category  if @category %>
 
 <div class="body-bg">
 	<div class="row">
 		<div class="entry">
 			<h1><span class="title-tire">–</span> Стадионы <span class="title-tire">–</span></h1>
 			<hr>
-			<ul>
+			<ul class="list-unstyled">
 			<% @stadiums.each do |stadium| %>
-				<li>
-		  		<%= image_tag nil, class: 'avatar photo pull-left', size: '100x100' %>
-					<%= link_to stadium.name, stadium %>
+				<li class="clearfix">
+					<%= link_to  stadium  do %>
+			  		<%= image_tag stadium.pictures.last.try(:name).try(:thumb).try(:url) || 'placeholder.png', class: 'avatar photo pull-left', size: '60x60' %>
+			  		<%= stadium.name %>
+		  		<% end %>
 				</li>
+			<% end %>
+			<% if @stadiums.empty? %>
+				<p class="text-center">Не найдено</p>
 			<% end %>
 			</ul>
 		</div>

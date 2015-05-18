@@ -1,0 +1,18 @@
+.body-bg
+  .row
+    .entry
+      %h1
+        %span.title-tire –
+        = @coach.name
+        %span.title-tire –
+      %hr/
+      .row
+      .col-xs-12.col-sm-12
+        %div{"data-grid" => ""}
+:javascript
+  kendo.culture("ru-RU");
+  var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+  var changes = new Tennis.Collections.Changes();
+  var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+  var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+  grid.render();

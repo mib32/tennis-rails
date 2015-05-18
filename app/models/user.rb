@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :orders
+  has_many :events, through: :orders
+  has_many :event_changes, through: :events
   has_one :wallet
   after_create :create_wallet
 
@@ -12,5 +15,21 @@ class User < ActiveRecord::Base
 
   def set_customer
     self.type = 'Customer' unless self.type
+  end
+
+  def total
+    orders.unpaid.map(&:total).inject(:+)
+  end
+
+  def total_hours
+    orders.unpaid.map(&:total_hours).inject(:+)
+  end
+
+  def changes_total
+    event_changes.unpaid.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
+  end
+
+  def navs
+    []
   end
 end

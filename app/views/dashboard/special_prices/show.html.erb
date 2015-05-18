@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @dashboard_special_price.start %>
+</p>
+
+<p>
+  <strong>End:</strong>
+  <%= @dashboard_special_price.end %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @dashboard_special_price.price %>
+</p>
+
+<p>
+  <strong>Is sale:</strong>
+  <%= @dashboard_special_price.is_sale %>
+</p>
+
+<p>
+  <strong>Court:</strong>
+  <%= @dashboard_special_price.court %>
+</p>
+
+<%= link_to 'Edit', edit_dashboard_special_price_path(@dashboard_special_price) %> |
+<%= link_to 'Back', dashboard_special_prices_path %>

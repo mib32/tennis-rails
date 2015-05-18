@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <div class='balance'>
-    <a href='/my-account/'>
-    Ваш баланс: <%= number_to_currency(current_user.wallet.total, :unit => "руб. ", format: "%n %u") %>
-    </a>
+    <%= link_to orders_path do %>
+      Ваш баланс: <%= number_to_currency(current_user.wallet.total, precision: 0) %>
+    <% end %>
   </div>
 <% end %>

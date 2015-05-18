@@ -15,7 +15,7 @@ crumb :category do |category|
   if category.parent
     parent category.parent
   else
-    parent :root
+    parent :stadiums
   end
 end
 

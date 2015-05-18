@@ -1,5 +1,9 @@
 class DashboardController < ApplicationController
-  def edit
+  before_filter :authenticate_user!
+  def show
     @user = current_user
+  end
+
+  def payment_settings
   end
 end

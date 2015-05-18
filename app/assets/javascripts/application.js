@@ -13,8 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
 //= require underscore
 //= require gmaps/google
+//= require kendo.all.min
+//= require cultures/kendo.culture.ru-RU.min
+//= require messages/kendo.messages.ru-RU.min
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
@@ -24,8 +28,11 @@
 //= require gritter
 //= require moment
 //= require moment/ru
-//= require fullcalendar
-//= require fullcalendar/lang/ru
 //= require cocoon
 //= require jquery.datetimepicker
+//= require dropzone
+//= require lightbox
 //= require_directory .
+
+
+

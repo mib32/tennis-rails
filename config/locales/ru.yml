@@ -1,12 +1,37 @@
 ru:
+  true: Да
+  false: Нет
   hours:
     few: "%{count} часа"
     many: "%{count} часов"
     one: "%{count} час"
     other: "%{count} часов"
+  changes:
+    few: "%{count} переноса"
+    many: "%{count} переносов"
+    one: "%{count} перенос"
+    other: "%{count} переносов"
   activerecord:
+    models:
+      stadium: Стадион
+      special_price: Период
     attributes:
       user:
+        name: Имя
         password: Пароль
+        current_password: Пароль
         password_confirmation: Подтверждение пароля
         email: Эл. почта
+      stadium:
+        category: Категория
+        name: Имя
+        address: Адрес
+        latitude: Широта
+        longitude: Долгота
+        phone: Телефон
+        description: Описание
+      special_price:
+        start: Начало
+        end: Конец
+        price: Цена
+        is_sale: Скидка

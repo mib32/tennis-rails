@@ -3,8 +3,14 @@ class Tennis.Views.MapView extends Backbone.View
     @handler = Gmaps.build('Google', builders: { Marker: CustomMarkerBuilder })
     @geocoder = new google.maps.Geocoder()
     @listenTo(@collection, 'change', @renderMarkers) if @collection
-    $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
-      google.maps.event.trigger(@handler.getMap(), 'resize')
+    @externalDomListeners()
+
+  externalDomListeners: ->
+    $ => 
+      $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
+        google.maps.event.trigger(@handler.getMap(), 'resize')
+      $('#searcher').on 'ajax:success', (e, data) =>
+        @renderMarkers(new Tennis.Collections.MarkerCollection(data))
 
   moscowCoords: ->
     lat: 55.75
@@ -29,5 +35,7 @@ class Tennis.Views.MapView extends Backbone.View
 
   renderMarkers: (collection) ->
     console.log 'Re-rendering marker data'
-    @handler.removeMarkers(@collection)
-    @handler.addMarkers collection
+    @handler.removeMarkers(@markers)
+    @markers = @handler.addMarkers collection.models
+    @handler.bounds.extendWith(@markers)
+    @handler.fitMapToBounds()
