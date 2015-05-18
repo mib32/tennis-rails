@@ -1,6 +1,10 @@
 ru:
   true: Да
   false: Нет
+  success: Успешно
+  failure: Ошибка
+  pending: В обработке
+  none: Нет
   hours:
     few: "%{count} часа"
     many: "%{count} часов"

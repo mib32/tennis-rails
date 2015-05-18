@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       resources :special_prices
     end
     resources :orders, only: :index
+
+    post 'payments/success'
   end
   # resources :categories
   resources :coaches

@@ -19,6 +19,6 @@
         %tr
           %td= l request.created_at, format: :short
           %td= number_to_currency request.amount, precision: 0
-          %td= request.status
+          %td= t request.status || 'none'
 - else
   Пока ни одного.

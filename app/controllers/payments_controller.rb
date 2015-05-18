@@ -1,13 +1,15 @@
-# class PaymentsController < RobokassaController
-#   def result_callback notification
-#     payee = User.find notification.params['UserId']
-#     payee.wallet.deposit! notification.total
-#     render text: notification.success
-#   end
-
-#   def fail_callback notification
-#   end  
-
-#   def success_callback notification
-#   end
-# end
+class PaymentsController < DashboardController
+  def success
+    @request = current_user.wallet.deposit_requests.find(params['OrderId'])
+    @response = @request.payment_responses.new data: DepositResponseData.new(params)
+    if @response.security_key == params["SecurityKey"]
+      @request.status = :success
+      @request.save 
+      redirect_to dashboard_deposit_requests_path, notice: 'Кошелек успешно пополнен'
+    else
+      @request.status = :failure
+      @request.save
+      redirect_to dashboard_deposit_requests_path
+    end
+  end
+end

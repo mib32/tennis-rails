@@ -13,6 +13,6 @@ class Wallet < ActiveRecord::Base
   end
 
   def total
-    deposits.sum(:amount) - withdrawals.sum(:amount)
+    deposits.sum(:amount) - withdrawals.sum(:amount) + deposit_requests.success.sum(:amount)
   end
 end
