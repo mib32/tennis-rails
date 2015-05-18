@@ -1,6 +1,6 @@
 set :application, 'tennis-rails'
 set :repo_url, 'https://github.com/mib32/tennis-rails.git'
-set :branch, 'kendo'
+# set :branch, 'kendo'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513082429) do
+ActiveRecord::Schema.define(version: 20150518120610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,6 @@ ActiveRecord::Schema.define(version: 20150513082429) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
-
-  create_table "coaches", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "stadium_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "slug"
-  end
-
-  add_index "coaches", ["stadium_id"], name: "index_coaches_on_stadium_id", using: :btree
-  add_index "coaches", ["user_id"], name: "index_coaches_on_user_id", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150513082429) do
     t.decimal  "amount",     precision: 8, scale: 2
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.text     "data"
   end
 
   add_index "deposit_requests", ["wallet_id"], name: "index_deposit_requests_on_wallet_id", using: :btree
@@ -99,11 +89,9 @@ ActiveRecord::Schema.define(version: 20150513082429) do
     t.string   "recurrence_exception"
     t.integer  "recurrence_id"
     t.boolean  "is_all_day"
-    t.integer  "eventable_id"
-    t.string   "eventable_type"
+    t.integer  "court_id"
   end
 
-  add_index "events", ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id", using: :btree
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
@@ -221,8 +209,6 @@ ActiveRecord::Schema.define(version: 20150513082429) do
 
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
-  add_foreign_key "coaches", "stadiums"
-  add_foreign_key "coaches", "users"
   add_foreign_key "courts", "stadiums"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
