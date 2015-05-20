@@ -10,7 +10,7 @@ class StadiumUser < User
   def navs
     [
       {name: 'Корты', link: 'dashboard_path'},
-      {name: 'Тренеры', link: '#'},
+      {name: 'Тренеры', link: 'dashboard_stadium_coaches_path'},
       {name: 'Заказы', link: 'dashboard_orders_path'},
       {name: 'Настройки', items: 
         [

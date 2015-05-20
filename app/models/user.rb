@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :name, use: [:slugged]
+
   has_many :orders
   has_many :events, through: :orders
   has_many :event_changes, through: :events

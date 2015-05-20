@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :events
     resource :stadium do
       resources :pictures, defaults: { imageable_type: 'Stadium'}
+      resources :coaches
     end
     resources :deposit_requests
     resources :courts do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518120610) do
+ActiveRecord::Schema.define(version: 20150520105042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20150518120610) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
+
+  create_table "coaches_courts", force: :cascade do |t|
+    t.integer "coach_id"
+    t.integer "court_id"
+  end
+
+  add_index "coaches_courts", ["coach_id"], name: "index_coaches_courts_on_coach_id", using: :btree
+  add_index "coaches_courts", ["court_id"], name: "index_coaches_courts_on_court_id", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "name"
@@ -186,6 +194,7 @@ ActiveRecord::Schema.define(version: 20150518120610) do
     t.string   "name"
     t.integer  "role"
     t.string   "type"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

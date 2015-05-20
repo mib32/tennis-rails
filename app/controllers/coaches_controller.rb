@@ -4,6 +4,6 @@ class CoachesController < ApplicationController
   end
 
   def show
-    @coach = Coach.find params[:id]
+    @coach = Coach.friendly.find params[:id]
   end
 end

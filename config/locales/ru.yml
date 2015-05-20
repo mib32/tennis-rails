@@ -23,6 +23,7 @@ ru:
       user:
         name: Имя
         password: Пароль
+        courts: Корты
         current_password: Пароль
         password_confirmation: Подтверждение пароля
         email: Эл. почта
