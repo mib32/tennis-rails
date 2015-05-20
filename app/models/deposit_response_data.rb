@@ -8,6 +8,7 @@ class DepositResponseData
   attr_reader :datetime, :transaction_id, :order_id, :amount, :currency, :private_security_key
 
   def initialize(params)
+    params = JSON.parse params
     @datetime = params["DateTime"]
     @transaction_id = params["TransactionID"]
     @order_id = params["OrderId"]

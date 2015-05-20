@@ -5,7 +5,7 @@ class Dashboard::PaymentsController < DashboardController
   def success
     @request = DepositRequest.find(params['OrderId'])
 
-    @response = @request.deposit_responses.create data: params
+    @response = @request.deposit_responses.create data: params.to_json
     if @response.response_data.security_key == params["SecurityKey"]
       @request.status = :success
       @request.save 
@@ -15,7 +15,7 @@ class Dashboard::PaymentsController < DashboardController
       @request.save
       # redirect_to dashboard_deposit_requests_paths
     end
-    
+
     render text: 'OK', status: 200
   end
 end
