@@ -1,7 +1,7 @@
 class Tennis.Views.ScheduleView extends Backbone.View
   initialize: ->
-    @model = new Tennis.Models.Event()
-    @collection = new Tennis.Collections.Events()
+    # @model = new Tennis.Models.Event()
+    # @collection = new Tennis.Collections.Events()
     @bindExternalEvents()
 
   bindExternalEvents: ->
@@ -73,7 +73,8 @@ class Tennis.Views.ScheduleView extends Backbone.View
         batch: false,
         transport: {
           read: {
-            url: @url()
+            url: =>
+             @url()
           },
           update: {
             url: (options) -> "#{@url()}/#{options.id}",
@@ -88,7 +89,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
             method: 'DELETE'
         },
         parameterMap: (options, operation) =>
-          options.court_id = @court_id() if @court_id()
           if operation == "read"
             return options
           if operation != "read" && options
@@ -145,4 +145,4 @@ class Tennis.Views.ScheduleView extends Backbone.View
       false
 
   url: ->
-    @$el.data('source') || "/events"
+    window.location.pathname.replace('/events', '/courts/' + @court_id() + '/events')

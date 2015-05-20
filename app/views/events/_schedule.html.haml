@@ -1,9 +1,9 @@
 .row.top30
   .col-xs-12
     = label_tag "Выберите корт"
-    = select_tag :court, options_for_select(@record.courts.map {|c| [c.name, c.id, { data: {source: events_path(court_id: c), price: c.price, change_price: c.change_price } } ] }), class: 'form-control'
+    = select_tag :court, options_for_select(@record.courts.map {|c| [c.name, c.id, { data: {price: c.price, change_price: c.change_price } } ] }), class: 'form-control'
   .col-xs-12.col-sm-12
-    %div{"data-grid" => "", "data-source" => events_path}
+    %div{"data-grid" => "", "data-source" => stadium_court_events_path(court_id: @stadium.courts.first)}
 .row.top30
   .col-xs-12.col-sm-6
     .panel.panel-default
