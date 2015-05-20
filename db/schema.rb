@@ -11,22 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520140350) do
+ActiveRecord::Schema.define(version: 20150520161535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "additional_order_items", force: :cascade do |t|
+  create_table "additional_event_items", force: :cascade do |t|
     t.integer  "related_id"
     t.string   "related_type"
-    t.integer  "order_id"
-    t.integer  "amount"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "event_id"
+    t.integer  "amount",       default: 1
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  add_index "additional_order_items", ["order_id"], name: "index_additional_order_items_on_order_id", using: :btree
-  add_index "additional_order_items", ["related_type", "related_id"], name: "index_additional_order_items_on_related_type_and_related_id", using: :btree
+  add_index "additional_event_items", ["event_id"], name: "index_additional_event_items_on_event_id", using: :btree
+  add_index "additional_event_items", ["related_type", "related_id"], name: "index_additional_event_items_on_related_type_and_related_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -191,12 +191,12 @@ ActiveRecord::Schema.define(version: 20150520140350) do
   add_index "stadiums", ["user_id"], name: "index_stadiums_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                                          default: "",  null: false
+    t.string   "encrypted_password",                             default: "",  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                                  default: 0,   null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20150520140350) do
     t.integer  "role"
     t.string   "type"
     t.string   "slug"
+    t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -230,7 +231,7 @@ ActiveRecord::Schema.define(version: 20150520140350) do
 
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
-  add_foreign_key "additional_order_items", "orders"
+  add_foreign_key "additional_event_items", "events"
   add_foreign_key "courts", "stadiums"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"

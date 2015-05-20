@@ -55,6 +55,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Order.find params[:id]
+    if @order.unpaid? && @order.destroy
+      redirect_to orders_path, notice: 'Заказ успешно удален'
+    else
+      redirect_to orders_path, alert: 'Заказ не удалось удалить'
+    end
+  end
+
   def total
     
   end

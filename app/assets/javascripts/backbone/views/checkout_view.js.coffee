@@ -3,10 +3,15 @@ class Tennis.Views.CheckoutView extends Backbone.View
 
   initialize: ->
     $ =>
+      @refreshPrice()
       $('#court').on 'change', => 
-        $.get("/courts/#{$('#court').find(":selected").val()}.json")
-          .done (data, e) =>
-            @$('[data-court-price]').html("Стоимость часа: #{data.price.to_i} руб.")
+        @refreshPrice()
+        
+
+  refreshPrice: ->
+    $.get("/courts/#{$('#court').find(":selected").val()}.json")
+      .done (data, e) =>
+        @$('[data-court-price]').html("#{data.price} руб.")
   #     window.grid.scheduler().bind('save', @render, this)
 
   # render: ->

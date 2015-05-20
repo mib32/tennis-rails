@@ -1,11 +1,13 @@
-<h4 data-court-price>Стоимость часа: <%= number_to_currency object.price, precision: 0 %></h4>
+<h4>Стоимость часа: 
+  <span data-court-price class="label label-success"><%= number_to_currency object.price, precision: 0 %></span></h4>
 <% if current_user.nil? %>
   <h4>Сперва авторизуйтесь, пожалуйста:</h4>
   <%= link_to 'Вход / Регистрация', new_user_session_path, class: 'button add_to_cart_button product_type_simple' %>
 <% elsif current_user.orders.unpaid %>
-  <h3 data-total>
+  <h4>В корзине:</h4>
+  <p data-total>
     <% if current_user.total_hours %>
-      <%= t('hours', count: current_user.total_hours) %> на сумму <%= number_to_currency current_user.total, precision: 0 %></h3>
+      <%= t('hours', count: current_user.total_hours) %> на сумму <%= number_to_currency current_user.total, precision: 0 %></p>
     <% end %>
   <%= link_to 'Перейти к оплате', orders_path(), class: 'button add_to_cart_button product_type_simple', data: { book: true} %>
 <% end %>

@@ -6,6 +6,7 @@
 			<th>Начало</th>
 			<th>Конец</th>
 			<th>Длительность</th>
+			<th>Дополнительно</th>
 			<th>Цена</th>
 		</tr>
 	</thead>
@@ -16,14 +17,16 @@
 				<td><%= l item.start, format: :short %></td>
 				<td><%= l item.end, format: :short %></td>
 				<td><%= t('hours', count: item.duration_in_hours) %></td>
+				<td>
+					<%# if item.related.present? %>
+					<%= render item.additional_event_items %>
+				</td>
 				<td><%= number_to_integer_currency item.total %></td>	
 			</tr>
 		<% end %>
 	</tbody>
 </table>
 <% if order.unpaid? %>
-	<%= simple_form_for order, url: pay_order_path(order) do |f| %>
-		<%= f.hidden_field :id %>
-		<%= f.button :submit, "Оплатить #{number_to_integer_currency order.total}", class: 'btn-primary' %>
-	<% end %>
+	<%= link_to fa_icon('credit-card') + " Оплатить #{number_to_integer_currency order.total}", pay_order_path(order), method: :patch, class: 'btn btn-primary' %>
+	<%= link_to fa_icon('times') + ' Удалить заказ', order, method: :delete, data_confirm: 'Вы уверены?', class: 'btn btn-danger' %>
 <% end %>

@@ -12,5 +12,5 @@
         - @coaches.each do |coach|
           %li.clearfix
             = image_tag coach.gravatar_url, class: 'avatar photo pull-left'
-            = link_to coach.name, coach
+            = link_to coach.name, coach_events_path(coach)
             %p Информация:

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   # resources :categories
 
   resources :coaches do 
+    resources :events, only: :index, controller: 'coach_events'
     resources :courts do
       resources :events, controller: 'coach_events'
     end

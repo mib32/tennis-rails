@@ -1,7 +1,9 @@
 = simple_form_for [:dashboard, :stadium, @coach] do |f|
   = f.input :name
+  = f.input :price, as: :string
   = f.association :courts, as: :check_boxes, collection: current_user.stadium.courts
   = f.input :email
   = f.input :password
-  = f.input :password_confirmation
+  - if action_name == 'new'
+    = f.input :password_confirmation
   = f.button :submit, 'Сохранить'

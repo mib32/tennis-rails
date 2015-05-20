@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   respond_to :json
   before_filter :authenticate_user!, except: :index
+  before_filter :set_court, except: :index
 
   def index
     @events = Event.joins(:court, order: :user).includes(:order)
@@ -19,6 +20,7 @@ class EventsController < ApplicationController
   def create
     @order = Order.order('created_at desc').find_or_create_by(user: current_user, status: 'unpaid')
     @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
+    @event.court = @court
 
     @order.save
     respond_to do |format|
@@ -49,5 +51,12 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event).permit(Event.strong_params)
+  end
+  def set_court
+    if params[:court_id]
+      @court = Court.find params[:court_id]
+    else
+      raise 'Корт нужно указать'
+    end
   end
 end

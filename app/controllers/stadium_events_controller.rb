@@ -1,6 +1,5 @@
 class StadiumEventsController < EventsController
   before_action :set_stadium
-  before_action :set_court  
   def index
     @events = Event.joins(:court, order: :user).includes(:order)
     @events = @events.where(court_id: params[:court_id]) if params[:court_id]
@@ -48,9 +47,6 @@ class StadiumEventsController < EventsController
   private
   def set_stadium
     @stadium = Stadium.friendly.find params[:stadium_id]
-  end
-  def set_court
-    @court = @stadium.courts.find params[:court_id]
   end
 #   def event_params
 #     params.require(:event).permit(Event.strong_params)

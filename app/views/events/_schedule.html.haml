@@ -1,18 +1,15 @@
 .row.top30
-  .col-xs-12
-    = label_tag "Выберите корт"
-    = select_tag :court, options_for_select(@record.courts.map {|c| [c.name, c.id, { data: {price: c.price, change_price: c.change_price } } ] }), class: 'form-control'
-  .col-xs-12.col-sm-12
-    %div{"data-grid" => "", "data-source" => stadium_court_events_path(court_id: @stadium.courts.first)}
-.row.top30
-  .col-xs-12.col-sm-6
+  .col-md-4
     .panel.panel-default
       .panel-heading
         %h3.panel-title Бронирование
       .panel-body.woocommerce{"data-checkout" => ""}
         = render "orders/total", object: @record.courts.first
-  .col-xs-12.col-sm-6.col-md-6.col-lg-6
     = render 'orders/changes_total'
+  .col-md-8
+    = label_tag "Выберите корт"
+    = select_tag :court, options_for_select(@record.courts.map {|c| [c.name, c.id, { data: {price: c.price, change_price: c.change_price } } ] }), class: 'form-control'
+    %div{"data-grid" => "", "data-source" => stadium_court_events_path(court_id: @stadium.courts.first)}
 :javascript
   kendo.culture("ru-RU");
   var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});

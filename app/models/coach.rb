@@ -16,4 +16,5 @@ class Coach < User
   def name
     attributes["name"] || "Тренер ##{id}"
   end
+
 end

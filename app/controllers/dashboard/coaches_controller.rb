@@ -22,12 +22,20 @@ class Dashboard::CoachesController < DashboardController
     end
 
   end
+
+  def update
+    if @coach.update coach_params
+      redirect_to dashboard_stadium_coaches_path, notice: 'Тренер успешно сохранен'
+    else
+      render :edit
+    end
+  end
   private
   def find_coach
     @coach = Coach.friendly.find(params[:id]) if params[:id]
   end
 
   def coach_params
-    params.require(:coach).permit(:name, :password, :password_confirmation, :email, court_ids: [])
+    params.require(:coach).permit(:name, :password, :password_confirmation, :email, :price, court_ids: [])
   end
 end

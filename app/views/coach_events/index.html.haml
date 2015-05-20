@@ -1,0 +1,26 @@
+.body-bg
+  .row
+    .entry
+      %h1
+        %span.title-tire –
+        = @coach.name
+        %span.title-tire –
+      %hr/
+      .row
+        .col-md-4
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title Бронирование
+            .panel-body.woocommerce{"data-checkout" => ""}
+              = render "orders/total", object: @coach.courts.first
+        .col-md-8
+          = label_tag "Стадион"
+          = select_tag :court, options_for_select(@coach.courts.map {|c| ["#{c.stadium.name} - корт: #{c.name}", c.id ] }), class: 'form-control'
+          %div{"data-grid" => true, "data-source" => coach_court_events_path(court_id: @coach.courts.first)}
+:javascript
+  kendo.culture("ru-RU");
+  var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+  var changes = new Tennis.Collections.Changes();
+  var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+  var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+  grid.render();

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def total_hours
-    orders.unpaid.map(&:total_hours).inject(:+)
+    orders.unpaid.map(&:total_hours).inject(:+) || 0
   end
 
   def changes_total
