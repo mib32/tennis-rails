@@ -3,6 +3,7 @@ class Coach < User
   is_gravtastic
   
   has_and_belongs_to_many :courts, join_table: 'coaches_courts'
+  has_one :additional_order_item, as: :related
 
   validate :has_at_least_one_court
 

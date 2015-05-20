@@ -13,10 +13,10 @@
 		<% order.events.each do |item| %>
 			<tr>
 				<td><%= link_to item.court.stadium.name, item.court.stadium %></td>
-				<td><%= item.start %></td>
-				<td><%= item.end %></td>
+				<td><%= l item.start, format: :short %></td>
+				<td><%= l item.end, format: :short %></td>
 				<td><%= t('hours', count: item.duration_in_hours) %></td>
-				<td><%= item.total %></td>	
+				<td><%= number_to_integer_currency item.total %></td>	
 			</tr>
 		<% end %>
 	</tbody>
@@ -24,6 +24,6 @@
 <% if order.unpaid? %>
 	<%= simple_form_for order, url: pay_order_path(order) do |f| %>
 		<%= f.hidden_field :id %>
-		<%= f.button :submit, "Оплатить #{order.total}", class: 'btn-primary' %>
+		<%= f.button :submit, "Оплатить #{number_to_integer_currency order.total}", class: 'btn-primary' %>
 	<% end %>
 <% end %>

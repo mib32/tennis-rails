@@ -1,3 +1,19 @@
 = link_to new_dashboard_stadium_coach_path, class: 'btn btn-default' do
   = fa_icon 'user-plus'
   Создать тренера 
+
+- if @coaches.any?
+  %table.table
+    %thead
+      %tr
+        %th Имя
+        %th Почта
+        %th Дата создания
+    %tbody
+      - @coaches.each do |coach|
+        %tr
+          %td= coach.name
+          %td= coach.email
+          %td= coach.created_at
+- else
+  Пока нет тренеров

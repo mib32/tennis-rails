@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :events
     resource :stadium do
       resources :pictures, defaults: { imageable_type: 'Stadium'}
-      resources :coaches
+    resources :coaches
     end
     resources :deposit_requests
     resources :courts do
@@ -27,7 +27,13 @@ Rails.application.routes.draw do
     post 'payments/success'
   end
   # resources :categories
-  resources :coaches
+
+  resources :coaches do 
+    resources :courts do
+      resources :coach_events
+    end
+  end
+
   resources :courts
   resources :events
   resources :stadiums, defaults: { model_name: 'Stadium' } do

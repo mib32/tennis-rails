@@ -1,0 +1,16 @@
+- breadcrumb :coaches
+
+.body-bg
+  .row
+    .entry
+      %h1
+        %span.title-tire –
+        Тренеры
+        %span.title-tire –
+      %hr/
+      %ul.list-unstyled
+        - @coaches.each do |coach|
+          %li.clearfix
+            = image_tag coach.gravatar_url, class: 'avatar photo pull-left'
+            = link_to coach.name, coach
+            %p Информация:

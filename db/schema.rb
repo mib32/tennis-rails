@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520105042) do
+ActiveRecord::Schema.define(version: 20150520140350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "additional_order_items", force: :cascade do |t|
+    t.integer  "related_id"
+    t.string   "related_type"
+    t.integer  "order_id"
+    t.integer  "amount"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "additional_order_items", ["order_id"], name: "index_additional_order_items_on_order_id", using: :btree
+  add_index "additional_order_items", ["related_type", "related_id"], name: "index_additional_order_items_on_related_type_and_related_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -218,6 +230,7 @@ ActiveRecord::Schema.define(version: 20150520105042) do
 
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
+  add_foreign_key "additional_order_items", "orders"
   add_foreign_key "courts", "stadiums"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"

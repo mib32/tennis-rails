@@ -8,7 +8,9 @@
       %hr/
       .row
       .col-xs-12.col-sm-12
-        %div{"data-grid" => ""}
+        = label_tag "Выберите стадион"
+        = select_tag :court, options_for_select(@coach.courts.map {|c| ["#{c.stadium.name} - корт: #{c.name}", c.id, { data: {source: events_path(court_id: c) } } ] }), class: 'form-control'
+        %div{"data-grid" => true, "data-source" => coach_court_coach_events_path(@coach, @coach.courts.first)}
 :javascript
   kendo.culture("ru-RU");
   var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});

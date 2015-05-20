@@ -2,7 +2,7 @@ class Dashboard::CoachesController < DashboardController
   before_filter :find_coach, except: [ :index, :new, :create ]
 
   def index
-    @coaches = current_user.stadium.coaches
+    @coaches = current_user.stadium.coaches.uniq
   end
 
   def new
@@ -10,7 +10,7 @@ class Dashboard::CoachesController < DashboardController
   end
 
   def create
-    if (coach_params[:court_ids] & current_user.stadium.court_ids).size == coach_params[:court_ids].size
+    if coach_params[:court_ids].size > 0 || (coach_params[:court_ids] & current_user.stadium.court_ids).size == coach_params[:court_ids].size
       @coach = Coach.new coach_params
       if @coach.save
         redirect_to dashboard_stadium_coaches_path, notice: 'Тренер успешно создан'
@@ -28,6 +28,6 @@ class Dashboard::CoachesController < DashboardController
   end
 
   def coach_params
-    params.require(:coach).permit(devise_parameter_sanitizer.for(:account_create) + [:court_ids])
+    params.require(:coach).permit(:name, :password, :password_confirmation, :email, court_ids: [])
   end
 end
