@@ -1,9 +1,7 @@
 = simple_form_for @coach, url: dashboard_coach_path do |f|
-  = @coach.errors.inspect
   = f.input :avatar, as: :image_file, version: :small_square
   = f.input :name
   = f.input :price, as: :string
-  = f.input :email
-  .help-block Введите пароль чтобы сохранить изменения
-  = f.input :password
+  .form-group
+    = link_to fa_icon('edit') + ' Сменить пароль или почту', edit_user_registration_path, class: 'btn btn-default'
   = f.button :submit, 'Сохранить'
