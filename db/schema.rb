@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520161535) do
+ActiveRecord::Schema.define(version: 20150521085332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,9 +94,11 @@ ActiveRecord::Schema.define(version: 20150520161535) do
     t.datetime "updated_at", null: false
     t.integer  "status"
     t.string   "summary"
+    t.integer  "order_id"
   end
 
   add_index "event_changes", ["event_id"], name: "index_event_changes_on_event_id", using: :btree
+  add_index "event_changes", ["order_id"], name: "index_event_changes_on_order_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.datetime "start"
@@ -237,6 +239,7 @@ ActiveRecord::Schema.define(version: 20150520161535) do
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
+  add_foreign_key "event_changes", "orders"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "users"

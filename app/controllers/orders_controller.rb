@@ -46,6 +46,11 @@ class OrdersController < ApplicationController
         current_user.wallet.withdraw!(event.total)
         event.court.stadium.user.wallet.deposit!(event.total)
       end
+      @order.event_changes.each do |change|
+        change.event.update JSON.parse(change.summary)
+        current_user.wallet.withdraw!(change.total)
+        change.event.court.stadium.user.wallet.deposit!(change.total)
+      end
     end
 
     if transaction

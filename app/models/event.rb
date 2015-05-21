@@ -18,7 +18,8 @@ class Event < ActiveRecord::Base
   end
   scope :of_coach, ->(coach) { joins(:additional_event_items).where("additional_event_items.related_type = 'User' and additional_event_items.related_id = ? ", coach.id)}
 
-  after_update :register_change
+  # before_update :before_register_change
+  before_update :register_change
 
   def self.strong_params
    [ :id, :court_id, :start, :end, :recurrence_rule, :recurrence_id, :recurrence_exception, :user_id, :is_all_day, :description, :start_timezone, :end_timezone, :owned]
@@ -52,8 +53,21 @@ class Event < ActiveRecord::Base
   end
 
   def register_change
+    Rails.logger.debug self.start
+    Rails.logger.debug changed_attributes
     if order.paid?
-      event_changes.create! summary: @event.to_json, status: 'unpaid'
+      Thread.new do
+        ActiveRecord::Base.connection_pool.with_connection do
+          new_or_last_order = Order.order('created_at desc').find_or_create_by(user: order.user, status: 'unpaid')
+          if new_or_last_order.event_changes.where(event: self).any?
+            new_or_last_order.event_changes.where(event: self).last.update summary: self.to_json
+          else
+            event_changes.create! summary: self.to_json, order: new_or_last_order
+          end
+        end
+      end
+
+      return false
     end
   end
 

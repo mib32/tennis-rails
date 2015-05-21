@@ -5,15 +5,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :events
   enum status: [:unpaid, :paid]
 
-  # after_initialize :create_order_items, if: :new_record?
-  # attr_accessor :order_items
-
-  # def create_order_items
-  #   @order_items = []
-  # end
-
   def total
-    events.map(&:total).inject(:+)
+    events.map(&:total).inject(:+).to_i + event_changes.map(&:total).inject(:+)
   end
 
   def total_hours
