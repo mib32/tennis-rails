@@ -31,9 +31,17 @@ class Event < ActiveRecord::Base
 
   def total
     things = []
-    things << court.try(:price).to_i * duration_in_hours
-    things << additional_event_items.inject(0) {|o, i| o + i.related.price * i.amount}
+    things << dry_court_total
+    things << dry_other_total
     things.inject(&:+)
+  end
+
+  def dry_court_total
+    (court.try(:price).to_i * duration_in_hours.to_i).to_i
+  end
+
+  def dry_other_total
+    additional_event_items.map(&:total).inject(&:+).to_i
   end
 
   def duration_in_hours
