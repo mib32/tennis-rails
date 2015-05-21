@@ -14,7 +14,7 @@ set :rvm_ruby_version, '2.2.0'
 # set :pty, true
 
 set :linked_files, %w{config/database.yml config/application.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
