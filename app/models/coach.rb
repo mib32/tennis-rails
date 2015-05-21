@@ -8,7 +8,7 @@ class Coach < User
   has_many :courts, through: :coaches_courts
   has_one :additional_order_item, as: :related
 
-  validate :has_at_least_one_court
+  # validate :has_at_least_one_court
 
   def navs
     [
