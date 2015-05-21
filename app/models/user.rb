@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_one :wallet
   after_create :create_wallet
 
-  after_create :set_customer
+  after_initialize :set_customer, if: :new_record?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
