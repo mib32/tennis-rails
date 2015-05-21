@@ -11,6 +11,6 @@
       %ul.list-unstyled
         - @coaches.each do |coach|
           %li.clearfix
-            = image_tag coach.avatar.small_square || coach.gravatar_url, class: 'avatar photo pull-left'
+            = image_tag coach.avatar.small_square.presence || coach.gravatar_url, class: 'avatar photo pull-left', size: '100x100'
             = link_to coach.name, coach_events_path(coach)
             %p Информация:
