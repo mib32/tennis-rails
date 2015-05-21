@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <div class='balance'>
-    <%= link_to dashboard_deposit_requests_path do %>
+    <%= link_to dashboard_wallet_path do %>
       Ваш баланс: <%= number_to_currency(current_user.wallet.total, precision: 0) %>
     <% end %>
   </div>

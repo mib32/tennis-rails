@@ -11,7 +11,8 @@ class Coach < User
     [
       {name: 'Расписание', link: 'dashboard_path'},
       {name: 'Кошелек', link: 'dashboard_deposit_requests_path'},
-      {name: 'Настройки', link: 'edit_user_registration_path'}
+      {name: 'Клиенты', link: 'dashboard_clients_path'},
+      {name: 'Настройки', link: 'edit_dashboard_coach_path'}
     ]
   end
 

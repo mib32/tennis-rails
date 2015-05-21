@@ -1,4 +1,4 @@
-class Dashboard::StadiumsController < DashboardController
+class Dashboard::Stadium::StadiumsController < DashboardController
   before_filter :find_stadium
 
   def edit

@@ -1,0 +1,7 @@
+= simple_form_for [:dashboard, :stadium, @coach] do |f|
+  = f.input :name
+  = f.input :price, as: :string
+  = f.input :email
+  .help-block Введите пароль чтобы сохранить изменения
+  = f.input :password
+  = f.button :submit, 'Сохранить'

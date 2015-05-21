@@ -1,4 +1,4 @@
-class Dashboard::DepositRequestsController < DashboardController
+class Dashboard::Customer::DepositRequestsController < DashboardController
   def index
     @requests = current_user.wallet.deposit_requests.order(created_at: :desc).first(10)
   end

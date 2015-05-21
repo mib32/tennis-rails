@@ -35,4 +35,10 @@ class User < ActiveRecord::Base
   def navs
     []
   end
+
+  def method_missing t
+    if t.to_s.ends_with? '?'
+      type == t.to_s.to(-2).camelcase
+    end
+  end
 end

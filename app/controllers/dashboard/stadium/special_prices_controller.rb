@@ -1,4 +1,4 @@
-class Dashboard::SpecialPricesController < DashboardController
+class Dashboard::Stadium::SpecialPricesController < DashboardController
   before_action :set_special_price, only: [:show, :edit, :update, :destroy]
 
   # GET /dashboard/special_prices
