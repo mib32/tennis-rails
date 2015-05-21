@@ -52,6 +52,9 @@ Rails.application.routes.draw do
       resources :orders, only: :index
       scope module: :customer do
         resources :deposit_requests
+        resources :courts do
+          resources :events, only: :index
+        end
       end
     end
   end
