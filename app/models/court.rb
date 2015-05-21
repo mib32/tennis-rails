@@ -11,4 +11,8 @@ class Court < ActiveRecord::Base
   def price
     special_prices.current.price || attributes["price"]
   end
+
+  def name_with_stadium
+    stadium.name + ' - корт ' + name
+  end
 end

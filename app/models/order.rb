@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
   enum status: [:unpaid, :paid]
 
   def total
-    events.map(&:total).inject(:+).to_i + event_changes.map(&:total).inject(:+)
+    events.map(&:total).inject(:+).to_i + event_changes.map(&:total).inject(:+).to_i
   end
 
   def total_hours

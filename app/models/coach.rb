@@ -25,4 +25,8 @@ class Coach < User
     attributes["name"] || "Тренер ##{id}"
   end
 
+  def events
+    Event.joins(:additional_event_items).where('additional_event_items.related_type = ? and additional_event_items.related_id = ?', 'User', self.id)
+  end
+
 end

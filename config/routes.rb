@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   get 'dashboard/payment_settings', to: 'dashboard#payment_settings', as: 'dashboard_payment_settings'
   namespace :dashboard do
     
+    resource :coach
+
     resource :stadium do
       resources :pictures, defaults: { imageable_type: 'Stadium'}
-    resources :coaches
+      resources :coaches, controller: 'stadium/coaches'
     end
     resources :deposit_requests
 
