@@ -10,16 +10,19 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'dashboard', to: 'dashboard/events#index', as: 'dashboard'
+  get 'dashboard/events', to: 'dashboard/events#index', as: 'dashboard'
   get 'dashboard/payment_settings', to: 'dashboard#payment_settings', as: 'dashboard_payment_settings'
   namespace :dashboard do
-    resources :events
+    
     resource :stadium do
       resources :pictures, defaults: { imageable_type: 'Stadium'}
     resources :coaches
     end
     resources :deposit_requests
+
+    resources :events, only: :index
     resources :courts do
+      resources :events
       resources :special_prices
     end
     resources :orders, only: :index

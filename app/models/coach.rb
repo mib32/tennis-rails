@@ -7,6 +7,14 @@ class Coach < User
 
   validate :has_at_least_one_court
 
+  def navs
+    [
+      {name: 'Расписание', link: 'dashboard_path'},
+      {name: 'Кошелек', link: 'dashboard_deposit_requests_path'},
+      {name: 'Настройки', link: 'edit_user_registration_path'}
+    ]
+  end
+
   def has_at_least_one_court
     if courts.size < 1
       errors.add :courts, 'Выберите хотя бы один корт.'
