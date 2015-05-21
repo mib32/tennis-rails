@@ -1,12 +1,13 @@
-class Dashboard::Coach::CustomersController < DashboardController
+class Dashboard::Coach::CustomersController < Dashboard::Coach::CoachesController
   before_filter :find_customer, except: :index
 
   def index
-    @customers = 
+    @customers = @coach.customers
   end
+
 
   private
   def find_customer
-    @customer = Customer.find(params[:id]) if params[:id]
+    @customer = User.find(params[:id]) if params[:id]
   end
 end

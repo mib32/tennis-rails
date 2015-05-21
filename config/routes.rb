@@ -40,6 +40,9 @@ Rails.application.routes.draw do
       scope module: :coach do
         resource :coach
         resources :customers
+        resources :courts do
+          resources :events, only: :index
+        end
       end
     end
   end

@@ -24,6 +24,7 @@ ru:
         name: Имя
         password: Пароль
         courts: Корты
+        avatar: Аватар
         price: Стоимость
         current_password: Пароль
         password_confirmation: Подтверждение пароля

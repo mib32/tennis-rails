@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521085332) do
+ActiveRecord::Schema.define(version: 20150521154723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150521085332) do
   create_table "coaches_courts", force: :cascade do |t|
     t.integer "coach_id"
     t.integer "court_id"
+    t.decimal "price",    precision: 8, scale: 2, default: 0.0
   end
 
   add_index "coaches_courts", ["coach_id"], name: "index_coaches_courts_on_coach_id", using: :btree
@@ -210,6 +211,7 @@ ActiveRecord::Schema.define(version: 20150521085332) do
     t.string   "type"
     t.string   "slug"
     t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

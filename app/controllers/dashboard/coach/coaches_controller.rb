@@ -1,11 +1,11 @@
-class Dashboard::CoachesController < DashboardController
+class Dashboard::Coach::CoachesController < DashboardController
   before_filter :find_coach
 
   def edit
   end
 
   def update
-    @stadium.update stadium_params
+    @coach.update coach_params
 
     render :edit
   end
@@ -14,8 +14,7 @@ class Dashboard::CoachesController < DashboardController
   def find_coach
     @coach = current_user
   end
-  def stadium_params
-    params.require(:stadium).permit(:name, :address, :telephone, :description, :category_id, :phone, :latitude, :longitude,
-      courts_attributes: [:id, :name, :price, :change_price, :_destroy])
+  def coach_params
+    params.require(:coach).permit(:name, :password, :password_confirmation, :email, :price, :avatar, court_ids: [])
   end
 end

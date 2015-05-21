@@ -131,6 +131,7 @@ SimpleForm.setup do |config|
     check_boxes: :vertical_radio_and_checkboxes,
     radio_buttons: :vertical_radio_and_checkboxes,
     file: :vertical_file_input,
+    image_file: :vertical_file_input,
     boolean: :vertical_boolean,
   }
 end

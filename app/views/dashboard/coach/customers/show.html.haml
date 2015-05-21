@@ -1,0 +1,32 @@
+%h3= @customer.name
+%dl
+  %dt Баланс
+  %dd= number_to_integer_currency @customer.events.paid.of_coach(@coach).map(&:dry_coach_total).inject(&:+).to_i
+%h3 Грядущие
+%table.table
+  %thead
+    %tr
+      %th Стадион
+      %th Начало
+      %th Конец
+  %tbody
+    - @customer.events.future.paid.of_coach(@coach).order(created_at: :desc).each do |e|
+      %tr
+        %td= e.court.name_with_stadium
+        %td= l e.start, format: :short
+        %td= l e.end, format: :short
+        %td= number_to_integer_currency e.dry_coach_total
+%h3 Прошедшие
+%table.table
+  %thead
+    %tr
+      %th Стадион
+      %th Начало
+      %th Конец
+  %tbody
+    - @customer.events.past.paid.of_coach(@coach).order(created_at: :desc).each do |e|
+      %tr
+        %td= e.court.name_with_stadium
+        %td= l e.start, format: :short
+        %td= l e.end, format: :short
+        %td= number_to_integer_currency e.dry_coach_total

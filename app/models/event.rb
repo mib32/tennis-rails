@@ -9,6 +9,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :court
 
   scope :paid, -> { joins(:order).where('orders.status =  ?', Order.statuses[:paid]) }
+  scope :past, -> { where('"end" < LOCALTIMESTAMP')}
+  scope :future, -> { where('"start" > LOCALTIMESTAMP')}
   scope :paid_or_owned_by,  -> (user) do 
     if user
       joins(:order).where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: user.id, st: Order.statuses[:paid]} )
@@ -42,6 +44,10 @@ class Event < ActiveRecord::Base
 
   def dry_other_total
     additional_event_items.map(&:total).inject(&:+).to_i
+  end
+
+  def dry_coach_total
+    additional_event_items.coach.map(&:total).inject(&:+).to_i
   end
 
   def duration_in_hours
