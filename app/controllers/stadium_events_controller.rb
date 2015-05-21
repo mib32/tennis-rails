@@ -1,13 +1,15 @@
 class StadiumEventsController < EventsController
   before_action :set_stadium
+  before_action :set_court
   def index
-    @events = Event.joins(:court, order: :user).includes(:order)
-    @events = @events.where(court_id: params[:court_id]) if params[:court_id]
-    if current_user
-      @events = @events.where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: current_user.id, st: Order.statuses[:paid]} )
-    else
-      @events = @events.where(orders: { status: Order.statuses[:paid] })
-    end
+    @events = @court.events.paid_or_owned_by(current_user)
+    # @events = Event.joins(:court, order: :user).includes(:order)
+    # @events = @events.where(court_id: params[:court_id]) if params[:court_id]
+    # if current_user
+      # @events = @events.where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: current_user.id, st: Order.statuses[:paid]} )
+    # else
+      # @events = @events.where(orders: { status: Order.statuses[:paid] })
+    # end
     respond_to do |format|
       format.json {  }
       format.html {  }
@@ -47,6 +49,9 @@ class StadiumEventsController < EventsController
   private
   def set_stadium
     @stadium = Stadium.friendly.find params[:stadium_id]
+  end
+  def set_court
+    @court = @court || ( params[:court_id] && @stadium.courts.find(params[:court_id]) ) || @stadium.courts.first
   end
 #   def event_params
 #     params.require(:event).permit(Event.strong_params)

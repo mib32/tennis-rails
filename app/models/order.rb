@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user 
   has_many :events, dependent: :destroy
+  has_many :event_changes, dependent: :destroy
   accepts_nested_attributes_for :events
   enum status: [:unpaid, :paid]
 

@@ -35,7 +35,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
           e.preventDefault()
         return
       resizeEnd: (e) =>
-        if @timeIsOccupied(e.start, e.end, e.events)
+        if @timeIsOccupied(e.start, e.end, e.event)
           alert('Это время занято')
           e.preventDefault()
         return
@@ -73,19 +73,20 @@ class Tennis.Views.ScheduleView extends Backbone.View
         batch: false,
         transport: {
           read: {
-            url: =>
+            url: (e, s)=>
              @url()
           },
           update: {
-            url: (options) -> "#{@url()}/#{options.id}",
+            url: (options) => "#{@url()}/#{options.id}",
             type: 'PUT'
           },
           create: {
-            url: @url(),
+            url: =>
+             @url()
             type: 'POST'
           },
           destroy: {
-            url: (options) -> "#{@url()}/#{options.id}",
+            url: (options) => "#{@url()}/#{options.id}",
             method: 'DELETE'
         },
         parameterMap: (options, operation) =>

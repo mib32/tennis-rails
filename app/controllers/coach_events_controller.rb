@@ -2,7 +2,7 @@ class CoachEventsController < EventsController
   before_action :set_coach 
   before_action :set_court
   def index
-    @events = @court.events.paid.of_coach(@coach)
+    @events = @court.events.paid_or_owned_by(current_user).of_coach(@coach)
 #     @events = Event.joins(:court, order: :user).includes(:order)
 #     @events = @events.where(court_id: params[:court_id]) if params[:court_id]
 #     if current_user
