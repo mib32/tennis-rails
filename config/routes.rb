@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+  end
   # resources :changes, only: :create
 
   post 'payments/success'
@@ -16,7 +19,11 @@ Rails.application.routes.draw do
   
   
 
-  
+  namespace :admin do
+    resources :stadiums
+    resources :users
+    root to: 'stadiums#index'
+  end
 
   constraints RoleRouteConstraint.new('stadium_user') do
     namespace :dashboard do

@@ -27,7 +27,7 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'rails-i18n', '~> 4.0.0'
 group :development do
-  gem 'rails-admin-scaffold'
+  gem 'rails-admin-scaffold', github: 'mib32/rails-admin-scaffold'
   gem 'better_errors'
   gem 'capistrano', '~> 3.4'
   gem 'capistrano-bundler'
@@ -95,3 +95,5 @@ gem 'friendly_id', "~> 5"
 gem 'yui-compressor'
 
 gem 'active_link_to'
+
+gem 'ice_cube'

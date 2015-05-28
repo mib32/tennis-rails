@@ -1,0 +1,11 @@
+- content_for :sub_layout do
+  .body-bg
+    .row
+      .col-sm-12
+        %ul.nav.nav-pills.nav-justified
+          = active_link_to 'Стадионы', admin_stadiums_path, wrap_tag: :li
+          = active_link_to 'Пользователи', admin_users_path, wrap_tag: :li
+    .row
+      .col-xs-12
+        = yield
+= render template: 'layouts/application'

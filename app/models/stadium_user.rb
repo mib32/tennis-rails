@@ -7,6 +7,10 @@ class StadiumUser < User
     attributes["name"] || "Стадион ##{id}"
   end
 
+  def model_name
+    User.model_name
+  end
+
   def navs
     [
       {name: 'Корты', link: 'dashboard_path'},

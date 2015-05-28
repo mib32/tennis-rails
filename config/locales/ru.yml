@@ -5,6 +5,9 @@ ru:
   failure: Ошибка
   pending: В обработке
   none: Нет
+  stadium_user: Стадион
+  coach: Тренер
+  customer: Клиент
   hours:
     few: "%{count} часа"
     many: "%{count} часов"
