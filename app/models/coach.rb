@@ -38,8 +38,4 @@ class Coach < User
     User.find(events.joins(:order).pluck("orders.user_id").uniq)
   end
 
-  def model_name
-    User.model_name
-  end
-
 end

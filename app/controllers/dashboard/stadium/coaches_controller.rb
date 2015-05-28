@@ -6,12 +6,12 @@ class Dashboard::Stadium::CoachesController < DashboardController
   end
 
   def new
-    @coach = Coach.new
+    @coach = ::Coach.new
   end
 
   def create
     if coach_params[:court_ids].size > 0 || (coach_params[:court_ids] & current_user.stadium.court_ids).size == coach_params[:court_ids].size
-      @coach = Coach.new coach_params
+      @coach = ::Coach.new coach_params
       if @coach.save
         redirect_to dashboard_stadium_coaches_path, notice: 'Тренер успешно создан'
       else
@@ -32,7 +32,7 @@ class Dashboard::Stadium::CoachesController < DashboardController
   end
   private
   def find_coach
-    @coach = Coach.friendly.find(params[:id]) if params[:id]
+    @coach = ::Coach.friendly.find(params[:id]) if params[:id]
   end
 
   def coach_params

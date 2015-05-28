@@ -34,7 +34,7 @@ ru:
         avatar: Аватар
         type: Тип
         public_type: Тип
-        price: Стоимость
+        price: Стоимость часа
         current_password: Пароль
         password_confirmation: Подтверждение пароля
         email: Эл. почта

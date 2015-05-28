@@ -11,7 +11,7 @@ class Customer < User
     Court.find events.pluck('distinct court_id')
   end
 
-  def model_name
-    User.model_name
-  end
+  # def model_name
+    # User.model_name
+  # end
 end

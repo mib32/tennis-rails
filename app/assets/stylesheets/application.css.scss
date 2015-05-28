@@ -733,6 +733,13 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
     display: none;
   }
 }
+body.stadium_user, body.coach{
+  label[for=title],
+  [data-container-for=title]{
+    display: block;
+  }
+
+}
 
 
 .invalid-slot {

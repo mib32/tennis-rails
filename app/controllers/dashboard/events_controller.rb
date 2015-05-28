@@ -15,6 +15,7 @@ class Dashboard::EventsController < DashboardController
   def create
     @order = Order.order('created_at desc').find_or_create_by(user: current_user, status: 'unpaid')
     @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
+    @event.court = params[:court_id]
 
     @order.save
     respond_to do |format|

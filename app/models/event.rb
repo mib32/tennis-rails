@@ -20,6 +20,7 @@ class Event < ActiveRecord::Base
   end
   scope :of_coach, ->(coach) { joins(:additional_event_items).where("additional_event_items.related_type = 'User' and additional_event_items.related_id = ? ", coach.id)}
 
+
   # before_update :before_register_change
   before_update :register_change
 

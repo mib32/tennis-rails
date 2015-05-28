@@ -11,7 +11,7 @@
     <%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= current_user.try(:type).try(:underscore) %>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>

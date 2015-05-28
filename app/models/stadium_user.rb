@@ -19,9 +19,9 @@ class StadiumUser < User
     attributes["name"] || "Стадион ##{id}"
   end
 
-  def model_name
-    User.model_name
-  end
+  # def model_name
+    # User.model_name
+  # end
 
   def navs
     [
