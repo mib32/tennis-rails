@@ -3,7 +3,8 @@ class Customer < User
     [
       {name: 'Расписание', link: 'dashboard_path'},
       {name: 'Кошелек', link: 'dashboard_deposit_requests_path'},
-      {name: 'Настройки', link: 'edit_user_registration_path'}
+      {name: 'Настройки', link: 'edit_user_registration_path'},
+      {name: 'Заказы', link: 'dashboard_orders_path'}
     ]
   end
 

@@ -56,8 +56,8 @@ Rails.application.routes.draw do
 
   constraints RoleRouteConstraint.new('customer') do
     namespace :dashboard do
-      resources :orders, only: :index
       scope module: :customer do
+        resources :orders, only: :index
         resources :deposit_requests
         resources :courts do
           resources :events, only: :index
