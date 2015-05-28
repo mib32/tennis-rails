@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  default_scope { order(created_at: :desc) }
   include FriendlyId
   friendly_id :name, use: [:slugged]
 
@@ -48,5 +49,9 @@ class User < ActiveRecord::Base
     if t.to_s.ends_with? '?'
       type == t.to_s.to(-2).camelcase
     end
+  end
+
+  def name_for_admin
+    name.to_s + " (#{email})"
   end
 end

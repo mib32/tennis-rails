@@ -22,8 +22,10 @@ class Tennis.Views.MapView extends Backbone.View
     @handler.buildMap { provider: {scrollwheel: false}, internal: {id: 'map'}}, =>
       if @collection
         @markers = @handler.addMarkers(@collection.models) 
-        @handler.bounds.extendWith(@markers)
-        @handler.fitMapToBounds()
+        # @handler.bounds.extendWith(@markers)
+        # @handler.fitMapToBounds()
+        @handler.getMap().setCenter(@moscowCoords())
+        @handler.getMap().setZoom(12)
       else
         @handler.getMap().setCenter(@coords())
       if @markers.length == 1 

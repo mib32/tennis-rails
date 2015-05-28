@@ -1,8 +1,9 @@
 class Stadium < ActiveRecord::Base
+  default_scope { order(created_at: :desc) }
   include FriendlyId
   friendly_id :name, use: [:slugged]
 
-  enum status: [:pending, :active]
+  enum status: [:pending, :active, :locked]
   
   belongs_to :category
   belongs_to :user

@@ -1,4 +1,8 @@
 ru:
+  statuses: &statuses
+    pending: Не активирован
+    active: Активный
+    locked: Отключен
   true: Да
   false: Нет
   success: Успешно
@@ -47,3 +51,8 @@ ru:
         end: Конец
         price: Цена
         is_sale: Скидка
+  simple_form:
+    options:
+      defaults:
+        status:
+          <<: *statuses

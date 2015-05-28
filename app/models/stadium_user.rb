@@ -5,7 +5,7 @@ class StadiumUser < User
 
   enum status: [:pending, :active]
   after_initialize :set_status, if: :new_record?
-  after_initialize :make_stadium, unless: :stadium?
+  after_initialize :make_stadium, unless: "stadium.present?"
 
   def set_status
       self.status = "pending" unless self.status

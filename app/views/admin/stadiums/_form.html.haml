@@ -6,7 +6,8 @@
     = f.input :phone
     = f.input :description
     = f.association :category
-    = f.association :user
+    = f.association :user, label_method: :name_for_admin
+    = f.input :status, collection: [:active, :locked, :pending], default: :active
 
   .form-actions
     = f.button :submit, 'Сохранить'

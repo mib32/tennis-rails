@@ -69,6 +69,6 @@ class Admin::StadiumsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stadium_params
-      params.require(:stadium).permit(:name, :address, :phone, :description, :category_id)
+      params.require(:stadium).permit(:name, :address, :phone, :description, :category_id, :user_id, :status)
     end
 end

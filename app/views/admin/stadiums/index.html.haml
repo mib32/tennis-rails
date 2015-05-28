@@ -2,6 +2,7 @@
 
 %table.table.table-stripped
   %tr
+    %th Статус
     %th Name
     %th Address
     %th Telephone
@@ -11,13 +12,14 @@
     %th
     %th
 
-  - @stadiums.reverse_each do |stadium|
-    %tr
-      %td= stadium.name
-      %td= stadium.address
-      %td= stadium.phone
-      %td= stadium.category.name
-      %td= stadium.user.try(:name)
+  - @stadiums.each do |stadium|
+    %tr{ class: stadium.status }
+      %td= t stadium.status, scope: 'statuses' if stadium.status 
+      %td= stadium.name || "-"
+      %td= stadium.address || "-"
+      %td= stadium.phone || "-"
+      %td= stadium.category.try(:name) || "-"
+      %td= stadium.user.try(:name) || "-"
       %td= link_to 'Редактировать', edit_admin_stadium_path(stadium), class: 'btn btn-default btn-xs'
       %td= link_to 'Удалить', [:admin, stadium], :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger btn-xs'
 

@@ -1,6 +1,6 @@
 class VisitorsController < ApplicationController
 
   def index
-    @stadiums = Stadium.all
+    @stadiums = Stadium.where('status <> ?', Stadium.statuses[:pending])
   end
 end
