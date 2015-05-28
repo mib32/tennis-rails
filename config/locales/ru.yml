@@ -28,6 +28,8 @@ ru:
         password: Пароль
         courts: Корты
         avatar: Аватар
+        type: Тип
+        public_type: Тип
         price: Стоимость
         current_password: Пароль
         password_confirmation: Подтверждение пароля

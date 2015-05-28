@@ -1,6 +1,8 @@
 class Stadium < ActiveRecord::Base
   include FriendlyId
   friendly_id :name, use: [:slugged]
+
+  enum status: [:pending, :active]
   
   belongs_to :category
   belongs_to :user
@@ -12,8 +14,7 @@ class Stadium < ActiveRecord::Base
   has_many :pictures, as: :imageable
   has_many :reviews, as: :reviewable
 
-
-  validates_presence_of :phone
+  # validates_presence_of :phone
 
   def as_json params={}
     {

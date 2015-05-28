@@ -3,6 +3,18 @@ class StadiumUser < User
 
   delegate :events, :courts, to: :stadium
 
+  enum status: [:pending, :active]
+  after_initialize :set_status, if: :new_record?
+  after_initialize :make_stadium, unless: :stadium?
+
+  def set_status
+      self.status = "pending" unless self.status
+  end
+
+  def make_stadium
+    self.create_stadium 
+  end
+
   def name
     attributes["name"] || "Стадион ##{id}"
   end

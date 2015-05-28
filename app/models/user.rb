@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
     self.type = 'Customer' unless self.type
   end
 
+  def public_type= type
+    if type == 'Admin'
+      raise 'Нельзя стать админом просто так!'
+    else
+      self.becomes! type.constantize
+    end
+  end
+
   def total
     orders.unpaid.map(&:total).inject(:+)
   end

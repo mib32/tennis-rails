@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521154723) do
+ActiveRecord::Schema.define(version: 20150528092730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,12 +182,13 @@ ActiveRecord::Schema.define(version: 20150521154723) do
     t.string   "name"
     t.string   "phone"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "latitude",    default: 55.75
+    t.float    "longitude",   default: 37.61
     t.string   "slug"
+    t.integer  "status",      default: 0
   end
 
   add_index "stadiums", ["category_id"], name: "index_stadiums_on_category_id", using: :btree
@@ -212,6 +213,7 @@ ActiveRecord::Schema.define(version: 20150521154723) do
     t.string   "slug"
     t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
     t.string   "avatar"
+    t.integer  "status"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
