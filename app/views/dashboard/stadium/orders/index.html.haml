@@ -4,6 +4,7 @@
     .panel-heading
       = order.guid
       .pull-right= number_to_currency order.total
+      .pull-right= 'Cтатус:' + t(order.status, scope: 'simple_form.options.order.status') + ' '
     .panel-body
       %table.table
         %thead
@@ -21,3 +22,8 @@
               %td= event.end
               %td= event.duration
               %td= event.total
+    = simple_form_for [:dashboard, order], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
+      = f.input :status, collection: [:unpaid, :paid, :change, :rain, :other]
+      = f.input :comment
+      = f.button :submit, 'Изменить статус'
+      .help-block При изменении статуса заказчик будет уведомлен

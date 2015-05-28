@@ -56,3 +56,10 @@ ru:
       defaults:
         status:
           <<: *statuses
+      order:
+        status:
+          unpaid: Неоплачено
+          paid: Оплачено
+          change: Перенос
+          rain: Дождь
+          other: Другое
