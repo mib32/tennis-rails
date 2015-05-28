@@ -7,6 +7,20 @@ class ApplicationController < ActionController::Base
   before_action :find_parent_record, if: :nested_resource?
   layout :set_layout
 
+
+  def after_sign_in_path_for(resource)
+    sign_in_url = new_user_session_url
+    if request.referer == sign_in_url
+      if current_user.type == 'Admin'
+        admin_stadiums_path
+      else
+        dashboard_path
+      end
+    else
+      stored_location_for(resource) || request.referer || dashboard_path
+    end
+  end
+ 
   protected
 
   def configure_permitted_params
