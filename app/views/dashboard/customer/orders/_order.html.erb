@@ -1,0 +1,50 @@
+<h3><%= order.guid %></h3>
+<% if order.events.any? %>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Стадион</th>
+				<th>Начало</th>
+				<th>Конец</th>
+				<th>Длительность</th>
+				<th>Дополнительно</th>
+				<th>Цена</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% order.events.each do |item| %>
+				<tr>
+					<td><%= link_to item.court.stadium.name, item.court.stadium %></td>
+					<td><%= l item.start, format: :short %></td>
+					<td><%= l item.end, format: :short %></td>
+					<td><%= t('hours', count: item.duration_in_hours) %></td>
+					<td>
+						<%# if item.related.present? %>
+						<%= render item.additional_event_items %>
+					</td>
+					<td><%= number_to_integer_currency item.total %></td>	
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+<% if order.event_changes.any? %>
+	<h4>Переносы</h4>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Стадион</th>
+				<th>Начало</th>
+				<th>Конец</th>
+				<th>Стоимость</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%= render order.event_changes %>
+		</tbody>
+	</table>
+<% end %>
+<% if order.unpaid? %>
+	<%= link_to fa_icon('credit-card') + " Оплатить #{number_to_integer_currency order.total}", pay_order_path(order), method: :patch, class: 'btn btn-primary' %>
+	<%= link_to fa_icon('times') + ' Удалить заказ', order, method: :delete, data_confirm: 'Вы уверены?', class: 'btn btn-danger' %>
+<% end %>
