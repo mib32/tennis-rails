@@ -24,7 +24,7 @@
       <%= text_field_tag :place, nil, placeholder: 'Расположение' %>
       <div class="location-detector"><input type="button" class="location-detector-btn" value=" "></div>
       <%= select_tag :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), class: 'chosen-select', prompt: 'Выбор категории...' %>
-      <%= submit_tag  'Подобрать', class: 'submit-btn' %>
+      <%= submit_tag  'Подобрать', class: 'submit-btn', data: {search_on_map: true} %>
     <% end %>
    	   </div>
 	<!-- End searcher -->

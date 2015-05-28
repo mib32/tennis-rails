@@ -9,8 +9,7 @@ class Tennis.Views.MapView extends Backbone.View
     $ => 
       $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
         google.maps.event.trigger(@handler.getMap(), 'resize')
-      $('#searcher').on 'ajax:success', (e, data) =>
-        @renderMarkers(new Tennis.Collections.MarkerCollection(data))
+      $('[data-search-on-map]').on 'click'
 
   moscowCoords: ->
     lat: 55.75
