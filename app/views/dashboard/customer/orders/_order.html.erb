@@ -8,6 +8,7 @@
 				<th>Конец</th>
 				<th>Длительность</th>
 				<th>Дополнительно</th>
+				<th>Повторяется?</th>
 				<th>Цена</th>
 			</tr>
 		</thead>
@@ -22,6 +23,7 @@
 						<%# if item.related.present? %>
 						<%= render item.additional_event_items %>
 					</td>
+					<td><%= t('repeats', count: item.occurrences) + ' ' + (item.schedule.to_s if item.recurring?).to_s %></td>	
 					<td><%= number_to_integer_currency item.total %></td>	
 				</tr>
 			<% end %>

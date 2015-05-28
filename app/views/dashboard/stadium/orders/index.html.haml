@@ -13,6 +13,7 @@
             %th Начало
             %th Конец
             %th Длительность
+            %th Повторяется?
             %th Цена
         %tbody
           - order.events.joins(court: :stadium).where('stadiums.id = ?', current_user.stadium.id).each do |event|
@@ -21,6 +22,7 @@
               %td= event.start
               %td= event.end
               %td= event.duration
+              %td= t('repeats', count: item.occurrences) + ' ' + (item.schedule.to_s if item.recurring?).to_s
               %td= event.total
     = simple_form_for [:dashboard, order], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
       = f.input :status, collection: [:unpaid, :paid, :change, :rain, :other]

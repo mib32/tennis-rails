@@ -3,6 +3,11 @@ ru:
     pending: Не активирован
     active: Активный
     locked: Отключен
+  repeats:
+    few: "%{count} раза"
+    many: "%{count} раз"
+    one: "%{count} раз"
+    other: "%{count} раз"
   true: Да
   false: Нет
   success: Успешно

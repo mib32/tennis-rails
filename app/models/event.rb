@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   has_many :event_changes
   has_many :additional_event_items, dependent: :destroy
 
+  attr_reader :schedule
+
   delegate :user, to: :order
 
   validates_presence_of :court
@@ -24,6 +26,8 @@ class Event < ActiveRecord::Base
   # before_update :before_register_change
   before_update :register_change
 
+  after_initialize :build_schedule
+
   def self.strong_params
    [ :id, :court_id, :start, :end, :recurrence_rule, :recurrence_id, :recurrence_exception, :user_id, :is_all_day, :description, :start_timezone, :end_timezone, :owned]
   end
@@ -33,22 +37,22 @@ class Event < ActiveRecord::Base
   end
 
   def total
-    things = []
-    things << dry_court_total
-    things << dry_other_total
-    things.inject(&:+)
+    [
+      dry_court_total,
+      dry_other_total,
+     ].inject(&:+)
   end
 
   def dry_court_total
-    (court.try(:price).to_i * duration_in_hours.to_i).to_i
+    (court.try(:price).to_i * duration_in_hours.to_i).to_i * occurrences
   end
 
   def dry_other_total
-    additional_event_items.map(&:total).inject(&:+).to_i
+    additional_event_items.map(&:total).inject(&:+).to_i * occurrences
   end
 
   def dry_coach_total
-    additional_event_items.coach.map(&:total).inject(&:+).to_i
+    additional_event_items.coach.map(&:total).inject(&:+).to_i * occurrences
   end
 
   def duration_in_hours
@@ -57,6 +61,10 @@ class Event < ActiveRecord::Base
 
   def duration
     self.end - self.start
+  end
+
+  def occurrences
+    @schedule.all_occurrences.length
   end
 
   def owned_by user
@@ -86,4 +94,22 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def recurring?
+    recurrence_rule?
+  end
+
+private
+
+  def build_schedule
+    @schedule = IceCube::Schedule.new do |s|
+      if recurring?
+        s.add_recurrence_rule(IceCube::Rule.from_ical(recurrence_rule))
+        if recurrence_exception?
+          s.add_exception_rule(IceCube::Rule.from_ical())
+        end
+      else
+        s.add_recurrence_rule(IceCube::SingleOccurrenceRule.new attributes["start"])
+      end
+    end
+  end
 end
