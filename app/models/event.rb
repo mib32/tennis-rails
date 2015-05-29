@@ -67,7 +67,7 @@ class Event < ActiveRecord::Base
     if @schedule.terminating?
       @schedule.all_occurrences.length
     else
-      @schedule.occurrences(DateTime.current + 1.month)
+      @schedule.occurrences(DateTime.current + 1.month).length
     end
   end
 
