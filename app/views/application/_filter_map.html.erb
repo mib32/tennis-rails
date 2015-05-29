@@ -13,8 +13,11 @@
         end.to_json %>
       );
   var map = new Tennis.Views.MapView({collection: markers});
-  window.stadium_names = markers.models.map(function(el){return el.attributes.name})
+  window.names = markers.models.map(function(el){return el.attributes.name})
   map.render(); 
+  $('#q_name_cont').autocomplete({
+      source: window.names
+    });
 </script>
 
 
