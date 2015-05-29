@@ -14,27 +14,27 @@ class Tennis.Views.MapView extends Backbone.View
         $('.location-detector-btn').addClass('fa-spin')
         if navigator.geolocation
           navigator.geolocation.getCurrentPosition(@putMeToMap)
+      if $('#searcher').length
+        input = $('#searcher #place')[0]
+        options = 
+          bounds: @moscowBounds()
+          type: ['geocode']
+        @autocomplete = new google.maps.places.Autocomplete(input, options)
 
-      input = $('#searcher #place')[0]
-      options = 
-        bounds: @moscowBounds()
-        type: ['geocode']
-      @autocomplete = new google.maps.places.Autocomplete(input, options)
 
-
-      $('[data-search-on-map]').on 'click', (e) =>
-        if $('#searcher #place').val() && @autocomplete.getPlace()
-          e.preventDefault()
-          map.handler.getMap().panTo(map.autocomplete.getPlace().geometry.location)
-        else if $('#searcher #name').val()
-          e.preventDefault()
-          marker = markers.where(name: $('#searcher #name').val())[0]
-          @handler.getMap().addListener 'center_changed', (e) =>
-            @handler.getMap().setZoom(16)
-          @handler.getMap().panTo(marker.attributes.position)
-        else if $('#searcher #category_id').val()
-          $('#searcher').on 'ajax:success', (e, data) =>
-            @renderMarkers(new Tennis.Collections.MarkerCollection(data))
+        $('[data-search-on-map]').on 'click', (e) =>
+          if $('#searcher #place').val() && @autocomplete.getPlace()
+            e.preventDefault()
+            map.handler.getMap().panTo(map.autocomplete.getPlace().geometry.location)
+          else if $('#searcher #name').val()
+            e.preventDefault()
+            marker = markers.where(name: $('#searcher #name').val())[0]
+            @handler.getMap().addListener 'center_changed', (e) =>
+              @handler.getMap().setZoom(16)
+            @handler.getMap().panTo(marker.attributes.position)
+          else if $('#searcher #category_id').val()
+            $('#searcher').on 'ajax:success', (e, data) =>
+              @renderMarkers(new Tennis.Collections.MarkerCollection(data))
 
 
   putMeToMap: (pos) =>
