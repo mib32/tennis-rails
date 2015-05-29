@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528131214) do
+ActiveRecord::Schema.define(version: 20150529193344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,12 @@ ActiveRecord::Schema.define(version: 20150528131214) do
   end
 
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
+
+  create_table "options", force: :cascade do |t|
+    t.integer  "tax",        default: 5
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -230,6 +236,17 @@ ActiveRecord::Schema.define(version: 20150528131214) do
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  create_table "withdrawal_requests", force: :cascade do |t|
+    t.integer  "wallet_id"
+    t.integer  "status"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.text     "data"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "withdrawal_requests", ["wallet_id"], name: "index_withdrawal_requests_on_wallet_id", using: :btree
+
   create_table "withdrawals", force: :cascade do |t|
     t.integer  "wallet_id"
     t.integer  "status"
@@ -257,5 +274,6 @@ ActiveRecord::Schema.define(version: 20150528131214) do
   add_foreign_key "stadiums", "categories"
   add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
+  add_foreign_key "withdrawal_requests", "wallets"
   add_foreign_key "withdrawals", "wallets"
 end

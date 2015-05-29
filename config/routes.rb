@@ -34,6 +34,11 @@ Rails.application.routes.draw do
           resources :special_prices
         end
         resources :orders
+        resources :withdrawal_requests do
+          member do
+            get 'confirm'
+          end
+        end
         get 'orders', to: 'orders#index', as: 'wallet'
       end
     end
@@ -47,6 +52,8 @@ Rails.application.routes.draw do
         resources :courts do
           resources :events, only: :index
         end
+
+        get 'orders', to: 'customers#index'
       end
     end
   end

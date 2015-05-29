@@ -31,7 +31,7 @@ class StadiumUser < User
       {name: 'Настройки', items: 
         [
           {name: 'Стадион', link: 'edit_dashboard_stadium_path', active: /stadium/},
-          {name: 'Прием платежей', link: '#'}
+          {name: 'Вывод средств', link: 'dashboard_withdrawal_requests_path'}
         ]
       }
     ]
