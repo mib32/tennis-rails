@@ -3,17 +3,12 @@ class StadiumsController < ApplicationController
   respond_to :html, :js, :json
 
   def index
-    @stadiums = Stadium.active
+    @q = Stadium.ransack(params[:q])
+    @stadiums = @q.result(distinct: true).active
 
     if params[:category_id].present?
       @category = Category.friendly.find(params[:category_id])
       @stadiums = @category.stadiums
-    end
-    if params[:name].present?
-      @stadiums = @stadiums.where('name ilike ?', '%' + params[:name] + '%')
-    end
-    if params[:place].present?
-      
     end
 
     respond_with @stadiums

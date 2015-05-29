@@ -26,4 +26,8 @@ class Stadium < ActiveRecord::Base
       name: name
     }
   end
+
+  ransacker :avg_price do |parent|
+    Arel.sql('')
+  end
 end

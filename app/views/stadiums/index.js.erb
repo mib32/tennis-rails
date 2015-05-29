@@ -1,0 +1,15 @@
+$('.stadiums').html("<%= j render @stadiums %>")
+
+window.markers = new Tennis.Collections.MarkerCollection(
+<%== @stadiums.map do |s|
+      {
+        position: {
+          lat: s.latitude.to_f,
+          lng: s.longitude.to_f
+        },
+        name: s.name,  
+        infowindow: "#{s.name}<br>#{link_to 'Перейти на страницу', s}"
+      }
+    end.to_json %>
+  );
+window.map.renderMarkers(markers)

@@ -1,0 +1,4 @@
+%li.clearfix
+  = link_to  stadium  do
+    = image_tag stadium.pictures.last.try(:name).try(:thumb).try(:url) || 'placeholder.png', class: 'avatar photo pull-left', size: '60x60'
+    = stadium.name

@@ -103,3 +103,7 @@ gem 'ice_cube'
 
 gem "letter_opener", :group => :development
 gem 'rails-observers'
+
+
+# search
+gem 'ransack', github: 'activerecord-hackery/ransack'

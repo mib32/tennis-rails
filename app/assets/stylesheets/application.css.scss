@@ -82,6 +82,9 @@ code {
 #menu-item-120 .delimiter {
     display: none;
 }
+.menu-item-120{
+  margin-right: 12px;
+}
 #map-container {
     -webkit-box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.2);
     -moz-box-shadow: px 7px 11px 0px rgba(50, 50, 50, 0.2);
@@ -91,6 +94,10 @@ code {
 #map {
     width: 100%;
     height: 450px;
+}
+#filter-map{
+  height: 200px;
+  width: 100%;
 }
 #map-container {
     // margin-top: 51px;
@@ -269,7 +276,7 @@ h1 {
     border: 1px solid #ddd;
     padding-left: 25px;
     padding-right: 25px;
-    margin-bottom: 120px;
+    margin-bottom: 50px;
     margin-top: 30px;
     -webkit-box-shadow: 0px 3px 11px 0px rgba(50, 50, 50, 0.70);
     -moz-box-shadow: 0px 3px 11px 0px rgba(50, 50, 50, 0.70);
@@ -753,3 +760,21 @@ body.stadium_user, body.coach{
 }
 
 
+
+
+.chosen-container-single .chosen-single {
+    height: 40px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 7px 0px 0px 10px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    box-shadow: 0px 3px 10px 0px rgba(75, 75, 75, 0.38) inset;
+    border: 1px solid #CCC;
+    color: #A5A5A5;
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+}

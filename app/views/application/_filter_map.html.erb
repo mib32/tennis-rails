@@ -1,0 +1,20 @@
+<div id="map-container"><div id="filter-map"></div></div>
+<script type="text/javascript">
+  var markers = new Tennis.Collections.MarkerCollection(
+    <%== objects.map do |s|
+          {
+            position: {
+              lat: s.latitude.to_f,
+              lng: s.longitude.to_f
+            },
+            name: s.name,  
+            infowindow: "#{s.name}<br>#{link_to 'Перейти на страницу', s}"
+          }
+        end.to_json %>
+      );
+  var map = new Tennis.Views.MapView({collection: markers});
+  window.stadium_names = markers.models.map(function(el){return el.attributes.name})
+  map.render(); 
+</script>
+
+

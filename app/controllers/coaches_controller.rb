@@ -1,6 +1,7 @@
 class CoachesController < ApplicationController
   def index
-    @coaches = Coach.all
+    @q = Coach.ransack(params[:q])
+    @coaches = @q.result(distinct: true)
   end
 
   def show

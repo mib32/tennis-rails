@@ -1,15 +1,18 @@
-- breadcrumb :coaches
-
+- breadcrumb :stadiums
+- breadcrumb :category, @category  if @category
 .body-bg
   .row
     .entry
       %h1
         %span.title-tire –
-        Тренеры
+        Стадионы
         %span.title-tire –
       = search_form_for @q, remote: true, wrapper: :inline_form, html: { class: 'form-inline' } do |f|
+        = f.input :name_cont, placeholder: 'Название', label: false
         = f.input :courts_stadium_category_id_eq, collection: Category.all,  prompt: 'Категория', label: false
         = f.button :submit, 'Поиск'
+      = render 'filter_map', objects: @stadiums
       %hr/
-      %ul.list-unstyled.coaches
-        = render @coaches
+      %ul.list-unstyled.stadiums
+        = render @stadiums
+          
