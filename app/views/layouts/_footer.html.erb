@@ -11,9 +11,9 @@
         
         <div class="footer-right col-md-4">
         	<ul class="menu" id="menu-footer">
-                <li class="menu-item"><%= link_to 'О сайте', '#' %></li>
-                <li class="menu-item"><%= link_to 'Обратная связь', '#' %></li>
-                <li class="menu-item"><%= link_to 'Помощь', '#' %></li>
+                <% @pages.each do |page| %>
+                    <li class="menu-item"><%= link_to page.title, page %></li>
+                <% end %>
             </ul>
         	</div>
       </div>

@@ -1,0 +1,4 @@
+= simple_form_for [:admin, @page] do |f|
+  = f.input :title, label: 'Заголовок'
+  = f.input :text, as: :bootsy, label: 'Содержимое'
+  = f.button :submit, 'Сохранить'

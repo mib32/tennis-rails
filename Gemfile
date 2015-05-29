@@ -107,3 +107,5 @@ gem 'rails-observers'
 
 # search
 gem 'ransack', github: 'activerecord-hackery/ransack'
+
+gem 'bootsy'

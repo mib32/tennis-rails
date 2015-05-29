@@ -1,0 +1,12 @@
+.body-bg.clearfix
+  %h1= @page.title
+  .page-content
+    = @page.text
+  %h3 Напишите нам
+  .form
+    = simple_form_for :feedback, url: feedback_path, method: :post, remote: true do |f|
+      = f.input :name, label: 'Имя'
+      = f.input :email, label: 'Почта'
+      = f.input :phone, label: 'Телефон'
+      = f.input :message, as: :text, label: 'Сообщение'
+      = f.button :submit, 'Отправить'

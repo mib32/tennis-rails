@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  post 'feedback/create', as: 'feedback'
+
+  resources :static_pages, only: :show
+
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   namespace :admin do
     resources :users
   end
@@ -19,6 +24,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :stadiums
     resources :users
+    resource :options,  only: [:edit, :update]
+    resources :static_pages
     root to: 'stadiums#index'
   end
 

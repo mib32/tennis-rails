@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :find_parent_record, if: :nested_resource?
+  before_action :find_static_pages
   layout :set_layout
 
 
@@ -42,5 +43,9 @@ class ApplicationController < ActionController::Base
     id_param = params[:action] == 'show' ? 'id' : params[:model_name].underscore + '_id'
     @record = klass.friendly.find(params[id_param])
     instance_variable_set('@' + params[:model_name].underscore, @record)
+  end
+
+  def find_static_pages
+    @pages = StaticPage.all
   end
 end
