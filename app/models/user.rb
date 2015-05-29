@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
   def name_for_admin
     name.to_s + " (#{email})"
   end
+
+  def admin?
+    false
+  end
 end

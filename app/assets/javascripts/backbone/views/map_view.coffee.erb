@@ -10,6 +10,11 @@ class Tennis.Views.MapView extends Backbone.View
       $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
         google.maps.event.trigger(@handler.getMap(), 'resize')
 
+      $('.location-detector-btn').click (e) =>
+        $('.location-detector-btn').addClass('fa-spin')
+        if navigator.geolocation
+          navigator.geolocation.getCurrentPosition(@putMeToMap)
+
       input = $('#searcher #place')[0]
       options = 
         bounds: @moscowBounds()
@@ -32,7 +37,15 @@ class Tennis.Views.MapView extends Backbone.View
             @renderMarkers(new Tennis.Collections.MarkerCollection(data))
 
 
+  putMeToMap: (pos) =>
+    latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+    @handler.getMap().panTo(latLng)
+    @geolocationMarker = new google.maps.Marker
+      position: latLng
+      map: @handler.getMap()
+      icon: '<%= asset_url('locate.png') %>'
 
+    $('.location-detector-btn').removeClass('fa-spin')
   moscowCoords: ->
     lat: 55.75
     lng: 37.61

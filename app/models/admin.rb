@@ -1,5 +1,5 @@
 class Admin < User
-  def model_name
-    User.model_name
+  def admin?
+    true
   end
 end

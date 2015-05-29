@@ -97,4 +97,9 @@ gem 'yui-compressor'
 
 gem 'active_link_to'
 
+
+# recurrence rules
 gem 'ice_cube'
+
+gem "letter_opener", :group => :development
+gem 'rails-observers'

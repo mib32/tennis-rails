@@ -47,6 +47,6 @@
 	</table>
 <% end %>
 <% if order.unpaid? %>
-	<%= link_to fa_icon('credit-card') + " Оплатить #{number_to_integer_currency order.total}", pay_order_path(order), method: :patch, class: 'btn btn-primary' %>
-	<%= link_to fa_icon('times') + ' Удалить заказ', order, method: :delete, data_confirm: 'Вы уверены?', class: 'btn btn-danger' %>
+	<%= link_to fa_icon('credit-card') + " Оплатить #{number_to_integer_currency order.total}", pay_dashboard_order_path(order), method: :patch, class: 'btn btn-primary' %>
+	<%= link_to fa_icon('times') + ' Удалить заказ', [:dashboard, order], method: :delete, data_confirm: 'Вы уверены?', class: 'btn btn-danger' %>
 <% end %>

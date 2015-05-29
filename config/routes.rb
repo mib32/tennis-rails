@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   post 'payments/success'
 
   resources :orders do
-    member do
-      patch 'pay'
-    end
     collection do
       get 'total'
     end
@@ -57,7 +54,11 @@ Rails.application.routes.draw do
   constraints RoleRouteConstraint.new('customer') do
     namespace :dashboard do
       scope module: :customer do
-        resources :orders, only: :index
+        resources :orders do
+          member do
+            patch 'pay'
+          end
+        end
         resources :deposit_requests
         resources :courts do
           resources :events, only: :index
@@ -66,6 +67,17 @@ Rails.application.routes.draw do
     end
   end
 
+  constraints RoleRouteConstraint.new('admin') do
+    namespace :dashboard do
+      scope module: :customer do
+        resources :orders do
+          member do
+            patch 'pay'
+          end
+        end
+      end
+    end
+  end
   resources :courts
 
   resources :coaches do 

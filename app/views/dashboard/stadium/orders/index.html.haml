@@ -22,7 +22,7 @@
               %td= event.start
               %td= event.end
               %td= event.duration
-              %td= t('repeats', count: item.occurrences) + ' ' + (item.schedule.to_s if item.recurring?).to_s
+              %td= t('repeats', count: event.occurrences) + ' ' + (event.schedule.to_s if event.recurring?).to_s
               %td= event.total
     = simple_form_for [:dashboard, order], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
       = f.input :status, collection: [:unpaid, :paid, :change, :rain, :other]

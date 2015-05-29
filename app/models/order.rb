@@ -17,4 +17,12 @@ class Order < ActiveRecord::Base
   def guid
     "#%06d" % id
   end
+
+  def human_status
+    if status?
+      I18n.translate status, scope: 'simple_form.options.order.status'
+    else
+      ''
+    end
+  end
 end
