@@ -64,7 +64,11 @@ class Event < ActiveRecord::Base
   end
 
   def occurrences
-    @schedule.all_occurrences.length
+    if @schedule.terminating?
+      @schedule.all_occurrences.length
+    else
+      @schedule.occurrences(DateTime.current + 1.month)
+    end
   end
 
   def owned_by user
