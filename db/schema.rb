@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529205121) do
+ActiveRecord::Schema.define(version: 20150530114257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20150529205121) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
+
+  create_table "coach_profiles", force: :cascade do |t|
+    t.string   "description"
+    t.string   "photo"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "coach_profiles", ["user_id"], name: "index_coach_profiles_on_user_id", using: :btree
 
   create_table "coaches_courts", force: :cascade do |t|
     t.integer "coach_id"
@@ -232,6 +242,7 @@ ActiveRecord::Schema.define(version: 20150529205121) do
     t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
     t.string   "avatar"
     t.integer  "status"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -267,6 +278,7 @@ ActiveRecord::Schema.define(version: 20150529205121) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "additional_event_items", "events"
+  add_foreign_key "coach_profiles", "users"
   add_foreign_key "courts", "stadiums"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"

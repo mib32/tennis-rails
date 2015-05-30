@@ -3,8 +3,18 @@
     .entry
       %h1
         %span.title-tire –
-        = @coach.name
+        Тренер
         %span.title-tire –
+      .row
+        .col-xs-2
+          = image_tag @coach.avatar.small_square.presence || @coach.gravatar_url, class: 'avatar photo pull-left'
+        .col-xs-10
+          %h3= @coach.name
+          - if @coach.phone?
+            %h5= fa_icon('phone') + ' ' + @coach.phone
+          - if @coach.email?
+            %h5= fa_icon('envelope') + ' ' + @coach.email
+          %p= truncate(@coach.description, length: 240)
       %hr/
       .row
         .col-md-4
