@@ -3,6 +3,7 @@
   .form-inputs
     = f.input :email
     = f.input :name
+    = f.input :phone
     = f.input :type, collection: [%w(Стадион StadiumUser), %w(Тренер Coach), %w(Клиент Customer), %w(Админ Admin)]
     = f.input :password
     = f.input :password_confirmation
