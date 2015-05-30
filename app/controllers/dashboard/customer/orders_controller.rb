@@ -72,9 +72,9 @@ class Dashboard::Customer::OrdersController < DashboardController
   def destroy
     @order = Order.find params[:id]
     if @order.unpaid? && @order.destroy
-      redirect_to orders_path, notice: 'Заказ успешно удален'
+      redirect_to dashboard_orders_path, notice: 'Заказ успешно удален'
     else
-      redirect_to orders_path, alert: 'Заказ не удалось удалить'
+      redirect_to dashboard_orders_path, alert: 'Заказ не удалось удалить'
     end
   end
 

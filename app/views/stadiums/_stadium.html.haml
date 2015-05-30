@@ -2,7 +2,7 @@
   .row
     .col-xs-2
       = link_to  stadium  do
-        = image_tag stadium.pictures.last.try(:name).try(:thumb).try(:url) || 'placeholder.png', class: 'avatar photo pull-left'
+        = image_tag stadium.pictures.last.try(:name).try(:small_square).try(:url) || 'placeholder.png', class: 'avatar photo pull-left'
     .col-xs-10
       %h3= link_to stadium.name, stadium
       %p= stadium.address
