@@ -9,11 +9,11 @@ class Admin::StaticPagesController < AdminController
   end
 
   def edit
-    @page = StaticPage.find params[:id]
+    @page = StaticPage.friendly.find params[:id]
   end
 
   def update
-    @page = StaticPage.find params[:id]
+    @page = StaticPage.friendly.find params[:id]
 
     @page.update static_page_params
 
@@ -27,7 +27,7 @@ class Admin::StaticPagesController < AdminController
   end
 
   def destroy
-    @page = StaticPage.find params[:id]
+    @page = StaticPage.friendly.find params[:id]
 
     @page.destroy
 
