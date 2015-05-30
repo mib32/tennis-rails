@@ -46,4 +46,8 @@ class Coach < User
     User.find(events.joins(:order).pluck("orders.user_id").uniq)
   end
 
+
+  def has_courts?
+    courts.size > 0
+  end
 end
