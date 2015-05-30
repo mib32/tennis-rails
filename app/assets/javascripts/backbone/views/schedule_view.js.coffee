@@ -20,8 +20,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
       views: [
         "day",
         {type: "week", selected: true},
-        "month",
-        "agenda",
+        "month"
       ],
 
       edit: (e) =>
