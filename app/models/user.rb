@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :events, through: :orders
   has_many :event_changes, through: :events
-  has_one :wallet
+  has_one :wallet, dependent: :destroy
   after_create :create_wallet
 
   after_initialize :set_customer, if: :new_record?

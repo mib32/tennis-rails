@@ -7,7 +7,7 @@ class Coach < User
   has_many :coaches_courts
   has_many :courts, through: :coaches_courts
   after_initialize :make_profile, unless: "coach_profile.present?"
-  has_one :coach_profile, foreign_key: "user_id"
+  has_one :coach_profile, foreign_key: "user_id", dependent: :destroy
   has_one :additional_order_item, as: :related
   accepts_nested_attributes_for :coach_profile
 
