@@ -58,6 +58,9 @@ ru:
         is_sale: Скидка
       coach_profile:
         description: Описание
+      event:
+        start: Начало
+        end: Конец
   simple_form:
     options:
       defaults:

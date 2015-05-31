@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user 
   belongs_to :stadium
+  belongs_to :coach
   has_many :events, dependent: :destroy
   has_many :event_changes, dependent: :destroy
   accepts_nested_attributes_for :events
@@ -24,5 +25,9 @@ class Order < ActiveRecord::Base
     else
       ''
     end
+  end
+
+  def associated_emails
+    [stadium.try(:user).try(:email), coach.try(:email)]
   end
 end

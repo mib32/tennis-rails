@@ -49,7 +49,8 @@ class Dashboard::Customer::OrdersController < DashboardController
             ai.payment_receiver.wallet.deposit! ai.total
           end
         else
-          redirect_to dashboard_orders_path, alert: "Недостаточно средств"
+          redirect_to(dashboard_orders_path, alert: "Недостаточно средств") 
+          raise ActiveRecord::Rollback
         end
       end
       @order.event_changes.each do |change|
@@ -57,7 +58,8 @@ class Dashboard::Customer::OrdersController < DashboardController
         if current_user.wallet.withdraw!(change.total)
           change.event.court.stadium.user.wallet.deposit!(change.total)
         else
-          redirect_to dashboard_orders_path, alert: "Недостаточно средств"
+          redirect_to(dashboard_orders_path, alert: "Недостаточно средств")
+          raise ActiveRecord::Rollback
         end
       end
     end

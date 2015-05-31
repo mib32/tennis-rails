@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :order
   belongs_to :court
-  has_many :event_changes
+  has_many :event_changes, dependent: :destroy
   has_many :additional_event_items, dependent: :destroy
 
   attr_reader :schedule
@@ -21,10 +21,9 @@ class Event < ActiveRecord::Base
     end
   end
   scope :of_coach, ->(coach) { joins(:additional_event_items).where("additional_event_items.related_type = 'User' and additional_event_items.related_id = ? ", coach.id)}
+  
+  before_update :register_change, unless: :skip_change_registering?
 
-
-  # before_update :before_register_change
-  before_update :register_change
 
   after_initialize :build_schedule
 
@@ -80,8 +79,8 @@ class Event < ActiveRecord::Base
   end
 
   def register_change
-    Rails.logger.debug self.start
-    Rails.logger.debug changed_attributes
+    # Rails.logger.debug self.start
+    # Rails.logger.debug changed_attributes
     if order.paid?
       Thread.new do
         ActiveRecord::Base.connection_pool.with_connection do
@@ -100,6 +99,14 @@ class Event < ActiveRecord::Base
 
   def recurring?
     recurrence_rule?
+  end
+
+  def skip_change_registering!
+    @skip_change_registering = true
+  end
+
+  def skip_change_registering?
+    @skip_change_registering
   end
 
 private

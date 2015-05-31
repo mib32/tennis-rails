@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :users
     resource :options,  only: [:edit, :update]
     resources :static_pages
+    resources :categories
     root to: 'stadiums#index'
   end
 
@@ -57,7 +58,7 @@ Rails.application.routes.draw do
         resource :coach
         resources :customers
         resources :courts do
-          resources :events, only: :index
+          resources :events
         end
 
         get 'orders', to: 'customers#index'

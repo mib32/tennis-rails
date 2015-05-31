@@ -19,4 +19,23 @@ class Dashboard::Stadium::EventsController < Dashboard::EventsController
       format.json { render 'events/_event', locals: { event: @event } }
     end
   end
+
+  def update
+    @event = Event.find params[:id]
+    @event.skip_change_registering!
+    @event.update event_params
+
+    respond_to do |format|
+      format.json { render 'events/_event', locals: { event: @event } }
+    end
+  end
+
+  def destroy
+    @event = Event.find params[:id]
+    @event.destroy
+    
+    respond_to do |format|
+      format.json { render 'events/_event', locals: { event: @event } }
+    end
+  end
 end

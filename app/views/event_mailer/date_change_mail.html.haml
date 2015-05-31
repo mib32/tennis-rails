@@ -1,0 +1,23 @@
+%h1 Занятие перенесено!
+
+%table
+  %thead
+    %tr
+      %th Стадион
+      %th Начало
+      %th Конец
+      %th Повторяется
+  %tbody
+    %tr
+      %td= @event.court.stadium.name
+      %td= l @event.start, format: :short
+      %td= l @event.end, format: :short
+      %td= t('hours', count: @event.duration_in_hours)
+
+
+
+- @event.previous_changes.except(:updated_at).each do |change, list|
+  %p
+    = Event.human_attribute_name change
+    = " с #{l list.first, format: :short} на #{l list.last, format: :short}"
+

@@ -17,7 +17,7 @@ class CoachEventsController < EventsController
   end
 
   def create
-    @order = Order.order('created_at desc').find_or_create_by(user: current_user, status: 'unpaid')
+    @order = Order.order('created_at desc').find_or_create_by(user: current_user, status: 'unpaid', stadium: @court.stadium, coach: @coach)
     @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
     @event.court = @court
     @event.additional_event_items.new related: @coach, amount: @event.duration_in_hours
