@@ -116,7 +116,7 @@ private
       if recurring?
         s.add_recurrence_rule(IceCube::Rule.from_ical(recurrence_rule))
         if recurrence_exception?
-          s.add_exception_rule(IceCube::Rule.from_ical())
+          s.add_exception_rule(IceCube::Rule.from_ical(recurrence_exception))
         end
       else
         s.add_recurrence_rule(IceCube::SingleOccurrenceRule.new attributes["start"])
