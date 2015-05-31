@@ -12,9 +12,6 @@ class Dashboard::Coach::CoachProfileController < DashboardController
 
   private
   def find_coach
-    @coach = current_user
-  end
-  def coach_params
-    params.require(:coach).permit(:name, :password, :password_confirmation, :email, :price, :avatar, court_ids: [])
+    @profile = current_user.coach_profile
   end
 end

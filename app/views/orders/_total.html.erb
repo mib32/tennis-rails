@@ -9,5 +9,5 @@
     <% if current_user.total_hours %>
       <%= t('hours', count: current_user.total_hours) %> на сумму <%= number_to_currency current_user.total, precision: 0 %></p>
     <% end %>
-  <%= link_to 'Перейти к оплате', dashboard_orders_path(), class: 'button add_to_cart_button product_type_simple', data: { book: true} %>
+  <%= link_to 'Перейти к оплате', vallet_paths(), class: 'button add_to_cart_button product_type_simple', data: { book: true} %>
 <% end %>
