@@ -1,4 +1,5 @@
 class Stadium < ActiveRecord::Base
+
   default_scope { order(created_at: :desc) }
   include FriendlyId
   friendly_id :name, use: [:slugged]
@@ -31,4 +32,5 @@ class Stadium < ActiveRecord::Base
   #   query = 
   #   Arel.sql('')
   # end
+
 end

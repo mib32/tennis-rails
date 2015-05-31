@@ -16,9 +16,10 @@
 
 
 
-- @event.previous_changes.except(:updated_at).each do |change, list|
+- [:start, :end].each do |attr|
+  - list = @event.previous_changes[attr]
   %p
-    = Event.human_attribute_name change
+    = Event.human_attribute_name attr
     - if list.first.present?
       = " с #{l list.first, format: :short}"
     - if list.last.present?
