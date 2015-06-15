@@ -98,7 +98,7 @@ class Event < ActiveRecord::Base
   end
 
   def recurring?
-    recurrence_rule?
+    recurrence_rule.present?
   end
 
   def skip_change_registering!
