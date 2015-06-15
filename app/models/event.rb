@@ -47,11 +47,11 @@ class Event < ActiveRecord::Base
   end
 
   def dry_other_total
-    additional_event_items.map(&:total).inject(&:+).to_i * occurrences
+    additional_event_items.map(&:total).inject(&:+).to_i
   end
 
   def dry_coach_total
-    additional_event_items.coach.map(&:total).inject(&:+).to_i * occurrences
+    additional_event_items.coach.map(&:total).inject(&:+).to_i
   end
 
   def duration_in_hours
