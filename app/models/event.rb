@@ -115,7 +115,7 @@ private
     @schedule = IceCube::Schedule.new do |s|
       if recurring?
         s.add_recurrence_rule(IceCube::Rule.from_ical(recurrence_rule))
-        if recurrence_exception.present?
+        if recurrence_exception.present? && recurrence_exception =~ /=/
           s.add_exception_rule(IceCube::Rule.from_ical(recurrence_exception))
         end
       else
