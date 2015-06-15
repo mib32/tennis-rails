@@ -9,7 +9,7 @@ class Customer < User
   end
 
   def courts
-    Court.find events.pluck('distinct court_id')
+    Court.where id: events.pluck('distinct court_id')
   end
 
   # def model_name
