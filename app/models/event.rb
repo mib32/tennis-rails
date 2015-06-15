@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
   end
 
   def dry_court_total
-    (court.try(:price).to_i * duration_in_hours.to_i).to_i * occurrences
+    (court.try(:price).to_i * duration_in_hours.to_i).to_i
   end
 
   def dry_other_total
@@ -55,7 +55,7 @@ class Event < ActiveRecord::Base
   end
 
   def duration_in_hours
-    (duration / 1.hour).ceil
+    (duration / 1.hour).ceil * occurrences
   end
 
   def duration
