@@ -9,8 +9,9 @@ class Stadium < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   has_many :events, through: :courts
-  has_many :courts
+  has_many :courts, dependent: :destroy
   has_many :coaches, through: :courts
+  has_many :orders, dependent: :destroy
   accepts_nested_attributes_for :courts, :reject_if => :all_blank, :allow_destroy => true
 
   has_many :pictures, as: :imageable

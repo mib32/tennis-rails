@@ -1,5 +1,5 @@
 class StadiumUser < User
-  has_one :stadium, foreign_key: "user_id"
+  has_one :stadium, foreign_key: "user_id", dependent: :destroy
 
   delegate :events, :courts, to: :stadium
 

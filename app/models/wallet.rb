@@ -1,9 +1,9 @@
 class Wallet < ActiveRecord::Base
   belongs_to :user
-  has_many :deposits
-  has_many :deposit_requests
-  has_many :withdrawals
-  has_many :withdrawal_requests
+  has_many :deposits, dependent: :destroy
+  has_many :deposit_requests, dependent: :destroy
+  has_many :withdrawals, dependent: :destroy
+  has_many :withdrawal_requests, dependent: :destroy
 
   def deposit! amount
     deposits.create! amount: amount - tax_for(amount)
