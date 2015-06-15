@@ -15,7 +15,11 @@
 		<tbody>
 			<% order.events.each do |item| %>
 				<tr>
-					<td><%= link_to item.court.stadium.name, item.court.stadium %></td>
+					<td>
+						<% if item.court.present? %>
+							<%= link_to item.court.stadium.name, item.court.stadium %>
+						<% end %>
+					</td>
 					<td><%= l item.start, format: :short %></td>
 					<td><%= l item.end, format: :short %></td>
 					<td><%= t('hours', count: item.duration_in_hours) %></td>
