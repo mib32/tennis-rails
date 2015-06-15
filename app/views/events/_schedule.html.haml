@@ -4,7 +4,7 @@
       .panel-heading
         %h3.panel-title Бронирование
       .panel-body.woocommerce{"data-checkout" => ""}
-        = render "orders/total", object: @record.courts.first
+        = render "orders/total", price: @record.courts.first.price
     = render 'orders/changes_total'
     - if @record.kind_of?(Stadium) && @record.coaches.any?
       .panel.panel-default

@@ -22,7 +22,8 @@
             .panel-heading
               %h3.panel-title Бронирование
             .panel-body.woocommerce{"data-checkout" => ""}
-              = render "orders/total", object: @coach.courts.first
+              %div{ "data-coach-price" => @coach.price }
+              = render "orders/total", price: @coach.courts.first.price + @coach.price
         .col-md-8
           = label_tag "Стадион"
           = select_tag :court, options_for_select(@coach.courts.map {|c| ["#{c.stadium.name} - корт: #{c.name}", c.id ] }), class: 'form-control'

@@ -50,4 +50,5 @@ class Coach < User
   def has_courts?
     courts.size > 0
   end
+
 end

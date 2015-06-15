@@ -1,5 +1,5 @@
 <h4>Стоимость часа: 
-  <span data-court-price class="label label-success"><%= number_to_currency object.price, precision: 0 %></span></h4>
+  <span data-court-price class="label label-success"><%= number_to_currency price, precision: 0 %></span></h4>
 <% if current_user.nil? %>
   <h4>Сперва авторизуйтесь, пожалуйста:</h4>
   <%= link_to 'Вход / Регистрация', new_user_session_path, class: 'button add_to_cart_button product_type_simple' %>
