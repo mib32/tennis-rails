@@ -1,0 +1,58 @@
+---
+deposit_responses_001:
+  id: '1'
+  deposit_request_id: '7'
+  status: 
+  data: '{"DateTime"=>"2015-05-20 09:32:34", "TransactionID"=>"43940093", "OrderId"=>"7",
+    "Amount"=>"5000.00", "Currency"=>"RUB", "SecurityKey"=>"d26ee61a45bee1008c2637de94de594a",
+    "OrderDescription"=>"Пополнение кошелька в системе BookingSports", "lang"=>"ru",
+    "Provider"=>"Card", "PaymentAmount"=>"5000.00", "PaymentCurrency"=>"RUB", "CardHolder"=>"ANTON
+    MURYGIN", "CardNumber"=>"************1111", "Country"=>"RU", "City"=>"Москва",
+    "ECI"=>"6", "controller"=>"dashboard/payments", "action"=>"success"}'
+  created_at: '2015-05-20 09:32:29.160719'
+  updated_at: '2015-05-20 09:32:29.160719'
+deposit_responses_002:
+  id: '2'
+  deposit_request_id: '8'
+  status: 
+  data: '{"DateTime":"2015-05-20 09:49:35","TransactionID":"43941359","OrderId":"8","Amount":"5000.00","Currency":"RUB","SecurityKey":"1b7a247c9cbef8635ce3211536715cf3","OrderDescription":"Пополнение
+    кошелька в системе BookingSports","lang":"ru","Provider":"Card","PaymentAmount":"5000.00","PaymentCurrency":"RUB","CardHolder":"ANTON
+    MUYR","CardNumber":"************1111","Country":"RU","City":"Москва","ECI":"6","controller":"dashboard/payments","action":"success"}'
+  created_at: '2015-05-20 09:49:29.823949'
+  updated_at: '2015-05-20 09:49:29.823949'
+deposit_responses_003:
+  id: '3'
+  deposit_request_id: '8'
+  status: 
+  data: '{"DateTime":"2015-05-20 09:49:35","TransactionID":"43941359","OrderId":"8","Amount":"5000.00","Currency":"RUB","SecurityKey":"1b7a247c9cbef8635ce3211536715cf3","OrderDescription":"Пополнение
+    кошелька в системе BookingSports","lang":"ru","Provider":"Card","PaymentAmount":"5000.00","PaymentCurrency":"RUB","CardHolder":"ANTON
+    MUYR","CardNumber":"************1111","Country":"RU","City":"Москва","ECI":"6","controller":"dashboard/payments","action":"success"}'
+  created_at: '2015-05-20 09:51:59.269085'
+  updated_at: '2015-05-20 09:51:59.269085'
+deposit_responses_004:
+  id: '4'
+  deposit_request_id: '1'
+  status: 
+  data: '{"DateTime":"2015-05-18 15:05:27","TransactionID":"43825721","OrderId":"1","Amount":"5000.00","Currency":"RUB","SecurityKey":"d4d9bcd04b79411b5a6fe9526829bbd8","OrderDescription":"Пополнение
+    кошелька в системе BookingSports","lang":"ru","Provider":"Card","PaymentAmount":"5000.00","PaymentCurrency":"RUB","CardHolder":"ANT
+    BUR","CardNumber":"************1111","Country":"RU","City":"Москва","ECI":"6","controller":"dashboard/payments","action":"success"}'
+  created_at: '2015-05-20 18:13:09.969364'
+  updated_at: '2015-05-20 18:13:09.969364'
+deposit_responses_005:
+  id: '5'
+  deposit_request_id: '2'
+  status: 
+  data: '{"DateTime":"2015-05-18 16:04:30","TransactionID":"43829315","OrderId":"2","Amount":"5000.00","Currency":"RUB","SecurityKey":"7ef249098307d043838300c7d7ccc9f5","OrderDescription":"Пополнение
+    кошелька в системе BookingSports","lang":"ru","Provider":"Card","PaymentAmount":"5000.00","PaymentCurrency":"RUB","CardHolder":"ANTON
+    MUR","CardNumber":"************1111","Country":"RU","City":"Москва","ECI":"6","controller":"dashboard/payments","action":"success"}'
+  created_at: '2015-05-20 18:13:10.398736'
+  updated_at: '2015-05-20 18:13:10.398736'
+deposit_responses_006:
+  id: '6'
+  deposit_request_id: '9'
+  status: 
+  data: '{"DateTime":"2015-05-21 17:53:06","TransactionID":"44039240","OrderId":"9","Amount":"5000.00","Currency":"RUB","SecurityKey":"0a9cbd172f530842418d91f96361ed65","OrderDescription":"Пополнение
+    кошелька в системе BookingSports","lang":"ru","Provider":"Card","PaymentAmount":"5000.00","PaymentCurrency":"RUB","CardHolder":"ANTON
+    MUR","CardNumber":"************1111","Country":"RU","City":"Москва","ECI":"6","controller":"payments","action":"success"}'
+  created_at: '2015-05-21 17:53:00.298318'
+  updated_at: '2015-05-21 17:53:00.298318'

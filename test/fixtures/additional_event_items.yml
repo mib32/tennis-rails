@@ -1,0 +1,177 @@
+---
+additional_event_items_001:
+  id: '1'
+  related_id: '3'
+  related_type: User
+  event_id: '23'
+  amount: '4'
+  created_at: '2015-05-21 17:57:01.64514'
+  updated_at: '2015-05-21 17:57:01.64514'
+additional_event_items_002:
+  id: '2'
+  related_id: '3'
+  related_type: User
+  event_id: '24'
+  amount: '1'
+  created_at: '2015-05-22 13:11:18.070379'
+  updated_at: '2015-05-22 13:11:18.070379'
+additional_event_items_003:
+  id: '3'
+  related_id: '3'
+  related_type: User
+  event_id: '25'
+  amount: '1'
+  created_at: '2015-05-22 13:17:33.007757'
+  updated_at: '2015-05-22 13:17:33.007757'
+additional_event_items_004:
+  id: '4'
+  related_id: '3'
+  related_type: User
+  event_id: '26'
+  amount: '1'
+  created_at: '2015-05-22 13:19:52.581077'
+  updated_at: '2015-05-22 13:19:52.581077'
+additional_event_items_005:
+  id: '7'
+  related_id: '3'
+  related_type: User
+  event_id: '44'
+  amount: '1'
+  created_at: '2015-05-30 16:07:40.011691'
+  updated_at: '2015-05-30 16:07:40.011691'
+additional_event_items_006:
+  id: '8'
+  related_id: '3'
+  related_type: User
+  event_id: '45'
+  amount: '1'
+  created_at: '2015-05-30 16:08:33.70611'
+  updated_at: '2015-05-30 16:08:33.70611'
+additional_event_items_007:
+  id: '9'
+  related_id: '3'
+  related_type: User
+  event_id: '46'
+  amount: '1'
+  created_at: '2015-05-30 16:08:37.602029'
+  updated_at: '2015-05-30 16:08:37.602029'
+additional_event_items_008:
+  id: '10'
+  related_id: '3'
+  related_type: User
+  event_id: '47'
+  amount: '1'
+  created_at: '2015-05-30 16:08:39.544919'
+  updated_at: '2015-05-30 16:08:39.544919'
+additional_event_items_009:
+  id: '11'
+  related_id: '3'
+  related_type: User
+  event_id: '48'
+  amount: '1'
+  created_at: '2015-05-30 16:08:43.547349'
+  updated_at: '2015-05-30 16:08:43.547349'
+additional_event_items_010:
+  id: '12'
+  related_id: '3'
+  related_type: User
+  event_id: '49'
+  amount: '1'
+  created_at: '2015-05-30 16:08:47.167276'
+  updated_at: '2015-05-30 16:08:47.167276'
+additional_event_items_011:
+  id: '13'
+  related_id: '3'
+  related_type: User
+  event_id: '50'
+  amount: '1'
+  created_at: '2015-05-30 16:08:47.373099'
+  updated_at: '2015-05-30 16:08:47.373099'
+additional_event_items_012:
+  id: '14'
+  related_id: '3'
+  related_type: User
+  event_id: '51'
+  amount: '1'
+  created_at: '2015-05-30 16:09:14.016649'
+  updated_at: '2015-05-30 16:09:14.016649'
+additional_event_items_013:
+  id: '15'
+  related_id: '3'
+  related_type: User
+  event_id: '52'
+  amount: '2'
+  created_at: '2015-05-30 16:10:23.383341'
+  updated_at: '2015-05-30 16:10:23.383341'
+additional_event_items_014:
+  id: '19'
+  related_id: '3'
+  related_type: User
+  event_id: '59'
+  amount: '1'
+  created_at: '2015-05-31 09:03:10.721115'
+  updated_at: '2015-05-31 09:03:10.721115'
+additional_event_items_015:
+  id: '21'
+  related_id: '18'
+  related_type: User
+  event_id: '72'
+  amount: '1'
+  created_at: '2015-06-15 12:04:57.493186'
+  updated_at: '2015-06-15 12:04:57.493186'
+additional_event_items_016:
+  id: '22'
+  related_id: '18'
+  related_type: User
+  event_id: '73'
+  amount: '1'
+  created_at: '2015-06-15 12:05:25.163484'
+  updated_at: '2015-06-15 12:05:25.163484'
+additional_event_items_017:
+  id: '25'
+  related_id: '18'
+  related_type: User
+  event_id: '76'
+  amount: '1'
+  created_at: '2015-06-15 13:36:17.175039'
+  updated_at: '2015-06-15 13:36:17.175039'
+additional_event_items_018:
+  id: '26'
+  related_id: '18'
+  related_type: User
+  event_id: '77'
+  amount: '2'
+  created_at: '2015-06-15 13:36:33.366242'
+  updated_at: '2015-06-15 13:36:33.366242'
+additional_event_items_019:
+  id: '27'
+  related_id: '18'
+  related_type: User
+  event_id: '78'
+  amount: '2'
+  created_at: '2015-06-15 13:42:00.427494'
+  updated_at: '2015-06-15 13:42:00.427494'
+additional_event_items_020:
+  id: '29'
+  related_id: '18'
+  related_type: User
+  event_id: '82'
+  amount: '4'
+  created_at: '2015-06-15 18:26:28.350019'
+  updated_at: '2015-06-15 18:26:28.350019'
+additional_event_items_021:
+  id: '30'
+  related_id: '18'
+  related_type: User
+  event_id: '83'
+  amount: '2'
+  created_at: '2015-06-15 18:26:38.011518'
+  updated_at: '2015-06-15 18:26:38.011518'
+additional_event_items_022:
+  id: '33'
+  related_id: '21'
+  related_type: User
+  event_id: '133'
+  amount: '1'
+  created_at: '2015-06-18 12:43:06.755137'
+  updated_at: '2015-06-18 12:43:06.755137'

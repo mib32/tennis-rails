@@ -1,0 +1,353 @@
+---
+users_001:
+  id: '8'
+  email: mibus33@gmail.com
+  encrypted_password: "$2a$10$P0Tgpqm8e7Jrnqc1EDDSg.sRezHIeNDKr3AU55VNWEicyFq30Twza"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '3'
+  current_sign_in_at: '2015-06-15 07:19:10.824558'
+  last_sign_in_at: '2015-05-22 13:17:21.253224'
+  current_sign_in_ip: 109.188.124.3
+  last_sign_in_ip: 109.188.127.4
+  created_at: '2015-05-21 17:52:12.549113'
+  updated_at: '2015-06-15 07:19:10.831452'
+  name: 
+  role: 
+  type: Customer
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_002:
+  id: '12'
+  email: my@mail.ru
+  encrypted_password: "$2a$10$Yj86ShwFADrYnxKs/0LHyetUgpuD6Jepxknfmlwp/9aDqKWIKHDie"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-05-30 16:04:18.960053'
+  last_sign_in_at: '2015-05-30 16:04:18.960053'
+  current_sign_in_ip: 79.104.6.172
+  last_sign_in_ip: 79.104.6.172
+  created_at: '2015-05-30 16:04:18.920729'
+  updated_at: '2015-05-30 16:04:18.961839'
+  name: 
+  role: 
+  type: Customer
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_003:
+  id: '18'
+  email: iakovlev.vadim@gmail.com
+  encrypted_password: "$2a$10$d0no3VVOrlut/XaPfT/PduW3OKU7CtYlufvWE.qNp8As4eJSCr.3y"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '7'
+  current_sign_in_at: '2015-06-22 13:22:27.374149'
+  last_sign_in_at: '2015-06-22 13:01:41.027122'
+  current_sign_in_ip: 77.236.234.250
+  last_sign_in_ip: 77.236.234.250
+  created_at: '2015-06-15 11:58:38.250368'
+  updated_at: '2015-06-22 13:22:47.654369'
+  name: "Вадим Яковлев"
+  role: 
+  type: Coach
+  slug: trener-18
+  price: '2000.00'
+  avatar: vadim.jpg
+  status: 
+  phone: "+79055343400"
+users_004:
+  id: '23'
+  email: iakovlev.trene@gmail.com
+  encrypted_password: "$2a$10$My7Zh5M3WvmyxShmCCqWdeM/UqjDNCT.l6jText4.CNx45F8f.4/S"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-06-18 09:58:51.093138'
+  last_sign_in_at: '2015-06-18 09:58:51.093138'
+  current_sign_in_ip: 37.110.8.16
+  last_sign_in_ip: 37.110.8.16
+  created_at: '2015-06-18 09:58:51.081019'
+  updated_at: '2015-06-18 10:01:10.919087'
+  name: Vadim
+  role: 
+  type: Customer
+  slug: vadim
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_005:
+  id: '25'
+  email: silverbor@mail.ru
+  encrypted_password: "$2a$10$Lx9L7KOr0E73Awgvt0mlh.54UnNKi6H/E0hneXGKm.wO1hKVFnffq"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '2'
+  current_sign_in_at: '2015-06-22 15:46:10.12093'
+  last_sign_in_at: '2015-06-22 15:39:42.031388'
+  current_sign_in_ip: 195.189.120.16
+  last_sign_in_ip: 195.189.120.16
+  created_at: '2015-06-22 15:39:42.004015'
+  updated_at: '2015-06-22 15:57:20.585802'
+  name: 
+  role: 
+  type: StadiumUser
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_006:
+  id: '13'
+  email: testonline2014@mail.ru
+  encrypted_password: "$2a$10$Rg24sD0Gt9s0X3agneXvguU3GzuUbHOW/nfB9Q5ht4Cx4nkrlz3pS"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-06-01 09:53:57.614437'
+  last_sign_in_at: '2015-06-01 09:53:57.614437'
+  current_sign_in_ip: 89.106.175.186
+  last_sign_in_ip: 89.106.175.186
+  created_at: '2015-06-01 09:53:57.555095'
+  updated_at: '2015-06-01 09:53:57.616587'
+  name: 
+  role: 
+  type: Customer
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_007:
+  id: '2'
+  email: tennisradar@tennis.ru
+  encrypted_password: "$2a$10$fegBnqM2QunUq5kX1qpb8eIi9hMfXOdy/sIKZH59D9pL/G3siqC2e"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '47'
+  current_sign_in_at: '2015-06-18 12:28:50.444194'
+  last_sign_in_at: '2015-06-18 12:20:33.538822'
+  current_sign_in_ip: 37.110.8.16
+  last_sign_in_ip: 37.110.8.16
+  created_at: '2015-04-21 20:17:18.939844'
+  updated_at: '2015-06-18 12:46:09.540955'
+  name: 
+  role: 
+  type: StadiumUser
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_008:
+  id: '14'
+  email: dum12@yandex.ru
+  encrypted_password: "$2a$10$YgTTte5Cqytj5LFyTuPSUe62GhMurmSWwqib23sfL/We9QyzZ4nM6"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-06-01 10:56:50.431623'
+  last_sign_in_at: '2015-06-01 10:56:50.431623'
+  current_sign_in_ip: 85.143.106.103
+  last_sign_in_ip: 85.143.106.103
+  created_at: '2015-06-01 10:56:50.41894'
+  updated_at: '2015-06-01 10:56:50.433869'
+  name: 
+  role: 
+  type: Customer
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_009:
+  id: '1'
+  email: admin@tennis.ru
+  encrypted_password: "$2a$10$EUIVKj0lpf4T13fi2bG4NeIbj.jNDgcrisExDteUOiboW0W52eG8S"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: '2015-06-22 15:58:50.487978'
+  sign_in_count: '27'
+  current_sign_in_at: '2015-06-23 21:07:00.253262'
+  last_sign_in_at: '2015-06-22 15:58:50.49875'
+  current_sign_in_ip: 158.181.245.172
+  last_sign_in_ip: 195.189.120.16
+  created_at: '2015-04-21 20:17:18.746536'
+  updated_at: '2015-06-23 21:07:00.260155'
+  name: 
+  role: 
+  type: Admin
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_010:
+  id: '3'
+  email: testcoach@tennis.ru
+  encrypted_password: "$2a$10$PJqLHSqm47MZhGnEpUB3COHtK2sK9eC.xuFn5YBvUxey03zOMqhjG"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '15'
+  current_sign_in_at: '2015-06-17 10:16:28.042929'
+  last_sign_in_at: '2015-06-11 10:53:04.567367'
+  current_sign_in_ip: 77.236.234.250
+  last_sign_in_ip: 85.21.143.191
+  created_at: '2015-04-21 20:17:19.096418'
+  updated_at: '2015-06-17 10:19:37.29516'
+  name: "Супер тренер"
+  role: 
+  type: Coach
+  slug: trener-3
+  price: '800.00'
+  avatar: ______________2015-05-19___11.16.16.png
+  status: 
+  phone: 
+users_011:
+  id: '5'
+  email: mibus32@gmail.com
+  encrypted_password: "$2a$10$85bzW491pvtntU2oo1Ugi.Ob.emhuG0J7JdIwk/LsPUJKs1myPkCC"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '7'
+  current_sign_in_at: '2015-06-10 15:24:48.733555'
+  last_sign_in_at: '2015-05-31 08:49:53.847967'
+  current_sign_in_ip: 109.188.124.19
+  last_sign_in_ip: 109.188.126.45
+  created_at: '2015-04-22 08:44:04.251623'
+  updated_at: '2015-06-10 15:24:48.736924'
+  name: 
+  role: 
+  type: StadiumUser
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_012:
+  id: '21'
+  email: iakovlev.trener@gmail.com
+  encrypted_password: "$2a$10$11UMKDz.tIKTegUWIHNu/u9NSE1yGyjLJlFHVjeODnQwrV7v2hjPq"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '3'
+  current_sign_in_at: '2015-06-18 12:52:42.91152'
+  last_sign_in_at: '2015-06-18 12:51:50.901946'
+  current_sign_in_ip: 37.110.8.16
+  last_sign_in_ip: 37.110.8.16
+  created_at: '2015-06-16 14:03:54.410245'
+  updated_at: '2015-06-18 12:53:49.523277'
+  name: "Яковлев Вадим"
+  role: 
+  type: Coach
+  slug: yakovlev-vadim
+  price: '2000.00'
+  avatar: 
+  status: 
+  phone: "+7(905)534-34-00"
+users_013:
+  id: '22'
+  email: mail@mail.ru
+  encrypted_password: "$2a$10$WfoT05iF1tPa6klTSYWc7e9r1PX2BeyoOAvYnqEhH.WspmZtfRi.O"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-06-17 10:22:35.201517'
+  last_sign_in_at: '2015-06-17 10:22:35.201517'
+  current_sign_in_ip: 77.236.234.250
+  last_sign_in_ip: 77.236.234.250
+  created_at: '2015-06-17 10:22:35.1808'
+  updated_at: '2015-06-17 10:22:35.203492'
+  name: 
+  role: 
+  type: Customer
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_014:
+  id: '20'
+  email: trener.yakovlev@opentennis.ru
+  encrypted_password: "$2a$10$31AkM2LIARRr9VwH6f.7O.zHXxqla7t.VzfD1eYhAduVPoJOZ2FCe"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '4'
+  current_sign_in_at: '2015-06-17 11:11:36.777104'
+  last_sign_in_at: '2015-06-17 11:08:34.128002'
+  current_sign_in_ip: 77.236.234.250
+  last_sign_in_ip: 77.236.234.250
+  created_at: '2015-06-16 13:55:59.102066'
+  updated_at: '2015-06-17 11:11:36.780303'
+  name: ''
+  role: 
+  type: StadiumUser
+  slug: 13aae819-c1fd-4287-9a8d-a5b6ae56871f
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: ''
+users_015:
+  id: '24'
+  email: silverbor2015@mail.ru
+  encrypted_password: "$2a$10$XrvScRd7./FHwAm/S70ua.uLPH2BofsiBwXNJvKIV.a2ARmIXzkfG"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '1'
+  current_sign_in_at: '2015-06-22 13:17:06.48188'
+  last_sign_in_at: '2015-06-22 13:17:06.48188'
+  current_sign_in_ip: 77.236.234.250
+  last_sign_in_ip: 77.236.234.250
+  created_at: '2015-06-22 13:17:06.464739'
+  updated_at: '2015-06-22 13:17:06.485363'
+  name: 
+  role: 
+  type: StadiumUser
+  slug: 
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: 
+users_016:
+  id: '4'
+  email: testcustomer@tennis.ru
+  encrypted_password: "$2a$10$Q/VluNaZwbLEAjZTKP/dj.pdyHH3wYFD6VrqWSX7cBLwLQiDtl/kG"
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '35'
+  current_sign_in_at: '2015-06-17 16:24:49.717088'
+  last_sign_in_at: '2015-06-17 13:27:29.378658'
+  current_sign_in_ip: 158.181.253.178
+  last_sign_in_ip: 85.21.143.191
+  created_at: '2015-04-21 20:17:19.265399'
+  updated_at: '2015-06-17 16:24:49.721332'
+  name: TestCustomer@tennis.ru
+  role: 
+  type: Customer
+  slug: testcustomer-tennis-ru
+  price: '0.00'
+  avatar: 
+  status: 
+  phone: ''

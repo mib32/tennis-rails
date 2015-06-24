@@ -1,0 +1,78 @@
+---
+withdrawals_001:
+  id: '1'
+  wallet_id: '2'
+  status: 
+  amount: '815.00'
+  created_at: '2015-05-12 11:25:17.264864'
+  updated_at: '2015-05-12 11:25:17.264864'
+withdrawals_002:
+  id: '2'
+  wallet_id: '8'
+  status: 
+  amount: '7200.00'
+  created_at: '2015-05-21 18:12:09.940353'
+  updated_at: '2015-05-21 18:12:09.940353'
+withdrawals_003:
+  id: '3'
+  wallet_id: '4'
+  status: 
+  amount: '4000.00'
+  created_at: '2015-05-25 09:15:54.761889'
+  updated_at: '2015-05-25 09:15:54.761889'
+withdrawals_004:
+  id: '4'
+  wallet_id: '4'
+  status: 
+  amount: '2000.00'
+  created_at: '2015-05-25 09:15:54.801632'
+  updated_at: '2015-05-25 09:15:54.801632'
+withdrawals_005:
+  id: '5'
+  wallet_id: '4'
+  status: 
+  amount: '3300.00'
+  created_at: '2015-05-31 07:00:08.785547'
+  updated_at: '2015-05-31 07:00:08.785547'
+withdrawals_006:
+  id: '6'
+  wallet_id: '4'
+  status: 
+  amount: '3300.00'
+  created_at: '2015-05-31 07:00:08.920751'
+  updated_at: '2015-05-31 07:00:08.920751'
+withdrawals_007:
+  id: '7'
+  wallet_id: '4'
+  status: 
+  amount: '825.00'
+  created_at: '2015-05-31 09:05:32.896674'
+  updated_at: '2015-05-31 09:05:32.896674'
+withdrawals_008:
+  id: '8'
+  wallet_id: '4'
+  status: 
+  amount: '6000.00'
+  created_at: '2015-06-15 19:30:54.170691'
+  updated_at: '2015-06-15 19:30:54.170691'
+withdrawals_009:
+  id: '9'
+  wallet_id: '4'
+  status: 
+  amount: '12000.00'
+  created_at: '2015-06-15 19:30:54.304855'
+  updated_at: '2015-06-15 19:30:54.304855'
+withdrawals_010:
+  id: '10'
+  wallet_id: '4'
+  status: 
+  amount: '2000.00'
+  created_at: '2015-06-17 10:56:35.415072'
+  updated_at: '2015-06-17 10:56:35.415072'
+withdrawals_011:
+  id: '11'
+  wallet_id: '4'
+  status: 
+  amount: '3000.00'
+  created_at: '2015-06-17 10:58:04.867688'
+  updated_at: '2015-06-17 10:58:04.867688'
