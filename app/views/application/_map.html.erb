@@ -1,52 +1,47 @@
-<div id="map-container">
-  <div id="map"></div>
-</div>
+<div id="map-container"><div id="map"></div></div>
 <script type="text/javascript">
-    var markers = new Tennis.Collections.MarkerCollection(
-            <%==@stadiums.map do |s|
-                  {
-                    icon: asset_path(stadium_get_category_icon(s)),
-                    position: {
-                      lat: s.latitude.to_f,
-                      lng: s.longitude.to_f
-                    },
-                    name: s.name,
-                    infowindow: stadium_infowindow(s)
-                  }
-                end.to_json %>
-    );
-    var map = new Tennis.Views.MapView({collection: markers});
-    window.stadium_names = markers.models.map(function (el) {
-        return el.attributes.name
-    });
-    map.render();
+  var markers = new Tennis.Collections.MarkerCollection(
+    <%==@stadiums.map do |s|
+          {
+            position: {
+              lat: s.latitude.to_f,
+              lng: s.longitude.to_f
+            },
+            name: s.name,  
+            infowindow: stadium_infowindow(s)
+          }
+        end.to_json %>
+      );
+  var map = new Tennis.Views.MapView({collection: markers});
+  window.stadium_names = markers.models.map(function(el){return el.attributes.name})
+  map.render(); 
 </script>
 
-<!-- Begin searcher -->
+   <!-- Begin searcher -->
 <div class="searchonmap">
-  <%= form_tag stadiums_path(format: 'json'), remote: true, method: :get, id: 'searcher' do %>
+    <%= form_tag  stadiums_path(format: 'json'), remote: true, method: :get, id: 'searcher' do %> 
       <%= text_field_tag :name, nil, placeholder: 'Ключевое слово...' %>
       <%= text_field_tag :place, nil, placeholder: 'Расположение' %>
       <div class="location-detector"><input type="button" class="location-detector-btn" value=" "></div>
       <%= select_tag :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), class: 'chosen-select', prompt: 'Выбор категории...' %>
-      <%= submit_tag 'Подобрать', class: 'submit-btn', data: {search_on_map: true} %>
-  <% end %>
-</div>
-<!-- End searcher -->
+      <%= submit_tag  'Подобрать', class: 'submit-btn', data: {search_on_map: true} %>
+    <% end %>
+   	   </div>
+	<!-- End searcher -->
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var config = {
-        '.chosen-select': {},
-        '.chosen-select-deselect': {allow_single_deselect: true},
-        '.chosen-select-no-single': {disable_search_threshold: 10},
-        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
-        '.chosen-select-width': {width: "95%"}
-    };
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
     for (var selector in config) {
-        $(selector).chosen(config[selector]);
+      $(selector).chosen(config[selector]);
     }
 
     $('#name').autocomplete({
-        source: window.stadium_names
+      source: window.stadium_names
     });
-</script>
+  </script>

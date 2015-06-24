@@ -2,20 +2,11 @@ module ApplicationHelper
   def number_to_integer_currency number
     number_to_currency number, precision: 0
   end
-
-  def stadium_infowindow(stadium)
-    result = "#{stadium.name}<br>#{stadium.phone}"
+  def stadium_infowindow stadium
     if stadium.active?
-      result += " #{link_to 'Перейти на страницу', stadium}"
-    end
-    return result
-  end
-
-  def stadium_get_category_icon(stadium)
-    if stadium.active?
-      stadium.category.slug.to_s + '-icon.png'
+      "#{stadium.name}<br>#{stadium.phone}<br>#{link_to 'Перейти на страницу', stadium}"
     elsif stadium.locked?
-      'gray-icon.png'
+      "#{stadium.name}<br>#{stadium.phone}"
     end
   end
 end

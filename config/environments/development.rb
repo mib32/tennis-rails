@@ -38,11 +38,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.yandex.ru",
     port: 587,
-    domain: 'tennis-rails.dev',
+    domain: Rails.application.secrets.domain_name,
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: '<%= ENV["YANDEX_NAME"] %>',
-    password: '<%= ENV["YANDEX_PASSWORD"] %>'
+    user_name: Rails.application.secrets.email_provider_username,
+    password: Rails.application.secrets.email_provider_apikey
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
