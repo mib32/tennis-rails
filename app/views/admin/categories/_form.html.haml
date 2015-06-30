@@ -3,6 +3,11 @@
   .form-inputs
     = f.input :name, label: 'Название'
     = f.input :parent_id, collection: Category.all, as: :select, label: 'Под категорией'
+    = f.label 'Иконка на карте'
+    = image_tag(@category.icon_url(:thumb)) if @category.icon?
+    = f.file_field :icon
+    = f.hidden_field(:icon_cache)
+
 
   .form-actions
     = f.button :submit, 'Сохранить'
