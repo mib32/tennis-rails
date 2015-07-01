@@ -77,8 +77,8 @@ class Tennis.Views.MapView extends Backbone.View
         this
 
     renderMarkers: (collection) ->
-        console.log 'Re-rendering marker data'
         @handler.removeMarkers(@markers)
+        console.log collection.models
         @markers = @handler.addMarkers collection.models
         @handler.bounds.extendWith(@markers)
         @handler.fitMapToBounds()

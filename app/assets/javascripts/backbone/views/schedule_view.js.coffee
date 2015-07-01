@@ -6,10 +6,23 @@ class Tennis.Views.ScheduleView extends Backbone.View
 
   bindExternalEvents: ->
     $ =>
+      scheduler = @scheduler()
       $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
-        @scheduler().refresh()
-      $('#court').on 'change', => 
-        @scheduler().dataSource.read()
+        scheduler.refresh()
+      $('#court').on 'change', =>
+        scheduler.dataSource.read()
+      scheduler.wrapper.on 'mouseup touchend', '.k-scheduler-table td, .k-event', (e) ->
+        target = $(e.currentTarget)
+        if target.hasClass('k-event')
+          event = scheduler.occurrenceByUid(target.data('uid'))
+          scheduler.editEvent event
+        else
+          slot = scheduler.slotByElement(target[0])
+          scheduler.addEvent
+            start: slot.startDate
+            end: slot.endDate
+        return
+
 
   render: ->
     @$el.kendoScheduler({
@@ -57,7 +70,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
           alert('Это время занято')
           e.preventDefault()
         else
-          e.sender.dataSource.one 'requestEnd', -> $.get('/orders/total.js') 
+          e.sender.dataSource.one 'requestEnd', -> $.get('/orders/total.js')
         return
 
       timezone: "Etc/UTC",
@@ -106,11 +119,12 @@ class Tennis.Views.ScheduleView extends Backbone.View
   scheduler: ->
     @$el.data('kendoScheduler')
 
+
   court_id: ->
     $('#court').find(":selected").val()
 
   fields:
-    title: { from: "description", type: 'string'}, 
+    title: { from: "description", type: 'string'},
     start: { type: "date", from: "start" },
     end: { type: "date", from: "end" },
     recurrenceId: { from: "recurrence_id" },
@@ -139,7 +153,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
     idx = occurences.indexOf(event)
     if idx > -1
       occurences.splice(idx, 1)
-    if occurences.length > 0 
+    if occurences.length > 0
       true
     else
       false
