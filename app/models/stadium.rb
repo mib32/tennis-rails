@@ -21,6 +21,7 @@ class Stadium < ActiveRecord::Base
 
   def as_json params={}
     {
+      icon: ActionController::Base.helpers.asset_path(category.icon),
       position: {
         lat: latitude.to_f,
         lng: longitude.to_f

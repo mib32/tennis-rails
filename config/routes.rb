@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard/events', to: 'dashboard/events#index', as: 'dashboard'
-  
-  
+
+
 
   namespace :admin do
     resources :stadiums
@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   end
   resources :courts
 
-  resources :coaches do 
+  resources :coaches do
     resources :events, only: :index, controller: 'coach_events'
     resources :courts do
       resources :events, controller: 'coach_events'

@@ -1,8 +1,9 @@
-$('.stadiums').html("<%= j render @stadiums %>")
+$('.stadiums').html("<%= j render @stadiums %>");
 
 window.markers = new Tennis.Collections.MarkerCollection(
 <%== @stadiums.map do |s|
       {
+        icon: asset_path(stadium_get_category_icon(s)),
         position: {
           lat: s.latitude.to_f,
           lng: s.longitude.to_f
@@ -12,4 +13,4 @@ window.markers = new Tennis.Collections.MarkerCollection(
       }
     end.to_json %>
   );
-window.map.renderMarkers(markers)
+window.map.renderMarkers(markers);

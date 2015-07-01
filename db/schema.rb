@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531071345) do
+ActiveRecord::Schema.define(version: 20150629190403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150531071345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "slug"
+    t.string   "icon"
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
@@ -115,6 +116,7 @@ ActiveRecord::Schema.define(version: 20150531071345) do
     t.datetime "start"
     t.datetime "end"
     t.string   "description"
+    t.integer  "court_id"
     t.integer  "order_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -122,9 +124,9 @@ ActiveRecord::Schema.define(version: 20150531071345) do
     t.string   "recurrence_exception"
     t.integer  "recurrence_id"
     t.boolean  "is_all_day"
-    t.integer  "court_id"
   end
 
+  add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
 
   create_table "options", force: :cascade do |t|
@@ -287,6 +289,7 @@ ActiveRecord::Schema.define(version: 20150531071345) do
   add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
   add_foreign_key "event_changes", "orders"
+  add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "stadiums"
   add_foreign_key "orders", "users"

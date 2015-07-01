@@ -1,0 +1,49 @@
+---
+courts_001:
+  id: '1'
+  name: "Первый"
+  stadium_id: '1'
+  price: '815.00'
+  created_at: '2015-04-21 20:17:19.445256'
+  updated_at: '2015-04-25 13:23:00.378212'
+  change_price: '75.00'
+courts_002:
+  id: '2'
+  name: "Второй"
+  stadium_id: '1'
+  price: '25.00'
+  created_at: '2015-04-21 20:17:19.452895'
+  updated_at: '2015-04-25 13:23:00.380703'
+  change_price: '100.00'
+courts_003:
+  id: '3'
+  name: "Основной"
+  stadium_id: '2'
+  price: '1000.00'
+  created_at: '2015-04-22 08:45:56.596532'
+  updated_at: '2015-04-25 13:24:10.794481'
+  change_price: '150.00'
+courts_004:
+  id: '4'
+  name: "третий корт"
+  stadium_id: '1'
+  price: '2000.00'
+  created_at: '2015-05-30 16:25:30.533551'
+  updated_at: '2015-05-30 16:25:30.533551'
+  change_price: '75.00'
+courts_005:
+  id: '6'
+  name: ''
+  stadium_id: '7'
+  price: 
+  created_at: '2015-06-16 14:30:02.417337'
+  updated_at: '2015-06-16 14:30:02.417337'
+  change_price: '0.00'
+courts_006:
+  id: '5'
+  name: "корт 1"
+  stadium_id: '7'
+  price: '500.00'
+  created_at: '2015-06-16 13:59:43.09042'
+  updated_at: '2015-06-17 10:40:48.318822'
+  change_price: '10.00'

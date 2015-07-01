@@ -1,0 +1,57 @@
+---
+tennis:
+  id: '3'
+  name: "Теннис"
+  ancestry: '1'
+  created_at: '2015-05-03 18:40:05.682165'
+  updated_at: '2015-05-03 18:40:05.682165'
+  slug: tennis
+group_training:
+  id: '4'
+  name: "Групповые занятия"
+  ancestry: 
+  created_at: '2015-05-03 18:40:05.688245'
+  updated_at: '2015-05-03 18:40:05.688245'
+  slug: gruppovye-zanyatiya
+yoga:
+  id: '5'
+  name: "Йога"
+  ancestry: 
+  created_at: '2015-05-03 18:40:05.692484'
+  updated_at: '2015-05-03 18:40:05.692484'
+  slug: yoga
+fitness:
+  id: '6'
+  name: "Фитнесс"
+  ancestry: 
+  created_at: '2015-05-03 18:40:05.696528'
+  updated_at: '2015-05-03 18:40:05.696528'
+  slug: fitness
+stadium:
+  id: '1'
+  name: "Стадион"
+  ancestry: 
+  created_at: '2015-04-21 20:17:19.33967'
+  updated_at: '2015-05-03 18:42:31.880587'
+  slug: stadion
+football:
+  id: '2'
+  name: "Футбол"
+  ancestry: '1'
+  created_at: '2015-04-21 20:17:19.363482'
+  updated_at: '2015-05-03 18:42:31.891341'
+  slug: futbol
+squosh:
+  id: '7'
+  name: "Сквош"
+  ancestry: '1'
+  created_at: '2015-06-16 11:04:55.616825'
+  updated_at: '2015-06-16 11:04:55.616825'
+  slug: skvosh
+basketball:
+  id: '8'
+  name: "Баскетбол"
+  ancestry: '1'
+  created_at: '2015-06-16 11:04:55.616825'
+  updated_at: '2015-06-16 11:04:55.616825'
+  slug: basketball

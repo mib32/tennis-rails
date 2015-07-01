@@ -1,0 +1,31 @@
+---
+coaches_courts_001:
+  id: '1'
+  coach_id: '3'
+  court_id: '3'
+  price: '0.00'
+coaches_courts_002:
+  id: '3'
+  coach_id: '3'
+  court_id: '2'
+  price: '0.00'
+coaches_courts_003:
+  id: '4'
+  coach_id: '16'
+  court_id: '1'
+  price: '0.00'
+coaches_courts_004:
+  id: '5'
+  coach_id: '16'
+  court_id: '4'
+  price: '0.00'
+coaches_courts_005:
+  id: '8'
+  coach_id: '21'
+  court_id: '5'
+  price: '0.00'
+coaches_courts_006:
+  id: '10'
+  coach_id: '18'
+  court_id: '6'
+  price: '0.00'
