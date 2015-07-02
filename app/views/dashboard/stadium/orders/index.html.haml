@@ -3,8 +3,8 @@
   .panel.panel-default
     .panel-heading
       = order.guid
-      .pull-right= number_to_currency order.total
-      .pull-right= 'Cтатус:' + t(order.status, scope: 'simple_form.options.order.status') + ' '
+      .pull-right='Сумма ' + (number_to_currency order.total).to_s
+      .pull-right= 'Cтатус:' + t(order.status, scope: 'simple_form.options.order.status') + '; '
     .panel-body
       %table.table
         %thead
@@ -21,11 +21,11 @@
               %td= event.court.name
               %td= event.start
               %td= event.end
-              %td= event.duration
+              %td= (event.duration/3600).to_i
               %td= t('repeats', count: event.occurrences) + ' ' + (event.schedule.to_s if event.recurring?).to_s
-              %td= event.total
+              %td= event.total.to_s + ' руб.'
     = simple_form_for [:dashboard, order], wrapper: :inline_form, html: { class: 'form-inline' } do |f|
-      = f.input :status, collection: [:unpaid, :paid, :change, :rain, :other]
-      = f.input :comment
+      = f.input :status, collection: [:unpaid, :paid, :change, :rain, :other], :label => 'Статус'
+      = f.input :comment, :label => 'Комментарий'
       = f.button :submit, 'Изменить статус'
       .help-block При изменении статуса заказчик будет уведомлен
