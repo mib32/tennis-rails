@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629190403) do
+ActiveRecord::Schema.define(version: 20150714134413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,12 +42,12 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   create_table "coach_profiles", force: :cascade do |t|
     t.string   "description"
     t.string   "photo"
-    t.integer  "user_id"
+    t.integer  "coach_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "coach_profiles", ["user_id"], name: "index_coach_profiles_on_user_id", using: :btree
+  add_index "coach_profiles", ["coach_id"], name: "index_coach_profiles_on_coach_id", using: :btree
 
   create_table "coaches_courts", force: :cascade do |t|
     t.integer "coach_id"
@@ -161,6 +161,28 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "products", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "description"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "address"
+    t.float    "latitude",    default: 55.75
+    t.float    "longitude",   default: 37.61
+    t.string   "slug"
+    t.integer  "status",      default: 0
+    t.string   "type"
+    t.integer  "parent_id"
+    t.string   "email"
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["parent_id"], name: "index_products_on_parent_id", using: :btree
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "reviewable_id"
     t.string   "reviewable_type"
@@ -199,24 +221,6 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "stadia", ["category_id"], name: "index_stadia_on_category_id", using: :btree
   add_index "stadia", ["user_id"], name: "index_stadia_on_user_id", using: :btree
-
-  create_table "stadiums", force: :cascade do |t|
-    t.integer  "category_id"
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "phone"
-    t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "address"
-    t.float    "latitude",    default: 55.75
-    t.float    "longitude",   default: 37.61
-    t.string   "slug"
-    t.integer  "status",      default: 0
-  end
-
-  add_index "stadiums", ["category_id"], name: "index_stadiums_on_category_id", using: :btree
-  add_index "stadiums", ["user_id"], name: "index_stadiums_on_user_id", using: :btree
 
   create_table "static_pages", force: :cascade do |t|
     t.text     "text"
@@ -282,8 +286,8 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "additional_event_items", "events"
-  add_foreign_key "coach_profiles", "users"
-  add_foreign_key "courts", "stadiums"
+  add_foreign_key "coach_profiles", "products", column: "coach_id"
+  add_foreign_key "courts", "products", column: "stadium_id"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
@@ -291,14 +295,14 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   add_foreign_key "event_changes", "orders"
   add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
-  add_foreign_key "orders", "stadiums"
+  add_foreign_key "orders", "products", column: "stadium_id"
   add_foreign_key "orders", "users"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
-  add_foreign_key "stadiums", "categories"
-  add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
   add_foreign_key "withdrawal_requests", "wallets"
   add_foreign_key "withdrawals", "wallets"
