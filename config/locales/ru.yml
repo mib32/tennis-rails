@@ -56,7 +56,7 @@ ru:
         end: Конец
         price: Цена
         is_sale: Скидка
-      coach_profile:
+      profile:
         description: Описание
       event:
         start: Начало

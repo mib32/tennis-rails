@@ -12,6 +12,6 @@ class Dashboard::Coach::CoachProfileController < DashboardController
 
   private
   def find_coach
-    @profile = current_user.coach_profile
+    @profile = current_user.profile
   end
 end
