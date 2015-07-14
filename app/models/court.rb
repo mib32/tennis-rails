@@ -6,8 +6,8 @@ class Court < Product
   has_many :coaches, through: :coaches_courts
 
   def change_price
-    attributes["change_pric"] || 0
-  ende
+    attributes["change_price"] || 0
+  end
 
   def price
     special_prices.current.price || attributes["price"]

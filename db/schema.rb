@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714134413) do
+ActiveRecord::Schema.define(version: 20150714141350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,17 +57,6 @@ ActiveRecord::Schema.define(version: 20150714134413) do
 
   add_index "coaches_courts", ["coach_id"], name: "index_coaches_courts_on_coach_id", using: :btree
   add_index "coaches_courts", ["court_id"], name: "index_coaches_courts_on_court_id", using: :btree
-
-  create_table "courts", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "stadium_id"
-    t.decimal  "price",        precision: 8, scale: 2
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.decimal  "change_price", precision: 8, scale: 2
-  end
-
-  add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
 
   create_table "deposit_requests", force: :cascade do |t|
     t.integer  "wallet_id"
@@ -287,20 +276,17 @@ ActiveRecord::Schema.define(version: 20150714134413) do
 
   add_foreign_key "additional_event_items", "events"
   add_foreign_key "coach_profiles", "products", column: "coach_id"
-  add_foreign_key "courts", "products", column: "stadium_id"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
   add_foreign_key "event_changes", "orders"
-  add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
   add_foreign_key "orders", "products", column: "stadium_id"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
   add_foreign_key "reviews", "users"
-  add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
   add_foreign_key "wallets", "users"
