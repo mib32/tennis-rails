@@ -20,3 +20,11 @@ static_pages_003:
   created_at: '2015-05-29 21:17:08.652618'
   updated_at: '2015-05-30 14:13:28.232631'
   slug: o-nas
+
+static_pages_004:
+  id: '4'
+  text: "Текст соглашения"
+  title: "Пользовательское соглашением"
+  created_at: '2015-05-29 21:17:08.652618'
+  updated_at: '2015-05-30 14:13:28.232631'
+  slug: reglament

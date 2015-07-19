@@ -1,5 +1,5 @@
 class Admin::StadiumsController < AdminController
-  before_action :set_stadium, only: [:show, :edit, :update, :destroy]
+  before_action :set_stadium, only: [:show, :edit, :update, :destroy, :courts]
 
   # GET /admin/stadiums
   # GET /admin/stadiums.json
@@ -61,6 +61,10 @@ class Admin::StadiumsController < AdminController
     end
   end
 
+  def courts
+    @stadium = Stadium.find(params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stadium
@@ -69,6 +73,6 @@ class Admin::StadiumsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stadium_params
-      params.require(:stadium).permit(:name, :address, :phone, :description, :category_id, :user_id, :status)
+      params.require(:stadium).permit(:name, :address, :phone, :description, :category_id, :user_id, :status, :category_ids => [])
     end
 end

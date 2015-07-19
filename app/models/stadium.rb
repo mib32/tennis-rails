@@ -6,7 +6,7 @@ class Stadium < ActiveRecord::Base
 
   enum status: [:pending, :active, :locked]
   
-  belongs_to :category
+  has_and_belongs_to_many :category
   belongs_to :user
   has_many :events, through: :courts
   has_many :courts, dependent: :destroy
@@ -21,7 +21,7 @@ class Stadium < ActiveRecord::Base
 
   def as_json params={}
     {
-      icon: ActionController::Base.helpers.asset_path(category.icon),
+      # icon: ActionController::Base.helpers.asset_path(category.icon),
       position: {
         lat: latitude.to_f,
         lng: longitude.to_f

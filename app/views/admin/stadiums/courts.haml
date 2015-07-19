@@ -1,0 +1,10 @@
+= link_to 'Назад', admin_stadiums_path, class: 'btn btn-default'
+%h1 Список кортов &laquo;#{@stadium.name}&raquo;
+
+%table.table.table-stripped
+  %tr
+    %th Название
+
+  - @stadium.courts.each do |court|
+    %tr{ class: '' }
+      %td= court.name || "-"

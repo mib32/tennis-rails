@@ -18,6 +18,12 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
-     <%= f.submit 'Зарегистрироваться', :class => 'button right' %>
+    <div class="checkbox" style="width:350px">
+      <label>
+        <%= f.check_box :terms_agree %> Согласен с пользовательским соглашением
+      </label>
+    </div>
+    
+     <%= f.submit 'Зарегистрироваться', :class => 'button right terms-required disabled' %>
   <% end %>
 </div>

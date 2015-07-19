@@ -12,10 +12,10 @@ module ApplicationHelper
   end
 
   def stadium_get_category_icon(stadium)
-    if stadium.active?
-      stadium.category.icon
-    elsif stadium.locked?
+    # if stadium.active?
+    #   stadium.category.icon
+    # elsif stadium.locked?
+    # end
       'gray-icon.png'
-    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629190403) do
+ActiveRecord::Schema.define(version: 20150718085437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
+
+  create_table "categories_stadiums", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "stadium_id",  null: false
+  end
+
+  add_index "categories_stadiums", ["category_id", "stadium_id"], name: "index_categories_stadiums_on_category_id_and_stadium_id", using: :btree
+  add_index "categories_stadiums", ["stadium_id", "category_id"], name: "index_categories_stadiums_on_stadium_id_and_category_id", using: :btree
 
   create_table "coach_profiles", force: :cascade do |t|
     t.string   "description"
@@ -297,7 +305,6 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
-  add_foreign_key "stadiums", "categories"
   add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
   add_foreign_key "withdrawal_requests", "wallets"

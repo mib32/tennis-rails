@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resource :options,  only: [:edit, :update]
     resources :static_pages
     resources :categories
+    get 'stadiums/:id/courts', to: 'stadiums#courts', as: 'stadium_courts'
     root to: 'stadiums#index'
   end
 
