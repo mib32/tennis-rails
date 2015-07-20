@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  concern :bookable do 
+    resources :events
+  end
+  scope :dashboard do 
+    resources :products
+  end
   resources :events do 
     collection do 
       get 'private'
+      get 'grid', as: 'dashboard'
     end
   end
 
@@ -44,8 +51,7 @@ Rails.application.routes.draw do
           resources :pictures, defaults: { imageable_type: 'Stadium'}
           resources :coaches
         end
-        resources :courts do
-          resources :events
+        resources :courts, concerns: :bookable do
           resources :special_prices
         end
         resources :orders
@@ -75,26 +81,7 @@ Rails.application.routes.draw do
     end
   end
 
-  constraints RoleRouteConstraint.new('customer') do
-    namespace :dashboard do
-      scope module: :customer do
-        resources :events do 
-          collection do
-            get 'grid'
-          end
-        end
-        resources :orders do
-          member do
-            patch 'pay'
-          end
-        end
-        resources :deposit_requests
-        resources :courts do
-          resources :events, only: :index
-        end
-      end
-    end
-  end
+  resources :deposit_requests
 
   constraints RoleRouteConstraint.new('admin') do
     namespace :dashboard do
@@ -109,24 +96,17 @@ Rails.application.routes.draw do
   end
   resources :courts
 
-  resources :coaches do
-    resources :events, only: :index, controller: 'coach_events'
-    resources :coaches_courts, module: 'coach', path: 'courts', controller: 'courts' do
-      resources :events
-    end
+  resources :coaches, defaults: { layout: 'coach', scope: 'coach' } do 
+    resources :courts, concerns: :bookable
   end
 
-
-  resources :stadiums, defaults: { model_name: 'Stadium' } do
-    resources :events, only: :index
+  resources :stadiums, defaults: { layout: 'stadium', scope: 'stadium' } do
     resources :pictures, only: :index
     resources :reviews
-    resources :courts do
-      resources :events, controller: 'stadium_events'
-    end
+    resources :courts, concerns: :bookable
   end
 
-  get 'dashboard/events', to: 'dashboard/events#index', as: 'dashboard'
+  # get 'events/grid', to: 'events#grid', as: 'dashboard'
 
   resources :stadium_users
   resources :sales

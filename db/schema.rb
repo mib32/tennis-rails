@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718153439) do
+ActiveRecord::Schema.define(version: 20150720103558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,10 +113,12 @@ ActiveRecord::Schema.define(version: 20150718153439) do
     t.string   "recurrence_exception"
     t.integer  "recurrence_id"
     t.boolean  "is_all_day"
+    t.integer  "user_id"
   end
 
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
   add_index "events", ["product_id"], name: "index_events_on_product_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "events_product_services", force: :cascade do |t|
     t.integer "event_id"
@@ -319,6 +321,7 @@ ActiveRecord::Schema.define(version: 20150718153439) do
   add_foreign_key "event_changes", "events"
   add_foreign_key "event_changes", "orders"
   add_foreign_key "events", "orders"
+  add_foreign_key "events", "users"
   add_foreign_key "events_product_services", "events"
   add_foreign_key "events_product_services", "product_services"
   add_foreign_key "orders", "products", column: "stadium_id"

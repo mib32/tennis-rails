@@ -183,4 +183,4 @@ class Tennis.Views.ScheduleView extends Backbone.View
       false
 
   url: ->
-    @mainUrl || window.location.pathname.replace('/events', '/courts/' + @court_id + '/events')
+    @mainUrl || window.location.pathname + '/events'

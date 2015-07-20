@@ -1,14 +1,14 @@
 class Event < ActiveRecord::Base
   belongs_to :order
   has_and_belongs_to_many :products
-  has_and_belongs_to_many :product_services
+  has_and_belongs_to_many :product_services # , dependent: :destroy - not sure
   has_many :event_changes, dependent: :destroy
   has_many :additional_event_items, dependent: :destroy
+  belongs_to :user
 
 
   attr_reader :schedule
 
-  delegate :user, to: :order
 
   # validates_presence_of :court
 

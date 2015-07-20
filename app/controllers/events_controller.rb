@@ -4,13 +4,14 @@ class EventsController < ApplicationController
   # before_filter :set_court, except: :index
 
   def index
-    @events = Event.joins(:court, order: :user).includes(:order)
-    @events = @events.where(court_id: params[:court_id]) if params[:court_id]
-    if current_user
-      @events = @events.where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: current_user.id, st: Order.statuses[:paid]} )
-    else
-      @events = @events.where(orders: { status: Order.statuses[:paid] })
-    end
+    # @events = Event.joins(:court, order: :user).includes(:order)
+    # @events = @events.where(court_id: params[:court_id]) if params[:court_id]
+    # if current_user
+      # @events = @events.where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: current_user.id, st: Order.statuses[:paid]} )
+    # else
+      # @events = @events.where(orders: { status: Order.statuses[:paid] })
+    # end
+    @events = Event.of_products(current_products)
     respond_with @events
   end
 
@@ -23,10 +24,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
-    # @event.court = @court
-
-    @order.save
+    @event = current_user.events.new event_params.delete_if {|k,v| v.empty? }
+    @event.products = current_products
+    @event.save!
     respond_with @event
   end
 
@@ -56,5 +56,9 @@ class EventsController < ApplicationController
     # else
       # raise 'Корт нужно указать'
     # end
+  end
+
+  def current_products
+    [Court.where(slug: params[:court_id]).last, Coach.where(slug: params[:coach_id]).last].compact
   end
 end

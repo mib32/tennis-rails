@@ -7,4 +7,9 @@ class Coach < Product
   def has_courts?
     courts.size > 0
   end
+
+
+  def name_with_stadium
+    name
+  end
 end

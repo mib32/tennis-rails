@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_params, if: :devise_controller?
-  before_action :find_parent_record, if: :nested_resource?
+  # before_action :find_parent_record, if: :nested_resource?
   before_action :find_static_pages
   layout :set_layout
 
@@ -47,5 +47,9 @@ class ApplicationController < ActionController::Base
 
   def find_static_pages
     @pages = StaticPage.all
+  end
+
+  def current_products
+    nil
   end
 end

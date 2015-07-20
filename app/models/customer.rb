@@ -8,8 +8,8 @@ class Customer < User
     ]
   end
 
-  def courts
-    Court.where id: events.pluck('distinct court_id')
+  def products
+    Product.where id: events.map(&:product_ids).flatten
   end
 
   # def model_name
