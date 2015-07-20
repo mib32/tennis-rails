@@ -1,4 +1,4 @@
-# class ChangesController < ApplicationController
+class ChangesController < ApplicationController
 #   respond_to :json
 #   def create
 #     ActiveRecord::Base.transaction do
@@ -16,4 +16,4 @@
 #     end
 #   respond_with @e, location: event_url(@e, court_id: @e.court )
 #   end
-# end
+end

@@ -1,0 +1,8 @@
+%div{"data-grid" => true}
+:javascript
+  kendo.culture("ru-RU");
+  var grid = new Tennis.Views.ScheduleView({el: '[data-grid]', court: #{@court.court.id}, url: "#{coach_coaches_court_events_path(@coach, @court)}"});
+  var changes = new Tennis.Collections.Changes();
+  //var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+  //var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+  grid.render();

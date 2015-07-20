@@ -1,6 +1,7 @@
 class StadiumUser < User
   has_one :stadium, foreign_key: "user_id", dependent: :destroy
-
+  has_one :product, foreign_key: "user_id", dependent: :destroy
+  
   delegate :events, :courts, to: :stadium
 
   enum status: [:pending, :active]

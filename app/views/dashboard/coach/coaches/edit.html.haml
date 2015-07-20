@@ -2,7 +2,7 @@
   = f.input :avatar, as: :image_file, version: :small_square
   = f.input :name
   = f.input :phone
-  = f.input :price, as: :string
+  -#= f.input :price, as: :string
   = f.simple_fields_for :profile do |pf|
     = pf.input :description, as: :text
 

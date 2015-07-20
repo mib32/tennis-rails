@@ -1,19 +1,18 @@
 class Dashboard::Coach::CourtsController < Dashboard::Coach::CoachesController
   def index
-    @courts = @coach.courts
+    @courts = @coach.coaches_courts
   end
 
   def create
     @court = Court.find(params[:coaches_court][:court_id])
-    @coach.courts << @court
+    @coach.coaches_courts.new court: @court, price: params[:coaches_court][:price]
     @coach.save
 
     redirect_to dashboard_courts_path
   end
 
   def destroy
-    @court = Court.find(params[:id])
-    @coach.courts.delete(@court)
+    @coach.coaches_courts.find(params[:id]).delete
 
     redirect_to dashboard_courts_path
   end

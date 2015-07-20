@@ -1,7 +1,10 @@
 class Tennis.Views.ScheduleView extends Backbone.View
-  initialize: ->
+  initialize: (attrs) ->
     # @model = new Tennis.Models.Event()
     # @collection = new Tennis.Collections.Events()
+    @mainUrl = attrs.url
+    @court_id = attrs.court
+    console.log @url()
     @bindExternalEvents()
 
   bindExternalEvents: ->
@@ -11,6 +14,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
         scheduler.refresh()
       $('#court').on 'change', =>
         scheduler.dataSource.read()
+        scheduler.resources[1].dataSource.read()
       scheduler.wrapper.on 'mouseup touchend', '.k-scheduler-table td, .k-event', (e) ->
         target = $(e.currentTarget)
         if target.hasClass('k-event')
@@ -75,11 +79,33 @@ class Tennis.Views.ScheduleView extends Backbone.View
 
       timezone: "Etc/UTC",
       resources:[
-        field: 'owned'
-        dataSource:[
-          { text: 'Своё', value: true, color: 'cadetblue', editable: false },
-          { text: 'Чужое', value: false, color: 'rgba(255,136,0,0.5)' }
-        ]
+        {
+          field: 'owned'
+          dataSource:[
+            { text: 'Своё', value: true, color: 'cadetblue', editable: false },
+            { text: 'Чужое', value: false, color: 'rgba(255,136,0,0.5)' }
+          ]
+        },
+        {
+          field: 'product_service_ids',
+          title: "Дополнительные услуги",
+          multiple: true,
+          dataTextField: 'service_name_and_price',
+          dataValueField: 'id'
+          dataSource: {
+            transport: {
+              read: {
+                url: => "/courts/#{@court_id}.json"
+              },
+              parameterMap: (options, operation) ->
+                return options.product_services
+            },
+            schema: {
+              data: (resp) ->
+                resp.product_services
+            }
+          }
+        }  
       ]
       dataSource: {
         batch: false,
@@ -120,8 +146,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
     @$el.data('kendoScheduler')
 
 
-  court_id: ->
-    $('#court').find(":selected").val()
 
   fields:
     title: { from: "description", type: 'string'},
@@ -159,4 +183,4 @@ class Tennis.Views.ScheduleView extends Backbone.View
       false
 
   url: ->
-    window.location.pathname.replace('/events', '/courts/' + @court_id() + '/events')
+    @mainUrl || window.location.pathname.replace('/events', '/courts/' + @court_id + '/events')

@@ -1,14 +1,16 @@
 class Event < ActiveRecord::Base
   belongs_to :order
-  belongs_to :court
+  has_and_belongs_to_many :products
+  has_and_belongs_to_many :product_services
   has_many :event_changes, dependent: :destroy
   has_many :additional_event_items, dependent: :destroy
+
 
   attr_reader :schedule
 
   delegate :user, to: :order
 
-  validates_presence_of :court
+  # validates_presence_of :court
 
   scope :paid, -> { joins(:order).where('orders.status =  ?', Order.statuses[:paid]) }
   scope :past, -> { where('"end" < LOCALTIMESTAMP')}
@@ -21,6 +23,10 @@ class Event < ActiveRecord::Base
     end
   end
   scope :of_coach, ->(coach) { joins(:additional_event_items).where("additional_event_items.related_type = 'User' and additional_event_items.related_id = ? ", coach.id)}
+  scope :of_products, ->(*products) do
+    joins(:events_products).
+    where(events_products: {product_id: products}).uniq
+  end
   
   before_update :register_change, unless: :skip_change_registering?
 
@@ -28,7 +34,7 @@ class Event < ActiveRecord::Base
   after_initialize :build_schedule
 
   def self.strong_params
-   [ :id, :court_id, :start, :end, :recurrence_rule, :recurrence_id, :recurrence_exception, :user_id, :is_all_day, :description, :start_timezone, :end_timezone, :owned]
+   [ :id, :start, :end, :recurrence_rule, :recurrence_id, :recurrence_exception, :user_id, :is_all_day, :description, :start_timezone, :end_timezone, :owned, product_service_ids: [], product_ids: []]
   end
 
   def description
@@ -37,22 +43,22 @@ class Event < ActiveRecord::Base
 
   def total
     [
-      dry_court_total,
+      dry_product_total,
       dry_other_total,
      ].inject(&:+)
   end
 
-  def dry_court_total
-    (court.try(:price).to_i * duration_in_hours.to_i).to_i
+  def dry_product_total
+    (products.map(&:price).inject(&:+).to_i * duration_in_hours.to_i).to_i
   end
 
   def dry_other_total
-    additional_event_items.map(&:total).inject(&:+).to_i
+    product_services.map(&:price).inject(&:+).to_i
   end
 
-  def dry_coach_total
-    additional_event_items.coach.map(&:total).inject(&:+).to_i
-  end
+  # def dry_coach_total
+    # additional_event_items.coach.map(&:total).inject(&:+).to_i
+  # end
 
   def duration_in_hours
     (duration / 1.hour).ceil * occurrences

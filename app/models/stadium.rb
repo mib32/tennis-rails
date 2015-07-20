@@ -1,7 +1,5 @@
 class Stadium < Product
   
-  
-  has_many :events, through: :courts
   has_many :courts, dependent: :destroy
   has_many :coaches, through: :courts
   

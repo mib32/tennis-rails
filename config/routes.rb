@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :events do 
+    collection do 
+      get 'private'
+    end
+  end
+
   post 'feedback/create', as: 'feedback'
 
   resources :static_pages, only: :show
@@ -15,9 +21,10 @@ Rails.application.routes.draw do
     collection do
       get 'total'
     end
+    member do
+      patch 'pay'
+    end
   end
-
-  get 'dashboard/events', to: 'dashboard/events#index', as: 'dashboard'
 
 
 
@@ -52,10 +59,12 @@ Rails.application.routes.draw do
     end
   end
 
-  constraints RoleRouteConstraint.new('coach') do
+  constraints RoleRouteConstraint.new('coach_user') do
+
     namespace :dashboard do
       scope module: :coach do
         resource :coach
+        resources :events
         resources :customers
         resources :courts do
           resources :events
@@ -69,6 +78,11 @@ Rails.application.routes.draw do
   constraints RoleRouteConstraint.new('customer') do
     namespace :dashboard do
       scope module: :customer do
+        resources :events do 
+          collection do
+            get 'grid'
+          end
+        end
         resources :orders do
           member do
             patch 'pay'
@@ -97,8 +111,8 @@ Rails.application.routes.draw do
 
   resources :coaches do
     resources :events, only: :index, controller: 'coach_events'
-    resources :courts do
-      resources :events, controller: 'coach_events'
+    resources :coaches_courts, module: 'coach', path: 'courts', controller: 'courts' do
+      resources :events
     end
   end
 
@@ -111,6 +125,8 @@ Rails.application.routes.draw do
       resources :events, controller: 'stadium_events'
     end
   end
+
+  get 'dashboard/events', to: 'dashboard/events#index', as: 'dashboard'
 
   resources :stadium_users
   resources :sales

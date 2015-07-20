@@ -1,7 +1,6 @@
 class CoachUser < User
-
-  
-  
+  has_one :coach, foreign_key: "user_id", dependent: :destroy
+  has_one :product, foreign_key: "user_id", dependent: :destroy
   
   # after_initialize :make_profile, unless: "coach_profile.present?"
   has_one :coach_profile, foreign_key: "user_id", dependent: :destroy
@@ -35,14 +34,14 @@ class CoachUser < User
     attributes["name"] || "Тренер ##{id}"
   end
 
-  def events
-    Event.joins(:additional_event_items).where('additional_event_items.related_type = ? and additional_event_items.related_id = ?', 'User', self.id)
+  # def events
+    # Event.joins(:additional_event_items).where('additional_event_items.related_type = ? and additional_event_items.related_id = ?', 'User', self.id)
+  # end
+
+
+
+  def courts
+    coach.courts
   end
-
-  def customers
-    User.find(events.joins(:order).pluck("orders.user_id").uniq)
-  end
-
-
 
 end

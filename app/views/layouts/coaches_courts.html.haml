@@ -1,0 +1,9 @@
+- content_for :super_sub_layout do
+  .row
+    .col-xs-4
+      %ul.nav.nav-pills.nav-stacked
+        - @coach.coaches_courts.each do |cc|
+          = active_link_to cc.name, coach_coaches_court_path(@coach, cc), active: /courts\/#{cc.id}/, wrap_tag: :li
+    .col-xs-8
+      = yield
+= render template: 'layouts/coach'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714141350) do
+ActiveRecord::Schema.define(version: 20150718153439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150714141350) do
     t.datetime "start"
     t.datetime "end"
     t.string   "description"
-    t.integer  "court_id"
+    t.integer  "product_id"
     t.integer  "order_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -115,8 +115,24 @@ ActiveRecord::Schema.define(version: 20150714141350) do
     t.boolean  "is_all_day"
   end
 
-  add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
+  add_index "events", ["product_id"], name: "index_events_on_product_id", using: :btree
+
+  create_table "events_product_services", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "product_service_id"
+  end
+
+  add_index "events_product_services", ["event_id"], name: "index_events_product_services_on_event_id", using: :btree
+  add_index "events_product_services", ["product_service_id"], name: "index_events_product_services_on_product_service_id", using: :btree
+
+  create_table "events_products", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "product_id"
+  end
+
+  add_index "events_products", ["event_id"], name: "index_events_products_on_event_id", using: :btree
+  add_index "events_products", ["product_id"], name: "index_events_products_on_product_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.integer  "tax",            default: 5
@@ -150,22 +166,36 @@ ActiveRecord::Schema.define(version: 20150714141350) do
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "product_services", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "service_id"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "type"
+  end
+
+  add_index "product_services", ["product_id"], name: "index_product_services_on_product_id", using: :btree
+  add_index "product_services", ["service_id"], name: "index_product_services_on_service_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "user_id"
     t.string   "name"
     t.string   "phone"
     t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "address"
-    t.float    "latitude",    default: 55.75
-    t.float    "longitude",   default: 37.61
+    t.float    "latitude",                            default: 55.75
+    t.float    "longitude",                           default: 37.61
     t.string   "slug"
-    t.integer  "status",      default: 0
+    t.integer  "status",                              default: 0
     t.string   "type"
     t.integer  "parent_id"
     t.string   "email"
+    t.string   "avatar"
+    t.decimal  "price",       precision: 8, scale: 2
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -185,6 +215,13 @@ ActiveRecord::Schema.define(version: 20150714141350) do
 
   add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "special_prices", force: :cascade do |t|
     t.datetime "start"
@@ -282,8 +319,12 @@ ActiveRecord::Schema.define(version: 20150714141350) do
   add_foreign_key "event_changes", "events"
   add_foreign_key "event_changes", "orders"
   add_foreign_key "events", "orders"
+  add_foreign_key "events_product_services", "events"
+  add_foreign_key "events_product_services", "product_services"
   add_foreign_key "orders", "products", column: "stadium_id"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_services", "products"
+  add_foreign_key "product_services", "services"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
   add_foreign_key "reviews", "users"

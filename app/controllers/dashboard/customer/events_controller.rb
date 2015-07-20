@@ -1,6 +1,10 @@
 class Dashboard::Customer::EventsController < Dashboard::EventsController
 
-  # def index
-    # paid_or_owned_by(current_user)
-  # end
+  def index
+    @events = current_user.events
+  end
+
+  def grid
+    @events = current_user.events
+  end
 end
