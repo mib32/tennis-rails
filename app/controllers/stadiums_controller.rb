@@ -6,6 +6,7 @@ class StadiumsController < ApplicationController
     @q = Stadium.ransack(params[:q])
     @stadiums = @q.result(distinct: true).active
 
+
     if params[:category_id].present?
       @category = Category.friendly.find(params[:category_id])
       @stadiums = @category.stadiums

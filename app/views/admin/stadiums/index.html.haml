@@ -17,8 +17,8 @@
         %td= stadium.name || "-"
         %td= stadium.address || "-"
         %td= stadium.phone || "-"
-        %td= stadium.category.collect(&:name).join(",")|| "-"
+        %td= stadium.category.collect(&:name).join(", ")|| "-"
         %td= stadium.user.try(:name) || "-"
         %td= link_to 'Редактировать', edit_admin_stadium_path(stadium), class: 'btn btn-default btn-xs'
         %td= link_to 'Удалить', [:admin, stadium], :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger btn-xs'
-        %td=raw "#{link_to (stadium.courts.size()), stadium_courts_path(stadium.id)}"
+        %td=raw "#{link_to (stadium.courts.size()), admin_stadium_courts_path(stadium.id), class: 'btn btn-success btn-xs'}"

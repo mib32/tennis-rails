@@ -4,7 +4,9 @@
 %table.table.table-stripped
   %tr
     %th Название
+    %th Цена
 
   - @stadium.courts.each do |court|
     %tr{ class: '' }
       %td= court.name || "-"
+      %td= court.price
