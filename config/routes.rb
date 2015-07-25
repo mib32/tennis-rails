@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     resource :options,  only: [:edit, :update]
     resources :static_pages
     resources :categories
-    get 'stadiums/:id/courts', to: 'stadiums#courts', as: 'stadium_courts'
     root to: 'stadiums#index'
   end
 
@@ -49,6 +48,7 @@ Rails.application.routes.draw do
           end
         end
         get 'orders', to: 'orders#index', as: 'wallet'
+        get 'events/courts', to: 'events#courts', as: 'stadium_courts'
       end
     end
   end

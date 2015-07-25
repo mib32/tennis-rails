@@ -26,7 +26,10 @@ class Dashboard::EventsController < DashboardController
   def show
     respond_with @event
   end
+  
+  def courts
 
+  end
 
   private
   def find_event

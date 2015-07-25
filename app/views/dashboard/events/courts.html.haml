@@ -1,0 +1,11 @@
+.row.top15
+  -current_user.courts.each do |court|
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      = label_tag court.name_with_stadium
+      .top15.schedule.court{'data-grid'=> court.id}
+:javascript
+  kendo.culture("ru-RU");
+  var grid = new Tennis.Views.ScheduleListView()
+  grid.render()
+  // var grid = new TennisList.Views.ScheduleView({el: '[data-grid]'});
+  // grid.render();
