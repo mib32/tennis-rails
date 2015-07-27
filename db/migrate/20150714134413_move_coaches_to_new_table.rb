@@ -3,6 +3,8 @@ class MoveCoachesToNewTable < ActiveRecord::Migration
     User.where(type: 'Coach').update_all type: 'CoachUser'
 
     add_column :products, :email, :string
+    Coach.update_column_information
+    
     remove_foreign_key "coach_profiles", "users"
     CoachUser.all.each do |coach|
       id = Coach.create name: coach.name, phone: coach.phone, email: coach.email
