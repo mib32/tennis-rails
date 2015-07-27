@@ -16,6 +16,7 @@ ru:
   none: Нет
   stadium_user: Стадион
   coach: Тренер
+  coach_user: Тренер
   customer: Клиент
   hours:
     few: "%{count} часа"
@@ -51,12 +52,16 @@ ru:
         longitude: Долгота
         phone: Телефон
         description: Описание
+      coach:
+        avatar: Фото
+        name: Имя
+        phone: Телефон
       special_price:
         start: Начало
         end: Конец
         price: Цена
         is_sale: Скидка
-      coach_profile:
+      profile:
         description: Описание
       event:
         start: Начало

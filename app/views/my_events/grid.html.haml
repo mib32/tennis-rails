@@ -1,0 +1,15 @@
+nothing to see
+-#.row.top15
+  .col-md-4
+    %ul.nav.nav-pills.nav-stacked
+      - current_user.products.each do |product|
+        = active_link_to product.name, grid_my_events_path(product_id: product), active: /#{product.to_param}/, wrap_tag: :li
+  .col-md-8
+    .top15{"data-grid" => ""}
+    :javascript
+      kendo.culture("ru-RU");
+      var grid = new Tennis.Views.ScheduleView({el: '[data-grid]'});
+      // var changes = new Tennis.Collections.Changes();
+      // var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+      // var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+      grid.render();

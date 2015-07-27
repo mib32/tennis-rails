@@ -1,3 +1,5 @@
 .col-md-4{ id: dom_id(picture) }
   = image_tag picture.name, class: 'thumbnail rounded img-responsive', height: 100
-  = link_to 'Удалить', [:dashboard, :stadium, picture], method: :delete, remote: true, data: { confirm: 'Вы уверены?' }
+  = simple_form_for [:dashboard, :product, picture], remote: true do |f|
+    = f.input :description, input_html: {data: {blur_remote: true}}
+  = link_to 'Удалить', [:dashboard, :product, picture], method: :delete, remote: true, data: { confirm: 'Вы уверены?' }

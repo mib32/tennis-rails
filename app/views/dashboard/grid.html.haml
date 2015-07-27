@@ -1,0 +1,19 @@
+.row.top15
+  - if current_user.products.none?
+    .col-xs-12.text-center
+      %h3 У вас пока не создано ни одного корта. Перейдите в раздел  #{ link_to 'и создайте для начала один!', current_user_courts_creation_path }
+  - else
+    .col-xs-4
+      %ul.nav.nav-pills.nav-stacked
+        - current_user.products.each do |cc|
+          = active_link_to cc.name, dashboard_grid_path(cc), active: /#{cc.to_param}/, wrap_tag: :li
+    .col-xs-8
+      = render "schedule_legend"
+      %div{"data-grid" => true}
+      :javascript
+        kendo.culture("ru-RU");
+        var grid = new Tennis.Views.ScheduleView({el: '[data-grid]', court: #{@court.id}, url: '#{court_my_events_path(@court)}'});
+        var changes = new Tennis.Collections.Changes();
+        //var checkout = new Tennis.Views.CheckoutView({el: '[data-checkout]'});
+        //var changesView = new Tennis.Views.ChangesView({el: '[data-event-move]', collection: changes});
+        grid.render();

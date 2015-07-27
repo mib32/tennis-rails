@@ -1,16 +1,27 @@
 class Tennis.Views.ScheduleView extends Backbone.View
-  initialize: ->
+  initialize: (attrs) ->
     # @model = new Tennis.Models.Event()
     # @collection = new Tennis.Collections.Events()
+    @mainUrl = attrs.url
+    @court_id = attrs.court
+    console.log @url()
     @bindExternalEvents()
 
   bindExternalEvents: ->
     $ =>
       scheduler = @scheduler()
+      setInterval ->
+        if !scheduler._editor.container
+          scheduler.dataSource.read() 
+          console.log('reload')
+        else
+          console.log('no reload')
+      , 30000
       $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
         scheduler.refresh()
       $('#court').on 'change', =>
         scheduler.dataSource.read()
+        scheduler.resources[1].dataSource.read()
       scheduler.wrapper.on 'mouseup touchend', '.k-scheduler-table td, .k-event', (e) ->
         target = $(e.currentTarget)
         if target.hasClass('k-event')
@@ -38,7 +49,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
 
       edit: (e) =>
         # console.log e.event
-        if !e.event.owned || @getCookie('signed_in') != '1'
+        if (e.event.visual_type == 'disowned') || @getCookie('signed_in') != '1'
           alert('Пожалуйста, сначала авторизуйтесь.')
           e.preventDefault()
       resize: (e) =>
@@ -75,29 +86,56 @@ class Tennis.Views.ScheduleView extends Backbone.View
 
       timezone: "Etc/UTC",
       resources:[
-        field: 'owned'
-        dataSource:[
-          { text: 'Своё', value: true, color: 'cadetblue', editable: false },
-          { text: 'Чужое', value: false, color: 'rgba(255,136,0,0.5)' }
-        ]
+        {
+          field: 'visual_type'
+          dataSource:[
+            { text: 'Своё', value: 'owned', color: 'cadetblue', editable: false },
+            { text: 'Чужое', value: 'disowned', color: '#ccc' },
+            { text: 'Оплачено', value: 'paid', color: '#8ED869' }
+          ]
+        },
+        {
+          field: 'product_service_ids',
+          title: "Дополнительные услуги",
+          multiple: true,
+          dataTextField: 'service_name_and_price',
+          dataValueField: 'id'
+          dataSource: {
+            transport: {
+              read: {
+                url: => "/products/#{@court_id}.json"
+              },
+              parameterMap: (options, operation) ->
+                return options.product_services
+            },
+            schema: {
+              data: (resp) ->
+                resp.product_services
+            }
+          }
+        }  
       ]
       dataSource: {
         batch: false,
         transport: {
           read: {
+            dataType: 'json',
             url: (e, s)=>
-             @url()
+             @url() + '.json'
           },
           update: {
+            dataType: 'json',
             url: (options) => "#{@url()}/#{options.id}",
             type: 'PUT'
           },
           create: {
+            dataType: 'json',
             url: =>
              @url()
             type: 'POST'
           },
           destroy: {
+            dataType: 'json',
             url: (options) => "#{@url()}/#{options.id}",
             method: 'DELETE'
         },
@@ -120,8 +158,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
     @$el.data('kendoScheduler')
 
 
-  court_id: ->
-    $('#court').find(":selected").val()
 
   fields:
     title: { from: "description", type: 'string'},
@@ -132,7 +168,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
     recurrenceException: { from: "recurrence_exception" },
     startTimezone: { from: "start_timezone" },
     endTimezone: { from: "end_timezone" },
-    owned: { from: "owned", type: 'boolean', defaultValue: "true"},
     isAllDay: { type: "boolean", from: "is_all_day" }
 
   getCookie: (cname) ->
@@ -159,4 +194,4 @@ class Tennis.Views.ScheduleView extends Backbone.View
       false
 
   url: ->
-    window.location.pathname.replace('/events', '/courts/' + @court_id() + '/events')
+    @mainUrl || window.location.pathname + '/events'

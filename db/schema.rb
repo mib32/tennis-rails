@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629190403) do
+ActiveRecord::Schema.define(version: 20150727174234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
 
-  create_table "coach_profiles", force: :cascade do |t|
-    t.string   "description"
-    t.string   "photo"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "coach_profiles", ["user_id"], name: "index_coach_profiles_on_user_id", using: :btree
-
   create_table "coaches_courts", force: :cascade do |t|
     t.integer "coach_id"
     t.integer "court_id"
@@ -57,17 +47,6 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "coaches_courts", ["coach_id"], name: "index_coaches_courts_on_coach_id", using: :btree
   add_index "coaches_courts", ["court_id"], name: "index_coaches_courts_on_court_id", using: :btree
-
-  create_table "courts", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "stadium_id"
-    t.decimal  "price",        precision: 8, scale: 2
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.decimal  "change_price", precision: 8, scale: 2
-  end
-
-  add_index "courts", ["stadium_id"], name: "index_courts_on_stadium_id", using: :btree
 
   create_table "deposit_requests", force: :cascade do |t|
     t.integer  "wallet_id"
@@ -116,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150629190403) do
     t.datetime "start"
     t.datetime "end"
     t.string   "description"
-    t.integer  "court_id"
+    t.integer  "product_id"
     t.integer  "order_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -124,10 +103,28 @@ ActiveRecord::Schema.define(version: 20150629190403) do
     t.string   "recurrence_exception"
     t.integer  "recurrence_id"
     t.boolean  "is_all_day"
+    t.integer  "user_id"
   end
 
-  add_index "events", ["court_id"], name: "index_events_on_court_id", using: :btree
   add_index "events", ["order_id"], name: "index_events_on_order_id", using: :btree
+  add_index "events", ["product_id"], name: "index_events_on_product_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "events_product_services", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "product_service_id"
+  end
+
+  add_index "events_product_services", ["event_id"], name: "index_events_product_services_on_event_id", using: :btree
+  add_index "events_product_services", ["product_service_id"], name: "index_events_product_services_on_product_service_id", using: :btree
+
+  create_table "events_products", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "product_id"
+  end
+
+  add_index "events_products", ["event_id"], name: "index_events_products_on_event_id", using: :btree
+  add_index "events_products", ["product_id"], name: "index_events_products_on_product_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.integer  "tax",            default: 5
@@ -142,13 +139,9 @@ ActiveRecord::Schema.define(version: 20150629190403) do
     t.integer  "status"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "stadium_id"
     t.string   "comment"
-    t.integer  "coach_id"
   end
 
-  add_index "orders", ["coach_id"], name: "index_orders_on_coach_id", using: :btree
-  add_index "orders", ["stadium_id"], name: "index_orders_on_stadium_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pictures", force: :cascade do |t|
@@ -157,9 +150,47 @@ ActiveRecord::Schema.define(version: 20150629190403) do
     t.string   "imageable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "description"
   end
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
+
+  create_table "product_services", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "service_id"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "type"
+  end
+
+  add_index "product_services", ["product_id"], name: "index_product_services_on_product_id", using: :btree
+  add_index "product_services", ["service_id"], name: "index_product_services_on_service_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "description"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "address"
+    t.float    "latitude",                             default: 55.75
+    t.float    "longitude",                            default: 37.61
+    t.string   "slug"
+    t.integer  "status",                               default: 0
+    t.string   "type"
+    t.integer  "parent_id"
+    t.string   "email"
+    t.string   "avatar"
+    t.decimal  "price",        precision: 8, scale: 2
+    t.decimal  "change_price", precision: 8, scale: 2
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["parent_id"], name: "index_products_on_parent_id", using: :btree
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "reviewable_id"
@@ -174,6 +205,13 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "special_prices", force: :cascade do |t|
     t.datetime "start"
@@ -199,24 +237,6 @@ ActiveRecord::Schema.define(version: 20150629190403) do
 
   add_index "stadia", ["category_id"], name: "index_stadia_on_category_id", using: :btree
   add_index "stadia", ["user_id"], name: "index_stadia_on_user_id", using: :btree
-
-  create_table "stadiums", force: :cascade do |t|
-    t.integer  "category_id"
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "phone"
-    t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "address"
-    t.float    "latitude",    default: 55.75
-    t.float    "longitude",   default: 37.61
-    t.string   "slug"
-    t.integer  "status",      default: 0
-  end
-
-  add_index "stadiums", ["category_id"], name: "index_stadiums_on_category_id", using: :btree
-  add_index "stadiums", ["user_id"], name: "index_stadiums_on_user_id", using: :btree
 
   create_table "static_pages", force: :cascade do |t|
     t.text     "text"
@@ -282,23 +302,23 @@ ActiveRecord::Schema.define(version: 20150629190403) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "additional_event_items", "events"
-  add_foreign_key "coach_profiles", "users"
-  add_foreign_key "courts", "stadiums"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
   add_foreign_key "event_changes", "events"
   add_foreign_key "event_changes", "orders"
-  add_foreign_key "events", "courts"
   add_foreign_key "events", "orders"
-  add_foreign_key "orders", "stadiums"
+  add_foreign_key "events", "users"
+  add_foreign_key "events_product_services", "events"
+  add_foreign_key "events_product_services", "product_services"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_services", "products"
+  add_foreign_key "product_services", "services"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "users"
   add_foreign_key "reviews", "users"
-  add_foreign_key "special_prices", "courts"
   add_foreign_key "stadia", "categories"
   add_foreign_key "stadia", "users"
-  add_foreign_key "stadiums", "categories"
-  add_foreign_key "stadiums", "users"
   add_foreign_key "wallets", "users"
   add_foreign_key "withdrawal_requests", "wallets"
   add_foreign_key "withdrawals", "wallets"

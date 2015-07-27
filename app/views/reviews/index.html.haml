@@ -6,7 +6,7 @@
     .panel-heading
       %i Оставьте свой отзыв:
     .panel-body
-      = simple_form_for [@record.model_name.singular_route_key, @review] do |f|
+      = simple_form_for [@product.model_name.singular_route_key, @review] do |f|
         .row
           .col-md-2
             = f.input :rating, collection: 0..5, label: "Оценка"

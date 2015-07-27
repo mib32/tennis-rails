@@ -18,4 +18,12 @@ module ApplicationHelper
       'gray-icon.png'
     end
   end
+
+  def current_user_courts_creation_path
+    if current_user.kind_of? StadiumUser
+      dashboard_courts_path
+    elsif current_user.kind_of? CoachUser
+      dashboard_employments_path
+    end
+  end
 end

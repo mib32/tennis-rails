@@ -1,0 +1,2 @@
+$('#<%= dom_id(@picture) %>').find('form').append('<div class="alert alert-warning">Сохранено!</div>')
+setTimeout(function(){$('#<%= dom_id(@picture) %>').find('form .alert').fadeOut(function(){$(this).remove()})}, 3000)

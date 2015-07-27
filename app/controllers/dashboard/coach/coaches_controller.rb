@@ -12,9 +12,10 @@ class Dashboard::Coach::CoachesController < DashboardController
 
   private
   def find_coach
-    @coach = current_user
+    @coach_user = current_user
+    @coach = current_user.coach
   end
   def coach_params
-    params.require(:coach).permit(:name, :password, :password_confirmation, :email, :price, :phone, :avatar, court_ids: [], coach_profile_attributes: [:description])
+    params.require(:coach).permit(:name, :password, :password_confirmation, :email, :price, :phone, :avatar, court_ids: [], profile_attributes: [:description])
   end
 end

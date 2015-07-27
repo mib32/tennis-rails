@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <li><%= link_to dashboard_path(@user) do %>
+  <li><%= link_to dashboard_grid_path(@user) do %>
     Личный кабинет
     <div class="delimiter">
       <%= image_tag 'menu-separ.png' %>
@@ -7,9 +7,9 @@
     <% end %>
   </li>
   <% if current_user.admin? %>
-    <li><%= link_to 'Админка', admin_root_path %></li>
+    <li><%= link_to 'Админка', admin_stadiums_path %></li>
   <% end %>
-  <li><%= link_to 'Корзина', dashboard_orders_path %></li>
+  <li><%= link_to 'Заказы', my_events_path %></li>
   <li><%= link_to 'Выход', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to 'Вход / Регистрация', new_user_session_path %></li>

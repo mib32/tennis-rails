@@ -1,6 +1,7 @@
 class StadiumsController < ApplicationController
   before_action :set_stadium, only: [:show, :edit, :update]
   respond_to :html, :js, :json
+  layout 'stadium', except: [:index]
 
   def index
     @q = Stadium.ransack(params[:q])

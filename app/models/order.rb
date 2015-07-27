@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user 
-  belongs_to :stadium
-  belongs_to :coach
+  # belongs_to :stadium
+  # belongs_to :coach
   has_many :events, dependent: :destroy
   has_many :event_changes, dependent: :destroy
   accepts_nested_attributes_for :events
@@ -28,6 +28,23 @@ class Order < ActiveRecord::Base
   end
 
   def associated_emails
-    [stadium.try(:user).try(:email), coach.try(:email)]
+    events.map(&:products).flatten.uniq.map(&:email).to_a
+  end
+
+  def pay!
+    unless self.paid?
+      transaction = ActiveRecord::Base.transaction do
+        user.wallet.withdraw! self.total
+        self.events.each do |event|
+          event.associated_payables_with_price.each do |item|
+            item[:product].owner.wallet.deposit_with_tax_deduction! item[:total]
+          end
+        end
+      end
+
+      if transaction
+        self.paid!
+      end
+    end
   end
 end

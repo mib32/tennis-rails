@@ -1,3 +1,5 @@
+railroady -i -b -C | dot -Tsvg > doc/controllers_inheritance.svg
+
 Tennis Rails
 ================
 

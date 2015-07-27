@@ -1,6 +1,7 @@
 class Dashboard::PicturesController < DashboardController
   before_filter :find_picture, except: [ :index, :create ]
   before_filter :find_imageable
+  respond_to :html, :js
 
   def index
     @pictures = @imageable.pictures
@@ -12,6 +13,12 @@ class Dashboard::PicturesController < DashboardController
 
   end
 
+  def update
+    @picture.update picture_params
+
+    respond_with @picture
+  end
+
   def destroy
     @picture.delete
   end
@@ -19,11 +26,14 @@ class Dashboard::PicturesController < DashboardController
   private
 
   def find_imageable
-    assoc = params[:imageable_type].underscore 
-    @imageable = current_user.send assoc
+    @imageable = current_user.product
   end
 
   def find_picture
     @picture = Picture.find(params[:id]) if params[:id]
+  end
+
+  def picture_params
+    params.require(:picture).permit(:name, :description)
   end
 end

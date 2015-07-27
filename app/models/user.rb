@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   friendly_id :name, use: [:slugged]
 
   has_many :orders, dependent: :destroy
-  has_many :events, through: :orders
+  has_many :events
   has_many :event_changes, through: :events
   has_one :wallet, dependent: :destroy
   after_create :create_wallet

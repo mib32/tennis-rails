@@ -1,0 +1,11 @@
+%h2 Клиенты
+%table.table.table-hover
+  %thead
+    %tr
+      %th Имя
+      %th Телефон
+      %th Почта
+      %th Количество занятий
+      %th
+  %tbody
+    = render collection: @customers, partial: 'customer'
