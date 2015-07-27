@@ -10,6 +10,13 @@ class Tennis.Views.ScheduleView extends Backbone.View
   bindExternalEvents: ->
     $ =>
       scheduler = @scheduler()
+      setInterval ->
+        if !scheduler._editor.container
+          scheduler.dataSource.read() 
+          console.log('reload')
+        else
+          console.log('no reload')
+      , 30000
       $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) =>
         scheduler.refresh()
       $('#court').on 'change', =>
@@ -42,7 +49,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
 
       edit: (e) =>
         # console.log e.event
-        if !e.event.owned || @getCookie('signed_in') != '1'
+        if (e.event.visual_type == 'disowned') || @getCookie('signed_in') != '1'
           alert('Пожалуйста, сначала авторизуйтесь.')
           e.preventDefault()
       resize: (e) =>
@@ -80,10 +87,11 @@ class Tennis.Views.ScheduleView extends Backbone.View
       timezone: "Etc/UTC",
       resources:[
         {
-          field: 'owned'
+          field: 'visual_type'
           dataSource:[
-            { text: 'Своё', value: true, color: 'cadetblue', editable: false },
-            { text: 'Чужое', value: false, color: 'rgba(255,136,0,0.5)' }
+            { text: 'Своё', value: 'owned', color: 'cadetblue', editable: false },
+            { text: 'Чужое', value: 'disowned', color: '#ccc' },
+            { text: 'Оплачено', value: 'paid', color: '#8ED869' }
           ]
         },
         {
@@ -95,7 +103,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
           dataSource: {
             transport: {
               read: {
-                url: => "/courts/#{@court_id}.json"
+                url: => "/products/#{@court_id}.json"
               },
               parameterMap: (options, operation) ->
                 return options.product_services
@@ -111,19 +119,23 @@ class Tennis.Views.ScheduleView extends Backbone.View
         batch: false,
         transport: {
           read: {
+            dataType: 'json',
             url: (e, s)=>
-             @url()
+             @url() + '.json'
           },
           update: {
+            dataType: 'json',
             url: (options) => "#{@url()}/#{options.id}",
             type: 'PUT'
           },
           create: {
+            dataType: 'json',
             url: =>
              @url()
             type: 'POST'
           },
           destroy: {
+            dataType: 'json',
             url: (options) => "#{@url()}/#{options.id}",
             method: 'DELETE'
         },
@@ -156,7 +168,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
     recurrenceException: { from: "recurrence_exception" },
     startTimezone: { from: "start_timezone" },
     endTimezone: { from: "end_timezone" },
-    owned: { from: "owned", type: 'boolean', defaultValue: "true"},
     isAllDay: { type: "boolean", from: "is_all_day" }
 
   getCookie: (cname) ->

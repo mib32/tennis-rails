@@ -1,2 +1,4 @@
-= render @order.events
-= link_to "Заплатить", pay_order_path(@order), method: :patch
+%h3= "Заказ #{@order.guid}"
+%table.table.table-hover
+  = render @order.events
+= link_to "Заплатить #{number_to_integer_currency @order.total} из кошелька", pay_order_path(@order), method: :patch, class: 'btn btn-primary'

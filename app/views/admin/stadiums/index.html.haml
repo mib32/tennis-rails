@@ -3,10 +3,10 @@
 %table.table.table-stripped
   %tr
     %th Статус
-    %th Name
-    %th Address
-    %th Telephone
-    %th Category
+    %th Имя
+    %th Адрес
+    %th Телефон
+    %th Категория
     %th Владелец
     %th
     %th
@@ -19,7 +19,7 @@
       %td= stadium.address || "-"
       %td= stadium.phone || "-"
       %td= stadium.category.try(:name) || "-"
-      %td= stadium.user.try(:name) || "-"
+      %td= stadium.owner.try(:name) || "-"
       %td= link_to 'Редактировать', edit_admin_stadium_path(stadium), class: 'btn btn-default btn-xs'
       %td= link_to 'Удалить', [:admin, stadium], :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger btn-xs'
 

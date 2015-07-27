@@ -59,6 +59,8 @@ class EventsController < ApplicationController
   end
 
   def current_products
-    [Court.where(slug: params[:court_id]).last, Coach.where(slug: params[:coach_id]).last].compact
+    [Court.where(slug: params[:court_id].to_s).last,
+     Coach.where(slug: params[:coach_id].to_s).last,
+     Product.where(slug: params[:product_id].to_s).last].compact
   end
 end

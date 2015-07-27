@@ -1,14 +1,14 @@
-class ReviewsController < ApplicationController
+class ReviewsController < NestedResourcesController
   before_filter :find_review, except: :index
   before_action :authenticate_user!, except: :index
 
   def index
-    @reviews = @record.reviews
+    @reviews = @product.reviews
     @review = Review.new
   end
 
   def create
-    @review = @record.reviews.new review_params
+    @review = @product.reviews.new review_params
     @review.user = current_user
 
     if @review.save  

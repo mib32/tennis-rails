@@ -6,16 +6,11 @@ class CourtsController < ApplicationController
   end
 
   def show
-    @court = Court.friendly.find(params[:id])
-
-    respond_to do |format|
-      format.json { render json: @court.to_json(include: {product_services: {methods: :service_name_and_price}}) }
-      format.html {  }
-    end
+    @court = Court.friendly.find params[:id]
   end
 
   def set_layout
-    params[:layout] || 'application'
+    params[:scope] || 'application'
   end
 
   def set_scope

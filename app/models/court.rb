@@ -4,6 +4,8 @@ class Court < Product
   has_many :coaches_courts
   has_many :coaches, through: :coaches_courts
 
+  delegate :owner, to: :stadium
+
   def change_price
     attributes["change_price"] || 0
   end
@@ -13,7 +15,15 @@ class Court < Product
   end
 
   def name_with_stadium
-    stadium.name + ' - корт ' + name
+    stadium.name.to_s + ' - корт ' + name.to_s
+  end
+
+  def product_services
+    if super.any?
+      super
+    else
+      stadium.product_services
+    end
   end
 
 end

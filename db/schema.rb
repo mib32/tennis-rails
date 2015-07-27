@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720103558) do
+ActiveRecord::Schema.define(version: 20150727174234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,16 +38,6 @@ ActiveRecord::Schema.define(version: 20150720103558) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
-
-  create_table "coach_profiles", force: :cascade do |t|
-    t.string   "description"
-    t.string   "photo"
-    t.integer  "coach_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "coach_profiles", ["coach_id"], name: "index_coach_profiles_on_coach_id", using: :btree
 
   create_table "coaches_courts", force: :cascade do |t|
     t.integer "coach_id"
@@ -149,13 +139,9 @@ ActiveRecord::Schema.define(version: 20150720103558) do
     t.integer  "status"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "stadium_id"
     t.string   "comment"
-    t.integer  "coach_id"
   end
 
-  add_index "orders", ["coach_id"], name: "index_orders_on_coach_id", using: :btree
-  add_index "orders", ["stadium_id"], name: "index_orders_on_stadium_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pictures", force: :cascade do |t|
@@ -164,6 +150,7 @@ ActiveRecord::Schema.define(version: 20150720103558) do
     t.string   "imageable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "description"
   end
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
@@ -186,18 +173,19 @@ ActiveRecord::Schema.define(version: 20150720103558) do
     t.string   "name"
     t.string   "phone"
     t.text     "description"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "address"
-    t.float    "latitude",                            default: 55.75
-    t.float    "longitude",                           default: 37.61
+    t.float    "latitude",                             default: 55.75
+    t.float    "longitude",                            default: 37.61
     t.string   "slug"
-    t.integer  "status",                              default: 0
+    t.integer  "status",                               default: 0
     t.string   "type"
     t.integer  "parent_id"
     t.string   "email"
     t.string   "avatar"
-    t.decimal  "price",       precision: 8, scale: 2
+    t.decimal  "price",        precision: 8, scale: 2
+    t.decimal  "change_price", precision: 8, scale: 2
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -314,7 +302,6 @@ ActiveRecord::Schema.define(version: 20150720103558) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "additional_event_items", "events"
-  add_foreign_key "coach_profiles", "products", column: "coach_id"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"
@@ -324,7 +311,6 @@ ActiveRecord::Schema.define(version: 20150720103558) do
   add_foreign_key "events", "users"
   add_foreign_key "events_product_services", "events"
   add_foreign_key "events_product_services", "product_services"
-  add_foreign_key "orders", "products", column: "stadium_id"
   add_foreign_key "orders", "users"
   add_foreign_key "product_services", "products"
   add_foreign_key "product_services", "services"

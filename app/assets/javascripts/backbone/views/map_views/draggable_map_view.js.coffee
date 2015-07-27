@@ -15,12 +15,12 @@ class Tennis.Views.DraggableMapView extends Tennis.Views.MapView
       @submitPos(event.latLng)
 
   submitPos: (pos) ->
-    $('#stadium_latitude').val(pos.lat())
-    $('#stadium_longitude').val(pos.lng())
+    $('#product_latitude').val(pos.lat())
+    $('#product_longitude').val(pos.lng())
     @geocoder.geocode {latLng: pos}, (t, i) ->
       if (i != google.maps.GeocoderStatus.OK)
           return console.log("Geocoder failed due to: " + i);
       if (!t[0])
           return console.log("No results found");
       a = t[0];
-      $('#stadium_address').val(a.formatted_address)
+      $('#product_address').val(a.formatted_address)

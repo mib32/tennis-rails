@@ -1,16 +1,29 @@
 Rails.application.routes.draw do
+  get 'grid/(:court_id)', to: 'dashboard#grid', as: 'dashboard_grid'
+  get 'products/show'
+
   concern :bookable do 
     resources :events
+    resources :my_events
   end
-  scope :dashboard do 
-    resources :products
+
+  concern :has_pictures do 
+    resources :pictures
   end
-  resources :events do 
+
+  resources :events, :my_events do 
     collection do 
-      get 'private'
-      get 'grid', as: 'dashboard'
+      get 'grid'
+      post 'bulk_process', constraints: ButtonParamRouting.new('pay'), action: 'create', controller: 'orders'
+      post 'bulk_process', constraints: ButtonParamRouting.new('destroy'), action: 'destroy'
     end
   end
+
+  resources :products, concerns: :bookable
+
+  # scope :my do
+    # resources :courts
+  # end
 
   post 'feedback/create', as: 'feedback'
 
@@ -44,41 +57,37 @@ Rails.application.routes.draw do
     root to: 'stadiums#index'
   end
 
-  constraints RoleRouteConstraint.new('stadium_user') do
-    namespace :dashboard do
-      scope module: :stadium do
-        resource :stadium do
-          resources :pictures, defaults: { imageable_type: 'Stadium'}
-          resources :coaches
-        end
-        resources :courts, concerns: :bookable do
-          resources :special_prices
-        end
-        resources :orders
-        resources :withdrawal_requests do
-          member do
-            get 'confirm'
-          end
-        end
-        get 'orders', to: 'orders#index', as: 'wallet'
-      end
-    end
-  end
+  # constraints RoleRouteConstraint.new('stadium_user') do
+  #   namespace :dashboard do
+  #     scope module: :stadium do
+  #       resource :stadium do
+  #         resources :pictures, defaults: { imageable_type: 'Stadium'}
+  #         resources :coaches
+  #       end
+  #       resources :courts, concerns: :bookable do
+  #         resources :special_prices
+  #       end
+  #       resources :orders
+  #        do
+  #         member do
+  #           get 'confirm'
+  #         end
+  #       end
+  #       get 'orders', to: 'orders#index', as: 'wallet'
+  #     end
+  #   end
+  # end
 
-  constraints RoleRouteConstraint.new('coach_user') do
+  # constraints RoleRouteConstraint.new('coach_user') do
 
-    namespace :dashboard do
-      scope module: :coach do
-        resource :coach
-        resources :events
-        resources :customers
-        resources :courts do
-          resources :events
-        end
-
-        get 'orders', to: 'customers#index'
-      end
-    end
+  namespace :dashboard do
+    resource :product, concerns: :has_pictures
+    # resource :events
+    resources :customers
+    resources :employments
+    resources :coaches
+    resources :withdrawal_requests
+    resource :orders
   end
 
   resources :deposit_requests
@@ -94,13 +103,16 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :courts
-
-  resources :coaches, defaults: { layout: 'coach', scope: 'coach' } do 
+  # scope '(:scope)' do 
+  resources :courts, concerns: :bookable do
+    resources :special_prices
+  end
+  # end
+  resources :coaches, defaults: { scope: 'coach' } do 
     resources :courts, concerns: :bookable
   end
 
-  resources :stadiums, defaults: { layout: 'stadium', scope: 'stadium' } do
+  resources :stadiums, defaults: { scope: 'stadium' } do
     resources :pictures, only: :index
     resources :reviews
     resources :courts, concerns: :bookable

@@ -1,0 +1,23 @@
+= link_to new_coach_path, class: 'btn btn-default' do
+  = fa_icon 'user-plus'
+  Создать тренера 
+
+- if @coaches.any?
+  %table.table
+    %thead
+      %tr
+        %th Имя
+        %th Почта
+        %th Стоимость
+        %th Дата создания
+        %th 
+    %tbody
+      - @coaches.each do |coach|
+        %tr
+          %td= coach.name
+          %td= coach.email
+          %td= number_to_integer_currency coach.price
+          %td= coach.created_at
+          %td= link_to fa_icon('edit') + ' Редактировать', edit_dashboard_stadium_coach_path(coach)
+- else
+  Пока нет тренеров

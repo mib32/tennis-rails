@@ -1,5 +1,5 @@
 <% unless @picture.persisted? %>
-  $('#<%= dom_id(@picture) %>').remove()
+  $('#<%= dom_id(@picture) %>').fadeOut().remove()
 <% else %>
   alert('Ошибка! Обновите страницу')
 <% end %>

@@ -1,0 +1,6 @@
+%tr
+  %td= customer.name
+  %td= customer.phone
+  %td= customer.email
+  %td= customer.events.of_products(current_user.product).count
+  %td= link_to "Подробнее", dashboard_customer_path(id: customer.id), class: 'btn btn-info btn-sm'

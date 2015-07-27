@@ -102,7 +102,7 @@ gem 'active_link_to'
 gem 'ice_cube'
 
 gem "letter_opener", :group => :development
-gem "switch_user", :group => :development
+gem "switch_user"
 gem "traceroute", :group => :development
 gem 'rails-observers'
 
