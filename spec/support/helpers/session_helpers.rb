@@ -1,11 +1,12 @@
 module Features
   module SessionHelpers
-    def sign_up_with(email, password, confirmation)
+    def sign_up_with(email, password, confirmation, type=nil)
       visit new_user_session_path
       within '.new_registration' do 
         fill_in 'Эл. почта', with: email
         fill_in 'Пароль', with: password
         fill_in 'Подтверждение пароля', :with => confirmation
+        select type, from: 'Тип' if type
       end
       click_button 'Зарегистрироваться'
     end

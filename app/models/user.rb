@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   def public_type= type
     if type == 'Admin'
       raise 'Нельзя стать админом просто так!'
-    else
+    elsif ['StadiumUser', 'CoachUser', 'Customer'].include? type
       self.becomes! type.constantize
     end
   end

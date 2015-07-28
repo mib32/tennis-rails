@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def current_user_courts_creation_path
     if current_user.kind_of? StadiumUser
-      dashboard_courts_path
+      dashboard_product_path
     elsif current_user.kind_of? CoachUser
       dashboard_employments_path
     end
