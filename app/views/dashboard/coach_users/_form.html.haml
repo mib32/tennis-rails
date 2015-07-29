@@ -1,7 +1,8 @@
-= simple_form_for [:dashboard, :stadium, @coach] do |f|
+= simple_form_for [:dashboard, @coach] do |f|
   = f.input :name
   = f.input :price, as: :string
-  = f.association :courts, as: :check_boxes, collection: current_user.stadium.courts
+  = f.simple_fields_for :coach do |cf|
+    = cf.association :courts, as: :check_boxes, collection: current_user.stadium.courts
   = f.input :email
   = f.input :password
   - if action_name == 'new'

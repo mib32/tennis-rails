@@ -1,4 +1,4 @@
-= link_to new_coach_path, class: 'btn btn-default' do
+= link_to new_dashboard_coach_user_path, class: 'btn btn-default' do
   = fa_icon 'user-plus'
   Создать тренера 
 
@@ -18,6 +18,6 @@
           %td= coach.email
           %td= number_to_integer_currency coach.price
           %td= coach.created_at
-          %td= link_to fa_icon('edit') + ' Редактировать', edit_dashboard_stadium_coach_path(coach)
+          %td= link_to fa_icon('edit') + ' Редактировать', edit_dashboard_coach_user_path(coach)
 - else
   Пока нет тренеров

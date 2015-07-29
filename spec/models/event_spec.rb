@@ -29,40 +29,73 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  it 'has price of a courts hour' do 
-    @event.products = [@court]
+  describe '#total' do
+    it 'shows price of a courts hour' do 
+      @event.products = [@court]
 
-    @event.save!
+      @event.save!
 
-    expect(@event.total).to eq 100 * 3
-  end
-  it 'has price of a  courts hour regarding special price' do 
-    special_price = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
-    price_rules = [DailyPriceRule.create(start: '11:00', stop: '13:00', price: 200, working_days: [DateTime.now.wday]), DailyPriceRule.create(start: '13:00', stop: '14:00', price: 50, working_days: [DateTime.now.wday])]
-    special_price.daily_price_rules = price_rules
-    special_price.save!
-    @stadium.special_prices = [special_price]
-    @stadium.save!
-    @court.reload
-    @event.products = [@court]
+      expect(@event.total).to eq 100 * 3
+    end
+    it 'special price of stadium affects the price' do 
+      special_price = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
+      price_rules = [DailyPriceRule.create(start: '11:00', stop: '13:00', price: 200, working_days: [DateTime.now.wday]), DailyPriceRule.create(start: '13:00', stop: '14:00', price: 50, working_days: [DateTime.now.wday])]
+      special_price.daily_price_rules = price_rules
+      special_price.save!
+      @stadium.special_prices = [special_price]
+      @stadium.save!
+      @court.reload
+      @event.products = [@court]
 
-    @event.save!
+      @event.save!
 
-    expect(@event.total).to eq 200 * 1 + 50 * 1 + 100 * 1
-  end
-  it 'has right total for periodic service' do
-    @periodic_service = ProductService.create service: Service.new(name: 'Синема'), price: 10, product: @court, periodic: "1"
-    
-    @event.product_services << @periodic_service
+      expect(@event.total).to eq 200 * 1 + 50 * 1 + 100 * 1
+    end
+    it 'special price of court affects the price' do 
+      special_price = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
+      price_rules = [DailyPriceRule.create(start: '11:00', stop: '13:00', price: 200, working_days: [DateTime.now.wday]), DailyPriceRule.create(start: '13:00', stop: '14:00', price: 50, working_days: [DateTime.now.wday])]
+      special_price.daily_price_rules = price_rules
+      special_price.save!
+      @court.special_prices = [special_price]
+      @court.save!
 
-    expect(@event.total).to eq 10 * 3
-  end
+      @event.products = [@court]
+      @event.save!
 
-  it 'has right total for non-periodic service' do
-    @non_periodic_service = ProductService.create service: Service.new(name: 'Синема'), price: 77, product: @court
-    
-    @event.product_services << @non_periodic_service    
-    
-    expect(@event.total).to eq 77
+      expect(@event.total).to eq 200 * 1 + 50 * 1 + 100 * 1
+    end
+    it 'special price of a court takes precedence over stadium' do
+      special_price1 = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
+      special_price2 = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
+      price_rules1 = [DailyPriceRule.create(start: '11:00', stop: '13:00', price: 11, working_days: [DateTime.now.wday]), DailyPriceRule.create(start: '13:00', stop: '14:00', price: 12, working_days: [DateTime.now.wday])]
+      price_rules2 = [DailyPriceRule.create(start: '11:00', stop: '13:00', price: 200, working_days: [DateTime.now.wday]), DailyPriceRule.create(start: '13:00', stop: '14:00', price: 50, working_days: [DateTime.now.wday])]
+      special_price1.daily_price_rules = price_rules1
+      special_price2.daily_price_rules = price_rules2
+      special_price1.save
+      special_price2.save
+
+      @court.special_prices = [special_price1]
+      @stadium.special_prices = [special_price2]
+
+      @event.products = [@court]
+      @event.save!
+
+      expect(@event.total).to eq 11 * 1 + 12 * 1 + 100 * 1
+    end
+    it 'has right total for periodic service' do
+      @periodic_service = ProductService.create service: Service.new(name: 'Синема'), price: 10, product: @court, periodic: "1"
+      
+      @event.product_services << @periodic_service
+
+      expect(@event.total).to eq 10 * 3
+    end
+
+    it 'has right total for non-periodic service' do
+      @non_periodic_service = ProductService.create service: Service.new(name: 'Синема'), price: 77, product: @court
+      
+      @event.product_services << @non_periodic_service    
+      
+      expect(@event.total).to eq 77
+    end
   end
 end

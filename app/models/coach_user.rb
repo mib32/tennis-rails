@@ -9,7 +9,7 @@ class CoachUser < User
   # validate :has_at_least_one_court
 
   def make_coach
-    self.create_coach
+    self.build_coach
   end
 
 

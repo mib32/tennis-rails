@@ -89,7 +89,7 @@ Rails.application.routes.draw do
     # resource :events
     resources :customers
     resources :employments
-    resources :coaches
+    resources :coach_users
     resources :withdrawal_requests
     resource :orders
   end
