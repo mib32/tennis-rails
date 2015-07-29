@@ -83,8 +83,6 @@ class Tennis.Views.ScheduleView extends Backbone.View
         else
           e.sender.dataSource.one 'requestEnd', -> $.get('/orders/total.js')
         return
-
-      timezone: "Etc/UTC",
       resources:[
         {
           field: 'visual_type'
@@ -146,6 +144,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
             return {event: options};
       },
       schema: {
+        timezone: 'Europe/Moscow'
         model: {
           id: "id",
           fields: @fields

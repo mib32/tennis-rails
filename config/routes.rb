@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   concern :has_pictures do 
     resources :pictures
   end
+  concern :has_special_prices do 
+    resources :special_prices
+  end
 
   resources :events, :my_events do 
     collection do 
@@ -81,7 +84,8 @@ Rails.application.routes.draw do
   # constraints RoleRouteConstraint.new('coach_user') do
 
   namespace :dashboard do
-    resource :product, concerns: :has_pictures
+    resource :product, concerns: [:has_pictures]
+    resources :special_prices
     # resource :events
     resources :customers
     resources :employments
@@ -104,9 +108,7 @@ Rails.application.routes.draw do
     end
   end
   # scope '(:scope)' do 
-  resources :courts, concerns: :bookable do
-    resources :special_prices
-  end
+  resources :courts, concerns: [:bookable]
   # end
   resources :coaches, defaults: { scope: 'coach' } do 
     resources :courts, concerns: :bookable

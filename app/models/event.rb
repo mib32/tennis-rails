@@ -54,7 +54,13 @@ class Event < ActiveRecord::Base
     self.end - self.start
   end
 
+  def hours
+    (self.start.hour..self.end.hour).to_a
+  end
+
   def occurrences
+    return 1 unless recurring?
+    build_schedule
     if @schedule.terminating?
       @schedule.all_occurrences.length
     else

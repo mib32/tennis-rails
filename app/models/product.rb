@@ -12,6 +12,7 @@ class Product < ActiveRecord::Base
   has_many :reviews, as: :reviewable
   mount_uploader :avatar, PictureUploader
 
+  has_many :special_prices
   has_and_belongs_to_many :events
   # has_many :orders, dependent: :destroy
   has_many :product_services, dependent: :destroy
@@ -23,11 +24,11 @@ class Product < ActiveRecord::Base
     User.find(events.joins(:order).pluck("orders.user_id").uniq)
   end
 
-  def price
-    attributes["price"] || 0
+  def price options=nil
+    (options && special_prices.current.price(options)) || attributes["price"] || 0
   end
 
   def price_for_event event
-    price.to_i * event.duration_in_hours.to_i
+    event.hours.map{ |hour| price(hour: hour, event: event) }.reduce(:+)
   end
 end

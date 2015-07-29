@@ -810,3 +810,11 @@ body.stadium_user, body.coach{
   margin-top: 14px;
   color: black;
 }
+
+select.hhmm{
+    display: inline-block;
+    width: 4em;
+}
+.form-group.hhmm{
+    white-space: nowrap;
+}

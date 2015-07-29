@@ -3,6 +3,14 @@
     %ul.nav.nav-pills.nav-stacked
       - @product.courts.each do |cc|
         = active_link_to cc.name, url_for([@product, cc]), active: /courts\/#{cc.to_param}/, wrap_tag: :li
+    %h3 Стоимость занятий
+    - if @court.special_prices.current.present?
+      %ul.list-group
+        - @court.special_prices.current.daily_price_rules.each do |rule|
+          %li.list-group-item
+            = rule.working_days.map{|d| d.present? ? t(:"date.abbr_day_names").at(d.to_i) : nil}.join(', ') + ': '
+            = rule.start + ' - ' + rule.stop
+            = ' ' + number_to_integer_currency(rule.price)
     - if @court.product_services.any?
       %h3 Дополнительные услуги
       %ul.list-group

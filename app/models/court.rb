@@ -1,6 +1,5 @@
 class Court < Product
   belongs_to :stadium, foreign_key: :parent_id
-  has_many :special_prices
   has_many :coaches_courts
   has_many :coaches, through: :coaches_courts
 
@@ -10,8 +9,13 @@ class Court < Product
     attributes["change_price"] || 0
   end
 
-  def price
-    special_prices.current.price || super
+
+  def special_prices
+    if super.any?
+      super
+    else
+      stadium.special_prices
+    end
   end
 
   def name_with_stadium

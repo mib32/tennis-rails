@@ -4,8 +4,7 @@ class Dashboard::SpecialPricesController < DashboardController
   # GET /dashboard/special_prices
   # GET /dashboard/special_prices.json
   def index
-    @court = current_user.stadium.courts.find(params[:court_id])
-    @special_prices = SpecialPrice.where(court_id: @court.id)
+    @special_prices = current_user.special_prices
   end
 
   # GET /dashboard/special_prices/1
@@ -15,8 +14,8 @@ class Dashboard::SpecialPricesController < DashboardController
 
   # GET /dashboard/special_prices/new
   def new
-    @court = current_user.stadium.courts.find(params[:court_id])
     @special_price = SpecialPrice.new
+    @special_price.daily_price_rules.new
   end
 
   # GET /dashboard/special_prices/1/edit
@@ -26,12 +25,11 @@ class Dashboard::SpecialPricesController < DashboardController
   # POST /dashboard/special_prices
   # POST /dashboard/special_prices.json
   def create
-    @court = current_user.stadium.courts.find(params[:court_id])
-    @special_price = @court.special_prices.new(special_price_params)
+    @special_price = SpecialPrice.new(special_price_params)
 
     respond_to do |format|
       if @special_price.save
-        format.html { redirect_to dashboard_court_special_prices_path(@court), notice: 'Период создан.' }
+        format.html { redirect_to dashboard_special_prices_path(@product), notice: 'Период создан.' }
         format.json { render :show, status: :created, location: @special_price }
       else
         format.html { render :new }
@@ -45,7 +43,7 @@ class Dashboard::SpecialPricesController < DashboardController
   def update
     respond_to do |format|
       if @special_price.update(special_price_params)
-        format.html { redirect_to dashboard_court_special_prices_path, notice: 'Период обновлен.' }
+        format.html { redirect_to dashboard_special_prices_path, notice: 'Период обновлен.' }
         format.json { render :show, status: :ok, location: @special_price }
       else
         format.html { render :edit }
@@ -59,7 +57,7 @@ class Dashboard::SpecialPricesController < DashboardController
   def destroy
     @special_price.destroy
     respond_to do |format|
-      format.html { redirect_to dashboard_court_special_prices_url, notice: 'Период успешно удален.' }
+      format.html { redirect_to dashboard_special_prices_url, notice: 'Период успешно удален.' }
       format.json { head :no_content }
     end
   end
@@ -67,12 +65,11 @@ class Dashboard::SpecialPricesController < DashboardController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_special_price
-      @court = current_user.stadium.courts.find(params[:court_id])
-      @special_price = @court.special_prices.find(params[:id])
+      @special_price = current_user.special_prices.select {|p| p.id.to_s == params[:id]}.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def special_price_params
-      params.require(:special_price).permit(:start, :end, :price, :is_sale, :court_id)
+      params.require(:special_price).permit(:start, :stop, :price, :product_id, :is_sale, :court_id, daily_price_rules_attributes: [:id, :start, :stop, :_destroy, :price, working_days: []])
     end
 end

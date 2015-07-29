@@ -57,8 +57,9 @@ ru:
         name: Имя
         phone: Телефон
       special_price:
+        product: Продукт
         start: Начало
-        end: Конец
+        stop: Конец
         price: Цена
         is_sale: Скидка
       profile:

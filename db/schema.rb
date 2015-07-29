@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727174234) do
+ActiveRecord::Schema.define(version: 20150728180703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20150727174234) do
 
   add_index "coaches_courts", ["coach_id"], name: "index_coaches_courts_on_coach_id", using: :btree
   add_index "coaches_courts", ["court_id"], name: "index_coaches_courts_on_court_id", using: :btree
+
+  create_table "daily_price_rules", force: :cascade do |t|
+    t.integer  "special_price_id"
+    t.string   "start"
+    t.string   "stop"
+    t.integer  "price"
+    t.integer  "working_days",     default: [],              array: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "daily_price_rules", ["special_price_id"], name: "index_daily_price_rules_on_special_price_id", using: :btree
 
   create_table "deposit_requests", force: :cascade do |t|
     t.integer  "wallet_id"
@@ -215,15 +227,15 @@ ActiveRecord::Schema.define(version: 20150727174234) do
 
   create_table "special_prices", force: :cascade do |t|
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "stop"
     t.integer  "price"
     t.boolean  "is_sale"
-    t.integer  "court_id"
+    t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "special_prices", ["court_id"], name: "index_special_prices_on_court_id", using: :btree
+  add_index "special_prices", ["product_id"], name: "index_special_prices_on_product_id", using: :btree
 
   create_table "stadia", force: :cascade do |t|
     t.integer  "category_id"
@@ -302,6 +314,7 @@ ActiveRecord::Schema.define(version: 20150727174234) do
   add_index "withdrawals", ["wallet_id"], name: "index_withdrawals_on_wallet_id", using: :btree
 
   add_foreign_key "additional_event_items", "events"
+  add_foreign_key "daily_price_rules", "special_prices"
   add_foreign_key "deposit_requests", "wallets"
   add_foreign_key "deposit_responses", "deposit_requests"
   add_foreign_key "deposits", "wallets"

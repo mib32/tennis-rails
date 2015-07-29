@@ -20,6 +20,10 @@ class StadiumUser < User
     attributes["name"] || attributes["email"]
   end
 
+  def special_prices
+    (stadium.special_prices.to_a + stadium.courts.map { |court| court.special_prices.to_a }.flatten).uniq
+  end
+
   # def model_name
     # User.model_name
   # end
