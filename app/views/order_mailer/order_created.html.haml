@@ -1,0 +1,8 @@
+%h3 Заказ #{@order.guid} оплачен!
+
+%table.table
+  = render @events
+
+Был оплачен пользователем #{@order.user.name}, #{@order.user.email}, тел: #{@order.user.phone}.
+
+Благодарим за использование нашей системы!

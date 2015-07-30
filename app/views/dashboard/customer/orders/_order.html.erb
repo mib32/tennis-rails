@@ -16,9 +16,7 @@
 			<% order.events.each do |item| %>
 				<tr>
 					<td>
-						<% if item.court.present? %>
-							<%= link_to item.court.stadium.name, item.court.stadium %>
-						<% end %>
+						<%= item.products.map(&:name).join(',') %>
 					</td>
 					<td><%= l item.start, format: :short %></td>
 					<td><%= l item.end, format: :short %></td>

@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_params, if: :devise_controller?
-  before_action :find_parent_record, if: :nested_resource?
   before_action :find_static_pages
   layout :set_layout
 
@@ -15,10 +14,10 @@ class ApplicationController < ActionController::Base
       if current_user.type == 'Admin'
         admin_stadiums_path
       else
-        dashboard_path
+        dashboard_grid_path
       end
     else
-      stored_location_for(resource) || request.referer || dashboard_path
+      stored_location_for(resource) || request.referer || dashboard_grid_path
     end
   end
  
@@ -30,22 +29,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    if nested_resource?
-      params[:model_name].underscore
+    if current_user && devise_controller?
+      'dashboard'
     end
-  end
-  def nested_resource?
-    params[:model_name].present? && ( params[:controller] != params[:model_name].underscore.pluralize || params[:action] == 'show')
-  end
-
-  def find_parent_record
-    klass = params[:model_name].constantize
-    id_param = params[:action] == 'show' ? 'id' : params[:model_name].underscore + '_id'
-    @record = klass.friendly.find(params[id_param])
-    instance_variable_set('@' + params[:model_name].underscore, @record)
   end
 
   def find_static_pages
     @pages = StaticPage.all
+  end
+
+  def current_products
+    nil
   end
 end

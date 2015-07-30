@@ -1,5 +1,6 @@
-class PicturesController < ApplicationController
+class PicturesController < NestedResourcesController
   before_filter :find_picture, except: :index
+  
 
   
 

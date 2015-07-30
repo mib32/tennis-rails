@@ -1,7 +1,7 @@
 class EventChange < ActiveRecord::Base
   belongs_to :event
   belongs_to :order
-  validates_presence_of :event, :order
+  # validates_presence_of :event
   enum status: [:unpaid, :paid]
 
   def total

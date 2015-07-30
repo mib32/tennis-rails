@@ -1,0 +1,34 @@
+%h3= @customer.name
+%dl
+  %dt Баланс
+  %dd= number_to_integer_currency @customer.events.paid.of_products(current_user.product).map(&:total).inject(&:+).to_i
+%h3 Грядущие
+%table.table
+  %thead
+    %tr
+      %th Стадион
+      %th Начало
+      %th Конец
+      %th Сумма
+  %tbody
+    - @customer.events.future.paid.of_products(current_user.product).order(created_at: :desc).each do |e|
+      %tr
+        %td= e.product_names
+        %td= l e.start, format: :short
+        %td= l e.end, format: :short
+        %td= number_to_integer_currency e.total
+%h3 Прошедшие
+%table.table
+  %thead
+    %tr
+      %th Стадион
+      %th Начало
+      %th Конец
+      %th Сумма
+  %tbody
+    - @customer.events.past.paid.of_products(current_user.product).order(created_at: :desc).each do |e|
+      %tr
+        %td= e.product_names
+        %td= l e.start, format: :short
+        %td= l e.end, format: :short
+        %td= number_to_integer_currency e.total

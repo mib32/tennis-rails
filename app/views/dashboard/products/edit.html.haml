@@ -1,0 +1,59 @@
+- if @product.kind_of? Stadium
+  = simple_form_for @product, as: :product, url: dashboard_product_path do |f|
+    .row.top15
+      .col-xs-12
+        .btn-toolbar
+          = link_to fa_icon('camera-retro') + ' Загрузить фото', dashboard_product_pictures_path, class: 'btn btn-default'
+      .col-md-6
+        = f.association :category
+        = f.input :name
+        = f.input :address
+        = f.input :latitude, as: :hidden
+        = f.input :longitude, as: :hidden
+        = f.input :phone
+        = f.input :description
+      .col-md-6
+        %label Выберите месторасположение:
+        #map{:style => "height: 400px;"}
+        :javascript
+          var map = new Tennis.Views.DraggableMapView({latLng: {lat: #{@product.latitude || 55.75}, lng: #{@product.longitude || 37.61}}});
+          map.render();
+    .row
+      .col-xs-12
+        %h4 Корты
+        = link_to_add_association 'Добавить корт', f, :courts, class: 'btn btn-primary', 'data-association-insertion-node' => '.courts', 'data-association-insertion-method' => 'append'
+        %table.table
+          %thead
+            %tr
+              %th Название
+              %th Стоимость часа
+              %th Стоимость переноса
+              %th
+          %tbody.courts
+            = f.simple_fields_for :courts, @product.courts.any? && @product.courts || @product.courts.new do |court|
+              = render "court_fields", f: court
+        %h4 Дополнительные услуги
+        = link_to_add_association 'Добавить услугу', f, :product_services, class: 'btn btn-primary', 'data-association-insertion-node' => '.services', 'data-association-insertion-method' => 'append'
+        %table.table
+          %thead
+            %tr
+              %th Название
+              %th Стоимость
+              %th Периодичность
+              %th
+          %tbody.services
+            = f.simple_fields_for :product_services, @product.product_services.any? && @product.product_services || @product.product_services.new do |court|
+              = render "product_service_fields", f: court
+        = f.button :submit
+- elsif @product.kind_of? Coach
+  = simple_form_for @product, as: :product, url: dashboard_product_path do |f|
+    = f.input :avatar, as: :image_file, version: :small_square
+    = f.input :name
+    = f.input :phone
+    -#= f.input :price, as: :string
+    = f.simple_fields_for :profile do |pf|
+      = pf.input :description, as: :text
+
+    .form-group
+      = link_to fa_icon('edit') + ' Сменить пароль или почту', edit_user_registration_path, class: 'btn btn-default'
+    = f.button :submit, 'Сохранить'

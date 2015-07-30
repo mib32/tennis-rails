@@ -1,0 +1,6 @@
+%tr
+  = f.simple_fields_for :service, f.object.service || Service.new do |sf|
+    %td= sf.input :name, label: false
+  %td= f.input :price, label: false
+  %td= f.input :periodic?, as: :boolean, label: 'Да'
+  %td= link_to_remove_association 'Удалить услугу', f

@@ -3,8 +3,8 @@ class Dashboard::EventsController < DashboardController
   respond_to :html, :json
 
   def index
-    @events = current_user.events.joins(:court, order: :user).includes(:order)
-    @events = @events.where(court_id: params[:court_id]) if params[:court_id]
+    @events = Event.of_products(current_products)
+    # @events = @events.where(court_id: params[:court_id]) if params[:court_id]
     
     respond_to do |format|
       format.json { render 'events/index' }
@@ -15,7 +15,7 @@ class Dashboard::EventsController < DashboardController
   def create
     @order = Order.order('created_at desc').find_or_create_by(user: current_user, status: 'unpaid')
     @event = @order.events.new event_params.delete_if {|k,v| v.empty? }
-    @event.court = Court.find params[:court_id]
+    @event.products = current_products
 
     @order.save
     respond_to do |format|
@@ -38,5 +38,13 @@ class Dashboard::EventsController < DashboardController
 
   def event_params
     params.require(:event).permit(Event.strong_params)
+  end
+
+  def current_products
+    if params[:court_id]
+      [Court.find(params[:court_id])]
+    else
+      [current_user.product]
+    end
   end
 end

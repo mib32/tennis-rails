@@ -732,11 +732,11 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
 
 
 .k-edit-form-container{
-  label[for=owned],
+  label[for=visual_type],
   label[for=title],
   label[for=isAllDay],
   label[for=description],
-  [data-container-for=owned], 
+  [data-container-for=visual_type], 
   [data-container-for=title],
   [data-container-for=isAllDay], 
   [data-container-for=description] 
@@ -785,4 +785,28 @@ body.stadium_user, body.coach{
 
 .bootsy .bootsy_text_area{
   height: 200px;
+}
+
+.legend-label{
+  display: inline-block;
+  height: 100%;
+  width: 5em;
+  border-radius: 4px;
+  vertical-align: middle;
+  height: 20px;
+}
+    
+.legend-paid{
+  background-color: #8ED869;
+}
+.legend-owned{
+  background-color: cadetblue;
+}
+.legend-disowned{
+  background-color: #ccc;
+}
+#switch_user_identifier{
+  float: left;
+  margin-top: 14px;
+  color: black;
 }

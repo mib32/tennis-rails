@@ -2,8 +2,8 @@
   = f.input :avatar, as: :image_file, version: :small_square
   = f.input :name
   = f.input :phone
-  = f.input :price, as: :string
-  = f.simple_fields_for :coach_profile do |pf|
+  -#= f.input :price, as: :string
+  = f.simple_fields_for :profile do |pf|
     = pf.input :description, as: :text
 
   .form-group

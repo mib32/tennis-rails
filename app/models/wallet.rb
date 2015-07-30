@@ -5,16 +5,20 @@ class Wallet < ActiveRecord::Base
   has_many :withdrawals, dependent: :destroy
   has_many :withdrawal_requests, dependent: :destroy
 
+  def deposit_with_tax_deduction! amount
+    deposit! amount - tax_for(amount)
+    deduct_tax(amount)
+  end
+
   def deposit! amount
-    deposits.create! amount: amount - tax_for(amount)
+    deposits.create! amount: amount 
   end
 
   def withdraw! amount
     if can_spend? amount
       withdrawals.create! amount: amount 
     else
-      errors.add :base, "Недостаточно средств"
-      false
+      raise "Недостаточно средств"
     end
   end
 
@@ -23,10 +27,15 @@ class Wallet < ActiveRecord::Base
   end
 
   def can_spend? amount
-    total - amount > 0
+    total - amount >= 0
   end
 
   def tax_for(amount)
     amount.to_f * Option.current.tax / 100
+  end
+
+  private
+  def deduct_tax(amount)
+    AdminWallet.find.deposit! tax_for(amount)
   end
 end

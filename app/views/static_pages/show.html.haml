@@ -1,7 +1,7 @@
 .body-bg.clearfix
   %h1= @page.title
   .page-content
-    = @page.text
+    = raw @page.text
   %h3 Напишите нам
   .form
     = simple_form_for :feedback, url: feedback_path, method: :post, remote: true do |f|

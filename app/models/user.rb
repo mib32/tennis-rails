@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   friendly_id :name, use: [:slugged]
 
   has_many :orders, dependent: :destroy
-  has_many :events, through: :orders
+  has_many :events
   has_many :event_changes, through: :events
   has_one :wallet, dependent: :destroy
   after_create :create_wallet
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   def public_type= type
     if type == 'Admin'
       raise 'Нельзя стать админом просто так!'
-    else
+    elsif ['StadiumUser', 'CoachUser', 'Customer'].include? type
       self.becomes! type.constantize
     end
   end
