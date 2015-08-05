@@ -15,7 +15,8 @@ class OrdersController < DashboardController
 
   def create
     @order = current_user.orders.new
-    @order.events = Event.find(params[:event_ids])
+    @order.events = Event.find(params[:event_ids]) if params[:event_ids]
+    @order.event_changes = EventChange.find(params[:event_change_ids]) if params[:event_change_ids]
 
     @order.save!
 

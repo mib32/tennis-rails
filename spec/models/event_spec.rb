@@ -27,6 +27,13 @@ RSpec.describe Event, type: :model do
     it 'returns array of hours on which event is going' do 
       expect(@event.hours).to eq [12,13,14]
     end
+
+    it 'handles one hour well' do
+      @event.start = Time.parse('12:30:00')
+      @event.end = Time.parse('13:00:00')
+
+      expect(@event.hours).to eq [12]
+    end
   end
 
   describe '#total' do
@@ -36,6 +43,14 @@ RSpec.describe Event, type: :model do
       @event.save!
 
       expect(@event.total).to eq 100 * 3
+    end
+    it 'shows price of a courts hours times occurrences' do
+      @event.recurrence_rule = 'FREQ=DAILY;COUNT=10'
+      @event.products = [@court]
+
+      @event.save!
+
+      expect(@event.total).to eq 100 * 3 * 10
     end
     it 'special price of stadium affects the price' do 
       special_price = SpecialPrice.create start: 2.days.ago, stop: 2.days.from_now
@@ -97,5 +112,6 @@ RSpec.describe Event, type: :model do
       
       expect(@event.total).to eq 77
     end
+
   end
 end

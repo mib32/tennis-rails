@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
   end
 
   def associated_payables_with_price
-    associated_payables.map {|p| {product: p, total: p.price_for_event(self)}}
+    associated_payables.map {|p| {product: p, total: p.price_for_event(self) * occurrences}}
   end
 
   def duration_in_hours
@@ -55,7 +55,12 @@ class Event < ActiveRecord::Base
   end
 
   def hours
-    (self.start.hour..self.end.hour).to_a
+    arr = (self.start.hour..self.end.hour).to_a
+    if self.end.min == 0
+      arr[0..-2]
+    else
+      arr
+    end
   end
 
   def occurrences
@@ -95,6 +100,26 @@ class Event < ActiveRecord::Base
     products.map(&:name).join(', ')
   end
 
+  def coaches
+    products.where(type: 'Coach')
+  end
+
+  def coach
+    coaches.first
+  end
+
+  def stadium
+    products.where(type: 'Stadium').first || court.stadium
+  end
+
+  def courts
+    products.where(type: 'Court')
+  end
+
+  def court
+    courts.first
+  end
+
 private
 
   def build_schedule
@@ -105,7 +130,7 @@ private
           s.add_exception_rule(IceCube::Rule.from_ical(recurrence_exception))
         end
       else
-        s.add_recurrence_rule(IceCube::SingleOccurrenceRule.new attributes["start"])
+        s.add_recurrence_rule(IceCube::SingleOccurrenceRule.new start)
       end
     end
   end

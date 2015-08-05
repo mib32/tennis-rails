@@ -15,8 +15,9 @@ module Changeable
 
   def create_change
     if @arm_for_change_create 
-      Rails.logger.debug 'registering change'
-      event_changes.create! summary: self.to_json, status: :unpaid
+      Rails.logger.debug { 'registering change' }
+      event_changes.delete_all
+      event_changes.create! summary: self.attributes.except('id').to_json, status: :unpaid
       @arm_for_change_create = false
     end
   end
@@ -51,5 +52,13 @@ module Changeable
 
   def end_before_change
     attributes["end"]
+  end
+
+  def has_unpaid_changes?
+    event_changes.unpaid.present?
+  end
+
+  def event_change
+    event_changes.last
   end
 end
