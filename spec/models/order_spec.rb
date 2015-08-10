@@ -27,5 +27,26 @@ RSpec.describe Order, type: :model do
       expect { @order.pay! }.to raise_error
 
     end
+    it 'sends emails to coach' do 
+      ActionMailer::Base.deliveries.clear
+
+      @order.pay!
+
+      expect(ActionMailer::Base.deliveries.count).to eq 3
+      expect(ActionMailer::Base.deliveries.first.subject).to eq '⚽️ Bookingsports: Заказ оплачен!'
+    end
+
+    it 'sends email about event change' do 
+      @order.pay!
+      ActionMailer::Base.deliveries.clear
+      @event.reload
+      @event.update start: Time.now
+      @new_order = Order.create event_changes: [@event.event_change], user: @user
+      @new_order.pay!
+
+      # puts ActionMailer::Base.deliveries.last.body
+      expect(ActionMailer::Base.deliveries.count).to eq 3
+      expect(ActionMailer::Base.deliveries.first.subject).to eq '⚽️ Bookingsports: Занятие перенесено'
+    end
   end
 end

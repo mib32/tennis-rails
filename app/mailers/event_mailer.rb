@@ -1,11 +1,10 @@
 class EventMailer < ApplicationMailer
 
-  def date_change_mail(event)
-    @event = event
-    @event.changes_applied
+  def date_change_mail(to, event_change)
+    @event_change = event_change
+    @event = event_change.event
+    # @event.changes_applied
 
-    if event.order.present?
-      mail(to: event.order.associated_emails, subject: '⚽️ Bookingsports: Занятие перенесено')
-    end
+    mail(to: to, subject: '⚽️ Bookingsports: Занятие перенесено')
   end
 end

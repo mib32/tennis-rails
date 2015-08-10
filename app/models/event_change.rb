@@ -6,6 +6,7 @@ class EventChange < ActiveRecord::Base
   scope :paid, -> { joins("LEFT OUTER JOIN orders ON orders.id = event_changes.order_id").where('orders.status =  ?', Order.statuses[:paid]) }
   scope :unpaid, -> { joins("LEFT OUTER JOIN orders ON orders.id = event_changes.order_id").where('orders.status =  ? or orders.status is null', Order.statuses[:unpaid]) }
 
+  delegate :products, to: :event
   def total
     event.court.change_price.to_i
   end

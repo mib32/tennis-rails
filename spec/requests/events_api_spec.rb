@@ -15,9 +15,15 @@ RSpec.describe "EventsApi", type: :request do
 
 
     it 'creates event with additional services' do 
-      post stadium_court_events_path(@court.stadium, @court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false", "product_service_ids"=>[@service.id.to_s, @periodic_service.id.to_s]}}
+      post stadium_court_events_path(@coach, @court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false", "product_service_ids"=>[@service.id.to_s, @periodic_service.id.to_s]}}
 
       expect(Event.last.product_services.count).to eq 2
+    end
+
+    it 'creates coach event' do 
+      post coach_court_events_path(@court.stadium, @court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false", "product_service_ids"=>[@service.id.to_s, @periodic_service.id.to_s]}}
+
+      expect(@coach.events.count).to eq 1
     end
 
     it 'can move unpaid event freely' do 
@@ -43,5 +49,16 @@ RSpec.describe "EventsApi", type: :request do
       expect(@event.start_before_change.min).to eq 00
       expect(@event.end_before_change.min).to eq 30
     end
+
+    # it 'sends mail when event change is payed' do 
+    #   ActionMaler::Base.deliveries.clear
+    #   @event.order.paid!
+    #   put stadium_court_event_path(@court.stadium, @court, @event.id), {"event"=>{"id"=>@event.id, "start"=>"Mon Jul 20 2015 13:11:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:22:00 GMT+0300 (MSK)", "visual_type"=>"owned", "user_name"=>"TestCustomer@tennis.ru", "description"=>"TestCustomer@tennis.ru", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>""}}
+    #   post orders_path('event_change_ids[]' => @event.event_change.id)
+    #   @new_order = Order.last
+    #   @new_order.paid!
+
+    #   expect(ActionMaler::Base.deliveries.count).to be eq 3
+    # end
   end
 end

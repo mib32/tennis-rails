@@ -1,6 +1,16 @@
-%h1 Занятие перенесено!
+%h1 Перенос занятия
 
-%table
+Пользователь #{@event.user.name} перенес занятие.
+
+Занятие на стадионе #{@event.product_names}
+
+- if @event.start != @event.start_before_change
+  Начало перенесено с #{l @event.start_before_change, format: :short} на #{l @event.start, format: :short}.
+- if @event.end != @event.end_before_change
+  Конец перенесен с #{l @event.end_before_change, format: :short} на #{l @event.end, format: :short}.
+
+-# Старое
+-#%table
   %thead
     %tr
       %th Стадион
@@ -16,12 +26,13 @@
 
 
 
-- [:start, :end].each do |attr|
-  - list = @event.previous_changes[attr]
-  %p
-    = Event.human_attribute_name attr
-    - if list.first.present?
-      = " с #{l list.first, format: :short}"
-    - if list.last.present?
-      = " на #{l list.last, format: :short}"
+-#old
+  - [:start, :end].each do |attr|
+    - list = @event.previous_changes[attr]
+    %p
+      = Event.human_attribute_name attr
+      - if list.first.present?
+        = " с #{l list.first, format: :short}"
+      - if list.last.present?
+        = " на #{l list.last, format: :short}"
 
