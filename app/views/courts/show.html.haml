@@ -1,9 +1,11 @@
 .row.top15
   .col-xs-4
+    = render 'total'
+    %h4 Корты
     %ul.nav.nav-pills.nav-stacked
       - @product.courts.each do |cc|
         = active_link_to cc.name, url_for([@product, cc]), active: /courts\/#{cc.to_param}/, wrap_tag: :li
-    %h3 Стоимость занятий
+    %h4 Стоимость занятий
     - if @court.special_prices.current.present?
       %ul.list-group
         - @court.special_prices.current.daily_price_rules.each do |rule|
@@ -12,7 +14,7 @@
             = rule.start + ' - ' + rule.stop
             = ' ' + number_to_integer_currency(rule.price)
     - if @court.product_services.any?
-      %h3 Дополнительные услуги
+      %h4 Дополнительные услуги
       %ul.list-group
         - @court.product_services.each do |p|
           %li.list-group-item

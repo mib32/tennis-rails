@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     resources :events
     resources :my_events
   end
+  concern :totalable do 
+    member do 
+      get 'total'
+    end
+  end
 
   concern :has_pictures do 
     resources :pictures
@@ -41,9 +46,6 @@ Rails.application.routes.draw do
   post 'payments/success'
 
   resources :orders do
-    collection do
-      get 'total'
-    end
     member do
       patch 'pay'
     end
@@ -108,16 +110,16 @@ Rails.application.routes.draw do
     end
   end
   # scope '(:scope)' do 
-  resources :courts, concerns: [:bookable]
+  resources :courts, concerns: [:bookable, :totalable]
   # end
   resources :coaches, defaults: { scope: 'coach' } do 
-    resources :courts, concerns: :bookable
+    resources :courts, concerns: [:bookable, :totalable]
   end
 
   resources :stadiums, defaults: { scope: 'stadium' } do
     resources :pictures, only: :index
     resources :reviews
-    resources :courts, concerns: :bookable
+    resources :courts, concerns: [:bookable, :totalable]
   end
 
   # get 'events/grid', to: 'events#grid', as: 'dashboard'

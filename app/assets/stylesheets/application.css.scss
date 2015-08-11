@@ -169,7 +169,11 @@ select,
     padding: 20px !important;
 }
 .add_to_cart_button {
-    margin-top: -10px !important;
+    // margin-top: -10px !important;
+    margin-left: 0px !important;
+    width: 100% !important;
+    display: inline-block;
+    text-align: center;
 }
 .woocommerce #respond input#submit,
 .woocommerce a.button,

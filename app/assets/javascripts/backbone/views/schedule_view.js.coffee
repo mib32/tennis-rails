@@ -81,7 +81,7 @@ class Tennis.Views.ScheduleView extends Backbone.View
           alert('Это время занято')
           e.preventDefault()
         else
-          e.sender.dataSource.one 'requestEnd', -> $.get('/orders/total.js')
+          e.sender.dataSource.one 'requestEnd', -> $.get(window.location.pathname + '/total.js')
         return
       resources:[
         {

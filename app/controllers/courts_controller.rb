@@ -9,6 +9,15 @@ class CourtsController < ApplicationController
     @court = Court.friendly.find params[:id]
   end
 
+  def total
+    @court = Court.friendly.find(params[:id])
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  private
+
   def set_layout
     params[:scope] || 'application'
   end

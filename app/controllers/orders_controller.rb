@@ -2,10 +2,6 @@ class OrdersController < DashboardController
   before_filter :authenticate_user!
   respond_to :json, :js, :html
 
-  def total
-    
-  end
-
   def index 
   end
 

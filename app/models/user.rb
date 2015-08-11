@@ -30,16 +30,24 @@ class User < ActiveRecord::Base
     end
   end
 
-  def total
-    orders.unpaid.map(&:total).inject(:+)
+  def total options={}
+    events_maybe_scoped_by(options).unpaid.map(&:total).inject(:+)
   end
 
-  def total_hours
-    orders.unpaid.map(&:total_hours).inject(:+) || 0
+  def total_hours options={}
+    events_maybe_scoped_by(options).unpaid.map(&:duration_in_hours).inject(:+) || 0
   end
 
-  def changes_total
-    event_changes.unpaid.inject(0) {|sum, c| sum + c.event.court.change_price.to_i }
+  def events_maybe_scoped_by options
+    if options[:product].present?
+      events.of_products(options[:product])
+    else
+      events
+    end
+  end
+
+  def changes_total options={}
+    event_changes.of_products(options[:product]).unpaid.map(&:total).inject(:+) || 0
   end
 
   def navs
