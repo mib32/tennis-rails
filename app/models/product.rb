@@ -29,6 +29,6 @@ class Product < ActiveRecord::Base
   end
 
   def price_for_event event
-    event.hours.map{ |hour| price(hour: hour, event: event) }.reduce(:+)
+    event.hours.map{ |hour| price(hour: hour, event: event) }.reduce(:+) || 0
   end
 end
