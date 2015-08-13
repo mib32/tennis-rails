@@ -4,13 +4,7 @@ class EventsController < ApplicationController
   # before_filter :set_court, except: :index
 
   def index
-    # @events = Event.joins(:court, order: :user).includes(:order)
-    # @events = @events.where(court_id: params[:court_id]) if params[:court_id]
-    # if current_user
-      # @events = @events.where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: current_user.id, st: Order.statuses[:paid]} )
-    # else
-      # @events = @events.where(orders: { status: Order.statuses[:paid] })
-    # end
+    logger.debug { current_products.inspect }
     @events = Event.of_products(current_products)
     respond_with @events
   end
@@ -61,6 +55,7 @@ class EventsController < ApplicationController
   def current_products
     [Court.where(slug: params[:court_id].to_s).last,
      Coach.where(slug: params[:coach_id].to_s).last,
+     Stadium.where(slug: params[:stadium_id].to_s).last,
      Product.where(slug: params[:product_id].to_s).last].compact
   end
 end

@@ -6,6 +6,11 @@ RSpec.describe "EventsApi", type: :request do
     login_via_post_as @user
   end
   describe 'grid at court show view' do 
+    it 'Gets all events' do
+      @event = Event.create! products: [@court], product_services: [@service, @periodic_service], start: Time.parse('12:00:00'), end: Time.parse('14:30:00'), user: @user
+      get stadium_court_events_path(@court.stadium, @court, format: :json)
+      puts response.body
+    end
     it 'Creates new event' do
       post stadium_court_events_path(@court.stadium, @court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false"}}
 

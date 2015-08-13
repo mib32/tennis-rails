@@ -4,7 +4,7 @@
     %h4 Корты
     %ul.nav.nav-pills.nav-stacked
       - @product.courts.each do |cc|
-        = active_link_to cc.name, url_for([@product, cc]), active: /courts\/#{cc.to_param}/, wrap_tag: :li
+        = active_link_to [cc.name, cc.category.try(:name)].compact.join(', '), url_for([@product, cc]), active: /courts\/#{cc.to_param}/, wrap_tag: :li
     %h4 Стоимость занятий
     - if @court.special_prices.current.present?
       %ul.list-group
@@ -18,9 +18,7 @@
       %ul.list-group
         - @court.product_services.each do |p|
           %li.list-group-item
-            = number_to_integer_currency p.price
-            = p.service.name
-            = p.periodic? ? '' : "Разово"
+            = p.service_name_and_price
 
   .col-xs-8
     = render "schedule_legend"

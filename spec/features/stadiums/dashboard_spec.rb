@@ -1,7 +1,8 @@
 feature 'dashboard' do
-  before(:all) do 
+  before(:each) do 
     @stadium_owner = StadiumUser.create! email: 'test@example.com', password: 'shooshoo'
     @court = Court.create!(name: "Корт", stadium: @stadium_owner.stadium, price: 100)
+    @category = Category.create! name: "Футбол"
     signin(@stadium_owner.email, @stadium_owner.password)
   end
 
@@ -19,6 +20,24 @@ feature 'dashboard' do
 
       expect{ click_button 'Сохранить' }.to change(CoachUser, :count).by 1
       expect(page).to have_text CoachUser.last.name
+    end
+  end
+
+  describe 'courts section' do 
+    it 'edits court' do 
+      visit edit_dashboard_product_path 
+      # puts page.html
+      within '.courts' do 
+        fill_in 'product_courts_attributes_0_name', with: 'Name'
+        fill_in 'product_courts_attributes_0_price', with: 100
+        fill_in 'product_courts_attributes_0_change_price', with: 10
+        select 'Футбол', from: 'product_courts_attributes_0_category_id'
+      end
+      click_button 'Сохранить Стадион'
+      # expect{ click_button 'Сохранить Стадион' }.to change(Court, :count).by 1
+      @court.reload
+      expect(@court.name).to eq 'Name'
+      expect(@court.category.name).to eq 'Футбол'
     end
   end
 end

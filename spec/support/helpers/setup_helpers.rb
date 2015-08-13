@@ -16,6 +16,7 @@ module TennisHelpers
 
       @event = Event.create! products: [@court, @coach], product_services: [@service, @periodic_service], start: Time.parse('12:00:00'), end: Time.parse('14:30:00'), user: @user
 
+      @category = Category.create! name: "Футбол"
       @order = Order.create! events: [@event], user: @user
       Option.create tax: 5
     end

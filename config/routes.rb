@@ -117,6 +117,7 @@ Rails.application.routes.draw do
   end
 
   resources :stadiums, defaults: { scope: 'stadium' } do
+    resources :events
     resources :pictures, only: :index
     resources :reviews
     resources :courts, concerns: [:bookable, :totalable]
