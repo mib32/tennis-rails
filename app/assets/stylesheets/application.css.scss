@@ -740,9 +740,11 @@ tr.cart-subtotal, tr.shipping {  height: 40px;}
   label[for=title],
   label[for=isAllDay],
   label[for=description],
+  label[for=timezone],
   [data-container-for=visual_type], 
   [data-container-for=title],
   [data-container-for=isAllDay], 
+  [data-container-for=timezone], 
   [data-container-for=description] 
   {
     display: none;
