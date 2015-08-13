@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   after_initialize :set_customer, if: :new_record?
 
+  validates_acceptance_of :terms_agree
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
