@@ -8,7 +8,8 @@ class ProductService < ActiveRecord::Base
   delegate :owner, to: :product
 
   def service_name_and_price
-    "#{service.name} (#{price} руб.)"
+    periodicity = self.periodic? ? ' в час' : ''
+    "#{service.name} (#{price} руб.#{periodicity})"
   end
 
   def periodic?
