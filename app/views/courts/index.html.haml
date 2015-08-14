@@ -1,2 +1,15 @@
-<h1>Courts#index</h1>
-<p>Find me in app/views/courts/index.html.erb</p>
+.row.top15
+  .col-xs-4
+    %h4 Корты
+    %ul.nav.nav-pills.nav-stacked
+      = active_link_to "Все корты", stadium_courts_path, active: /courts$/, wrap_tag: :li
+      - @product.courts.each do |cc|
+        = active_link_to [cc.name, cc.category.try(:name)].compact.join(', '), url_for([@product, cc]), active: /courts\/#{cc.to_param}/, wrap_tag: :li
+  .col-xs-8
+    = render "schedule_legend"
+    %div{"data-grid" => true}
+    :javascript
+      kendo.culture("ru-RU");
+      var grid = new Tennis.Views.AllCourtsScheduleView({el: '[data-grid]'});
+      var changes = new Tennis.Collections.Changes();
+      grid.render();

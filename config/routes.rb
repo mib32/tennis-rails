@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   concern :bookable do 
     resources :events
     resources :my_events
+    collection do 
+      get 'events', to: 'events#parents_events'
+    end
   end
   concern :totalable do 
     member do 

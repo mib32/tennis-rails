@@ -1,12 +1,21 @@
 class EventsController < ApplicationController
   respond_to :json, :html
-  before_filter :authenticate_user!, except: :index
+  before_filter :authenticate_user!, except: [:index, :parents_events]
   # before_filter :set_court, except: :index
 
   def index
     logger.debug { current_products.inspect }
     @events = Event.of_products(current_products)
     respond_with @events
+  end
+
+  def parents_events
+    if params[:scope] == "stadium"
+      stadium = Stadium.friendly.find(params[:stadium_id])
+      @events = stadium.courts.flat_map {|court| Event.of_products(court)}
+    end
+
+    render :index
   end
 
   def private
