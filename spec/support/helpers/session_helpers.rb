@@ -7,6 +7,7 @@ module Features
         fill_in 'Пароль', with: password
         fill_in 'Подтверждение пароля', :with => confirmation
         select type, from: 'Тип' if type
+        check 'Согласен с пользовательским соглашением'
       end
       click_button 'Зарегистрироваться'
     end

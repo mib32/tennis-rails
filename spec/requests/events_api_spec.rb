@@ -5,6 +5,39 @@ RSpec.describe "EventsApi", type: :request do
     full_setup
     login_via_post_as @user
   end
+  describe 'grid at dashboard' do 
+    before(:each) do 
+      @event_four = Event.create! products: [@court], product_services: [@service, @periodic_service], start: Time.parse('12:00:00'), end: Time.parse('14:30:00'), user: @user_two
+      @order1 = Order.create! events: [@event, @event_two], user: @user
+      @order2 = Order.create! events: [@event_four], user: @user_two
+      @order1.paid!
+      @order2.paid!
+    end
+    context 'customer user' do 
+      it 'shows all my events without others' do 
+        get court_my_events_path(@court, format: :json)
+        data = JSON.parse(response.body)
+        puts data
+        grouped = data.group_by {|d| d["user_name"]}
+          
+        expect(data.count).to eq @user.events.of_products(@court).count
+        expect(grouped.keys.count).to eq 1
+        expect(grouped.keys.first).to eq "Пользователь #1"
+      end
+    end
+    context 'stadium user' do 
+      before(:each) do 
+        logout
+        login_via_post_as @stadium_owner
+      end
+      it 'shows all paid events from all users' do 
+        get court_my_events_path(@court, format: :json)
+        data = JSON.parse(response.body)
+          
+        expect(data.count).to eq 3
+      end
+    end
+  end
   describe 'grid at court show view' do 
     describe 'shows events' do 
       context 'user one' do 

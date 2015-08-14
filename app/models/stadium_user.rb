@@ -32,4 +32,12 @@ class StadiumUser < User
   def products
     stadium.courts
   end
+
+  def events
+    Event.where(id: event_ids)
+  end
+
+  def event_ids
+    products.flat_map {|product| product.events}.map(&:id)
+  end
 end
