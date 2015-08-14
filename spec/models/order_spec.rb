@@ -15,6 +15,7 @@ RSpec.describe Order, type: :model do
     it 'gives money to whom it belongs' do 
       @order.pay!
 
+      expect(@order.total).to eq 640
       expect(@coach.owner.wallet.total).to eq 285
       expect(@court.owner.wallet.total).to eq 323.0
       expect(AdminWallet.find.total).to eq 640 - (285 + 323.0)
