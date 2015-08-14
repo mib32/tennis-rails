@@ -117,7 +117,7 @@ class Event < ActiveRecord::Base
   end
 
   def court
-    courts.first
+    courts.first || Court.new
   end
 
 private
