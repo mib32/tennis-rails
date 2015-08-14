@@ -109,7 +109,7 @@ class Event < ActiveRecord::Base
   end
 
   def stadium
-    products.where(type: 'Stadium').first || court.stadium
+    products.where(type: 'Stadium').first || court.try(:stadium) || Stadium.new
   end
 
   def courts
