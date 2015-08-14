@@ -5,7 +5,8 @@ class EventsController < ApplicationController
 
   def index
     logger.debug { current_products.inspect }
-    @events = Event.of_products(current_products)
+
+    @events = Event.of_products(current_products).paid_or_owned_by(current_user)
     respond_with @events
   end
 

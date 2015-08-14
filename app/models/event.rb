@@ -14,14 +14,14 @@ class Event < ActiveRecord::Base
   scope :future, -> { where('"start" > ?', Time.current)}
   scope :paid_or_owned_by,  -> (user) do 
     if user
-      joins(:order).where("(orders.user_id <> :id and orders.status = :st) or orders.user_id = :id ", { id: user.id, st: Order.statuses[:paid]} )
+      joins("LEFT OUTER JOIN orders ON orders.id = events.order_id").where("(orders.user_id <> :id and orders.status = :st) or events.user_id = :id ", { id: user.id, st: Order.statuses[:paid]} )
     else
-      joins(:order).where('orders.status =  ?', Order.statuses[:paid])
+      paid
     end
   end
   scope :of_products, ->(*products) do
     joins(:events_products).
-    where(events_products: {product_id: products}).uniq
+    where(events_products: {product_id: products.flatten}).uniq
   end
 
   after_initialize :build_schedule

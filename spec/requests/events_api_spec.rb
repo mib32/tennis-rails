@@ -6,15 +6,45 @@ RSpec.describe "EventsApi", type: :request do
     login_via_post_as @user
   end
   describe 'grid at court show view' do 
-    it 'Gets all events' do
-      @event = Event.create! products: [@court], product_services: [@service, @periodic_service], start: Time.parse('12:00:00'), end: Time.parse('14:30:00'), user: @user
-      get stadium_court_events_path(@court.stadium, @court, format: :json)
-      puts response.body
+    describe 'shows events' do 
+      context 'user one' do 
+        it 'Gets all events from current court' do
+          get stadium_court_events_path(@court.stadium, @court, format: :json)
+          data = JSON.parse(response.body)
+          
+          expect(data.count).to eq 2
+        end
+        it 'shows all events from all courts when accessing specific path' do 
+          get events_stadium_courts_path(@court.stadium, format: :json)
+          data = JSON.parse(response.body)
+
+          expect(data.count).to eq 3
+        end
+      end
+      context 'user two' do 
+        before :each do 
+          logout
+          login_via_post_as @user_two
+        end
+        it 'cant see upaid events of other user' do
+          get stadium_court_events_path(@court.stadium, @court, format: :json)
+          data = JSON.parse(response.body)
+          
+          expect(data.count).to eq 0
+        end
+        it 'can see paid events of other user' do 
+          @order.pay!
+          get stadium_court_events_path(@court.stadium, @court, format: :json)
+          data = JSON.parse(response.body)
+
+          expect(data.count).to eq 1
+        end
+      end
     end
     it 'Creates new event' do
       post stadium_court_events_path(@court.stadium, @court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false"}}
 
-      expect(Event.count).to eq 2
+      expect(Event.count).to eq 4
       expect(Event.last.user.id).to be @user.id
     end
 

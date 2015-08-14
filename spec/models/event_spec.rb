@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  before(:all) { full_setup }
   before(:each) do 
+    full_setup
     @event = Event.create start: Time.parse('12:00:00'), end: Time.parse('14:30:00'), user: @user
   end
   describe '#occurrences' do 
@@ -113,5 +113,25 @@ RSpec.describe Event, type: :model do
       expect(@event.total).to eq 77
     end
 
+  end
+
+  describe '#paid_or_owned_by user' do 
+    it 'shows all users events' do 
+      expect(@user.events.count).to eq 4
+      expect(Event.paid_or_owned_by(@user).count).to eq 4
+    end
+    it 'show another users only paid events' do
+      @order.pay!
+
+      expect(Event.paid.count).to eq 1
+      expect(@user_two.events.count).to eq 0
+      expect(Event.paid_or_owned_by(@user_two).count).to eq 1
+    end
+    it 'shows only paid if user is nil' do 
+      @order.paid!
+
+      expect(Event.paid.count).to eq 1
+      expect(Event.paid_or_owned_by(nil).count).to eq 1
+    end
   end
 end
