@@ -30,4 +30,7 @@ class Court < Product
     end
   end
 
+  def kendo_court_id
+    stadium.courts.to_a.index(self) % 10
+  end
 end

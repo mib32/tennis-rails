@@ -82,11 +82,19 @@ class Tennis.Views.AllCourtsScheduleView extends Backbone.View
         return
       resources:[
         {
-          field: 'visual_type'
+          field: 'kendo_court_id'
           dataSource:[
-            { text: 'Своё', value: 'owned', color: 'cadetblue', editable: false },
-            { text: 'Чужое', value: 'disowned', color: '#ccc' },
-            { text: 'Оплачено', value: 'paid', color: '#8ED869' }
+            { text: '0', value: '0', color: '#1ABC9C' },
+            { text: '1', value: '1', color: '#3498DB' },
+            { text: '2', value: '2', color: '#34495E' },
+            { text: '3', value: '3', color: '#E67E22' },
+            { text: '4', value: '4', color: '#8ED869' },
+            { text: '5', value: '5', color: '#ECF0F1' },
+            { text: '6', value: '6', color: '#2ECC71' },
+            { text: '7', value: '7', color: '#9B59B6' },
+            { text: '8', value: '8', color: '#F1C40F' },
+            { text: '9', value: '9', color: '#E74C3C' },
+            { text: '10', value: '10', color: '#95A5A6' }
           ]
         },
       ]
