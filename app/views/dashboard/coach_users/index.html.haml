@@ -18,6 +18,6 @@
           %td= coach.email
           %td= number_to_integer_currency coach.price
           %td= coach.created_at
-          %td= link_to fa_icon('edit') + ' Редактировать', edit_dashboard_coach_user_path(coach)
+          %td= link_to fa_icon('edit') + ' Редактировать', edit_dashboard_coach_user_path(coach.owner.id)
 - else
   Пока нет тренеров

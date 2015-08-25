@@ -19,7 +19,16 @@ feature 'dashboard' do
       fill_in "Подтверждение пароля", with: '123123123'
 
       expect{ click_button 'Сохранить' }.to change(CoachUser, :count).by 1
-      expect(page).to have_text CoachUser.last.name
+      expect(page).to have_text CoachUser.last.coach.name
+    end
+    it 'lets you edit coach' do
+      @court.coaches.create! owner: CoachUser.create!(name: 'Антон', email: 'test32@example.com', password: 'shooshoo')
+      visit dashboard_coach_users_path
+      click_link 'Редактировать'
+      fill_in 'Имя', with: 'Антонбей'
+      click_button 'Сохранить'
+
+      expect(@court.coaches.last.name).to eq 'Антонбей'
     end
   end
 

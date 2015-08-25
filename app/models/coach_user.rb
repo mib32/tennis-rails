@@ -6,18 +6,14 @@ class CoachUser < User
   accepts_nested_attributes_for :coach
 
   delegate :description, to: :coach
-  # validate :has_at_least_one_court
+  
 
   def make_coach
     self.build_coach
   end
 
 
-  def has_at_least_one_court
-    if courts.size < 1
-      errors.add :courts, 'Выберите хотя бы один корт.'
-    end
-  end
+  
 
   def name
     attributes["name"] || "Тренер ##{id}"
