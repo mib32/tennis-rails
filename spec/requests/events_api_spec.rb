@@ -118,6 +118,29 @@ RSpec.describe "EventsApi", type: :request do
       expect(@event.end_before_change.min).to eq 30
     end
 
+    context 'paid event changed' do 
+      before :each do 
+        @event.order.paid!
+        put stadium_court_event_path(@court.stadium, @court, @event.id), {"event"=>{"id"=>@event.id, "start"=>"Mon Jul 20 2015 13:11:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:22:00 GMT+0300 (MSK)", "visual_type"=>"owned", "user_name"=>"TestCustomer@tennis.ru", "description"=>"TestCustomer@tennis.ru", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>""}}
+        @user.reload
+        @event.reload
+      end
+
+      context 'change is unpaid' do 
+        scenario 'stadium owner should not see changed datetimes' do
+          logout
+          login_via_post_as @stadium_owner
+          get court_my_events_path(@court, format: :json)
+
+          data = JSON.parse(response.body)
+          event = data.select {|e| e["id"] == @event.id }.first
+            
+          expect(event["start"]).to eq Time.parse('12:00:00').as_json
+          expect(event["visual_type"]).to eq "paid" #"has_unpaid_changes"
+        end
+      end
+    end
+
     # it 'sends mail when event change is payed' do 
     #   ActionMaler::Base.deliveries.clear
     #   @event.order.paid!

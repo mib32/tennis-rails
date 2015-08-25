@@ -89,7 +89,8 @@ class Tennis.Views.ScheduleView extends Backbone.View
           dataSource:[
             { text: 'Своё', value: 'owned', color: 'cadetblue', editable: false },
             { text: 'Чужое', value: 'disowned', color: '#ccc' },
-            { text: 'Оплачено', value: 'paid', color: '#8ED869' }
+            { text: 'Оплачено', value: 'paid', color: '#8ED869' },
+            { text: 'Неоплаченный перенос', value: 'has_unpaid_changes', color: '#69D8D8' }
           ]
         },
         {

@@ -75,9 +75,11 @@ class Event < ActiveRecord::Base
 
   def visual_type_for user
     case 
+    when self.user == user && has_unpaid_changes?
+      'has_unpaid_changes'
     when self.paid?
       'paid'
-    when user && (self.user.id == user.id)
+    when self.user == user
       'owned'
     else
       'disowned'

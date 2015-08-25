@@ -54,6 +54,22 @@ module Changeable
     attributes["end"]
   end
 
+  def start_for user
+    if self.user == user
+      self.start
+    else
+      start_before_change
+    end   
+  end
+
+  def end_for user
+    if self.user == user
+      self.end
+    else
+      end_before_change
+    end  
+  end
+
   def has_unpaid_changes?
     event_changes.unpaid.present?
   end
