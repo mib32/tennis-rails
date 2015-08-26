@@ -9,6 +9,10 @@ class MyEventsController < EventsController
     end
   end
 
+  def paid
+    @events = current_user.product.events.order(created_at: :desc)
+  end
+
   def grid
   end
 

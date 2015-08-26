@@ -1,0 +1,22 @@
+%h4 Заказы
+%table.table.table-striped
+  %thead
+    %tr
+      %th #
+      %th Стадион
+      %th Корт
+      %th Период занятий
+      %th Время тренировок
+      %th Стоимость
+  - @events.paid.each do |event|
+    %tr
+      %td= event.id
+      %td= event.stadium.name
+      %td= event.court.name
+      %td= l(event.schedule.first.to_date) + ' - ' + l(event.schedule.last.to_date)
+      %td
+        = event.start.strftime("%H:%M:%S") + ' - ' + event.end.strftime("%H:%M:%S")
+        - if event.has_unpaid_changes?
+          = link_to orders_path('event_change_ids[]' => event.event_change.id), method: :post, class: 'label' do
+            %span.label.label-success Оплатить перенос
+      %td= number_to_integer_currency event.total

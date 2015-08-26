@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
 
   has_many :special_prices
   has_and_belongs_to_many :events
-  # has_many :orders, dependent: :destroy
+  has_many :orders, through: :events, dependent: :destroy
   has_many :product_services, dependent: :destroy
   has_many :services, through: :product_services
   accepts_nested_attributes_for :product_services

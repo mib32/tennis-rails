@@ -23,6 +23,7 @@
 %table.table.table-striped
   %thead
     %tr
+      %th #
       %th Стадион
       %th Корт
       %th Период занятий
@@ -30,6 +31,7 @@
       %th Стоимость
   - @events.paid.each do |event|
     %tr
+      %td= event.id
       %td= event.stadium.name
       %td= event.court.name
       %td= l(event.schedule.first.to_date) + ' - ' + l(event.schedule.last.to_date)

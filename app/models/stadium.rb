@@ -4,9 +4,6 @@ class Stadium < Product
   # has_many :coaches, through: :courts
   
   accepts_nested_attributes_for :courts, :reject_if => :all_blank, :allow_destroy => true
-
-  
-
   # validates_presence_of :phone
 
   def coaches
@@ -22,6 +19,4 @@ class Stadium < Product
       name: name
     }
   end
-
-
 end

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :events, :my_events do 
     collection do 
+      get 'paid'
       get 'grid'
       post 'bulk_process', constraints: ButtonParamRouting.new('pay'), action: 'create', controller: 'orders'
       post 'bulk_process', constraints: ButtonParamRouting.new('destroy'), action: 'destroy'
@@ -96,7 +97,7 @@ Rails.application.routes.draw do
     resources :employments
     resources :coach_users
     resources :withdrawal_requests
-    resource :orders
+    # resources :orders
   end
 
   resources :deposit_requests

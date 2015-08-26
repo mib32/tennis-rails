@@ -1,6 +1,6 @@
 class Dashboard::OrdersController < DashboardController
   def index
-    @orders = Order.where('stadium_id = ? and orders.user_id <> ?', current_user.stadium.id, current_user.id).uniq
+    @orders = current_user.stadium.events
     # @events = current_user.stadium.events
   end
 
