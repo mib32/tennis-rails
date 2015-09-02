@@ -9,7 +9,7 @@
         %hr/
         .row
           .col-xs-12.col-sm-12.col-md-12.col-lg-12
-            %ul.nav.nav-pills.nav-justified
+            %ul.nav.nav-pills.nav-justified.dashboard-nav
               = render 'layouts/navigations/' + current_user.type.underscore
               -#%li
                 = link_to  '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do

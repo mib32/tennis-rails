@@ -20,4 +20,8 @@ class Coach < Product
       errors.add :courts, 'Выберите хотя бы один корт.'
     end
   end
+
+  def name
+    attributes["name"] || "Без имени"
+  end
 end

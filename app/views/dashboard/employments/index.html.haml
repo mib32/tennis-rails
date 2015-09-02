@@ -1,5 +1,5 @@
 = simple_form_for CoachesCourt.new, url: dashboard_employments_path, wrapper: :inline_form, html: { class: 'form-inline' } do |f|
-  = f.association :court, label: 'Корт', collection: Court.all - current_user.coach.courts, label_method: :name_with_stadium
+  = f.association :court, label: 'Корт', collection: Court.all - current_user.coach.courts, label_method: :name_with_stadium, include_blank: false
   = f.input :price, label: 'Стоимость часа', as: :decimal
   = f.button :submit, "Привязаться к стадиону"
 
