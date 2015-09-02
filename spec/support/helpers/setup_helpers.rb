@@ -30,7 +30,7 @@ module TennisHelpers
       post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
     end
 
-    def logout
+    def logout_via_delete
       delete destroy_user_session_path
     end
   end

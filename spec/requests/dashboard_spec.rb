@@ -10,7 +10,7 @@ RSpec.describe "Dashboard", type: :request do
     end
     %w(dashboard_grid_path
       dashboard_coach_users_path
-      dashboard_orders_path
+      paid_my_events_path
       edit_dashboard_product_path
       dashboard_withdrawal_requests_path).each do |path|
       it "visits #{path}" do

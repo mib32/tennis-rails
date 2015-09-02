@@ -1,7 +1,7 @@
 ru:
   statuses: &statuses
     pending: Не активирован
-    active: Активный
+    active: Активирован
     locked: Отключен
   repeats:
     few: "%{count} раза"
@@ -50,6 +50,7 @@ ru:
         longitude: Долгота
         phone: Телефон
         description: Описание
+        status: Статус
       coach:
         avatar: Фото
         name: Имя
