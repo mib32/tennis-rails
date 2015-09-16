@@ -69,4 +69,8 @@ class User < ActiveRecord::Base
   def admin?
     false
   end
+
+  def new_event options={}
+    self.events.new options
+  end
 end

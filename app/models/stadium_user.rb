@@ -40,4 +40,8 @@ class StadiumUser < User
   def event_ids
     products.flat_map {|product| product.events}.map(&:id)
   end
+
+  def new_event options={}
+    Event.new options.merge(user_id: self.id)
+  end
 end

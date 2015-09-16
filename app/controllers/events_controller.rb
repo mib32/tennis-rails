@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.new event_params.delete_if {|k,v| v.empty? }
+    @event = current_user.new_event event_params.delete_if {|k,v| v.empty? }
     @event.products = current_products
     @event.save!
     respond_with @event

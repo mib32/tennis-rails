@@ -36,6 +36,13 @@ RSpec.describe "EventsApi", type: :request do
           
         expect(data.count).to eq 3
       end
+      it 'creates new event' do
+        expect(Event.count).to eq 4
+        post court_my_events_path(@court), {event: {"id"=>"", "start"=>"Mon Jul 20 2015 12:00:00 GMT+0300 (MSK)", "end"=>"Mon Jul 20 2015 12:30:00 GMT+0300 (MSK)", "description"=>"", "recurrence_id"=>"", "recurrence_rule"=>"", "recurrence_exception"=>"", "start_timezone"=>"", "end_timezone"=>"", "is_all_day"=>"false"}}
+
+        expect(Event.count).to eq 5
+        expect(Event.last.user.id).to eq @stadium_owner.id
+      end
     end
   end
   describe 'grid at court show view' do 
