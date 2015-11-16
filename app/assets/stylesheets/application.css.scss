@@ -36,24 +36,29 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
-    
     margin-bottom: 90px;
 }
+
 body > .container {
     padding: 5px 15px 0;
 }
+
 .container .text-muted {
     margin: 20px 0;
 }
+
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
 }
+
 code {
     font-size: 80%;
 }
+
 .navbar-default {
     height: 71px;
     -webkit-box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.2);
@@ -65,47 +70,59 @@ code {
     font-weight: 400;
     background-color: #f8f8f8;
 }
+
 .navbar-brand img, .navbar-brand  {
     padding-top: 0;
 }
+
 .navbar-default .navbar-nav>li>a {
     color: #3D3D3D !important;
     font-weight: 600;
     font-size: 13px;
     padding-top: 25px;
 }
+
 .delimiter {
     float: right;
     padding-left: 32px;
 }
+
 .sub-menu .delimiter {
     display: none;
 }
+
 #menu-item-120 .delimiter {
     display: none;
 }
+
 .menu-item-120{
   margin-right: 12px;
 }
+
 #map-container {
     -webkit-box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.2);
     -moz-box-shadow: px 7px 11px 0px rgba(50, 50, 50, 0.2);
     box-shadow: 0px 7px 11px 0px rgba(50, 50, 50, 0.2);
     width: 100%;
 }
+
 #map {
     width: 100%;
     height: 450px;
 }
+
 #map.filter-map{
   height: 280px;
   width: 100%;
 }
+
 #map-container {
     // margin-top: 51px;
 }
+
 @media (min-width: 768px) {
 }
+
 .searchonmap {
     position: absolute;
     width: 760px;
@@ -120,6 +137,7 @@ code {
     -moz-box-shadow: 0px 5px 14px 0px rgba(50, 50, 50, 0.6);
     box-shadow: 0px 5px 14px 0px rgba(50, 50, 50, 0.6);
 }
+
 .location-detector {
     position: absolute;
     margin-left: 345px;
@@ -127,6 +145,7 @@ code {
     width: 25px;
     height: 30px;
 }
+
 .location-detector-btn {
     background: asset-url('locate.png') no-repeat;
     cursor: pointer;
@@ -134,12 +153,15 @@ code {
     width: 25px;
     height: 30px;
 }
+
 input[type="TEXT"] {
     margin-left: 3px;
 }
+
 select {
     margin-left: 7px;
 }
+
 input[type="TEXT"],
 select,
 .comment-field {
