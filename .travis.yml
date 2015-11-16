@@ -1,0 +1,6 @@
+language: ruby
+notifications:
+  email:
+    - ivanzotov@gmail.com
+
+script: bundle exec rake spec
